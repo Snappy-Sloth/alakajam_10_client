@@ -23,7 +23,7 @@ class Game extends Process {
 		root.add(scroller, Const.DP_BG);
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 
-		camera = new Camera();
+		// camera = new Camera();
 		level = new Level();
 		fx = new Fx();
 		hud = new ui.Hud();
