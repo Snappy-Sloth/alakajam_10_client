@@ -59,7 +59,28 @@ class Main extends dn.Process {
 
 		// Start
 		new dn.heaps.GameFocusHelper(Boot.ME.s2d, Assets.fontMedium);
-		delayer.addF( startGame, 1 );
+		// delayer.addF( startGame, 1 );
+		delayer.addF( startTitleScreen, 1 );
+	}
+
+	public function startTitleScreen() {
+		new ui.TitleScreen();
+	}
+
+	public function showDebugTita() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		startGame();
+	}
+
+	public function showDebugTipyx() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		new DebugTipyx();
 	}
 
 	public function startGame() {

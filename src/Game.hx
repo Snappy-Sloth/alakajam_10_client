@@ -57,6 +57,8 @@ class Game extends Process {
 		for(e in Entity.ALL)
 			e.destroy();
 		gc();
+
+		ME = null;
 	}
 
 	override function preUpdate() {
