@@ -1,3 +1,4 @@
+import ui.Hud;
 import dn.Process;
 import hxd.Key;
 
@@ -53,6 +54,12 @@ class Game extends Process {
 			hud.destroy();
 			new ui.GameOverScreen();
 		}
+	}
+
+	public function levelVictory() {
+		level.destroy();
+		hud.destroy();
+		new ui.EndLevelScreen();		
 	}
 
 	public function onCdbReload() {

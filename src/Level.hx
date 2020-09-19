@@ -191,6 +191,10 @@ class Level extends dn.Process {
 		if (hxd.Key.isPressed(Key.F1)) {
 			spawnShip();
 		}
+
+		if (hxd.Key.isPressed(Key.F3)) {
+			game.levelVictory();
+		}
 		#end
 
 		if (shipToSpawn > 0 && ftime >= nextSpawnTiming) {

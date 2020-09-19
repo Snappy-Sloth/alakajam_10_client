@@ -1,3 +1,4 @@
+import ui.GameOverScreen;
 import ui.ChooseLevelScreen;
 import Data;
 import hxd.Key;
@@ -67,6 +68,9 @@ class Main extends dn.Process {
 	public function startTitleScreen() {
 		if (Game.ME != null) {
 			Game.ME.destroy();
+		}
+		if( GameOverScreen.ME!=null ) {
+			GameOverScreen.ME.destroy();
 		}
 		new ui.TitleScreen();
 	}

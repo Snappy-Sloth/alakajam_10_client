@@ -4,6 +4,8 @@ class GameOverScreen extends dn.Process {
 
 	public static var ME : GameOverScreen;
 
+	var flow : h2d.Flow;
+
 	public function new() {
 		super(Main.ME);
 
@@ -11,16 +13,19 @@ class GameOverScreen extends dn.Process {
 
 		ME = this;
 
-		var flow = new h2d.Flow(root);
+		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
-        flow.verticalSpacing = 20;
+        flow.verticalSpacing = 50;
         
         var gameOverText = new h2d.Text(Assets.fontPixel, flow);
         gameOverText.text = 'GAME OVER';
-        gameOverText.scale(Const.SCALE);
+		gameOverText.scale(2*Const.SCALE);
+		
+		var menuBtn = new Button("Menu", Main.ME.startTitleScreen);
+		flow.addChild(menuBtn);
+		//menuBtn.setPosition((flow.outerWidth - Const.BUTTON_WIDTH) / 2, 0);
 
-		flow.reflow();
-		flow.setPosition((w() - flow.outerWidth) >> 1, (h() - flow.outerHeight) >> 1);
+		onResize();
 	}
 
 	override function onDispose() {
@@ -32,6 +37,9 @@ class GameOverScreen extends dn.Process {
     override function onResize() {
 		super.onResize();
 		root.setScale(Const.SCALE);
+
+		flow.reflow();
+		flow.setPosition(Std.int((w() / Const.SCALE) - flow.outerWidth) >> 1, Std.int((h() / Const.SCALE) - flow.outerHeight) >> 1);
 	}
 
 }

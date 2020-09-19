@@ -10,9 +10,6 @@ class Hud extends dn.Process {
 
 	var flowRight : h2d.Flow;
 	var flowLife : h2d.Flow;
-	var flowLevel : h2d.Flow;
-	var flowScore : h2d.Flow;
-	var flowTime : h2d.Flow;
 
 	var flowLeft : h2d.Flow;
 
@@ -34,6 +31,7 @@ class Hud extends dn.Process {
 
 		setrightHud(wi, he);
 		setLeftHud(wi, he);
+		onResize();
 	}
 
 	public function setrightHud(wi:Int, he:Int) {
@@ -44,15 +42,9 @@ class Hud extends dn.Process {
 		flowRight = new h2d.Flow(root);
 		flowRight.layout = Vertical;
 		flowRight.verticalSpacing = 20;
-		flowRight.setPosition(((w() / Const.SCALE + width * Const.MAP_TILE_SIZE) / 2) + Const.FLOW_MAPTILE_SPACING,
-							((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
-
-		flowLevel = new h2d.Flow(flowRight);
-		flowLevel.layout = Horizontal;
-		flowLevel.horizontalSpacing = 10;
 		
-		var levelText = new Text(Assets.fontPixel, flowLevel);
-		levelText.text = 'Level : 1';
+		var levelText = new Text(Assets.fontPixel, flowRight);
+		levelText.text = 'Level: 1';
 		
 		flowLife = new h2d.Flow(flowRight);
 		flowLife.layout = Horizontal;
@@ -66,22 +58,12 @@ class Hud extends dn.Process {
 			arLife.push(life);
 		}
 
-		//flow.setPosition((w() - flow.outerWidth) >> 1, (h() - flow.outerHeight) >> 1);
+		scoreText = new Text(Assets.fontPixel, flowRight);
+		scoreText.text = 'Score: ${game.score}';
 		
-		flowScore = new h2d.Flow(flowRight);
-		flowScore.layout = Horizontal;
-		flowScore.horizontalSpacing = 10;
+		timeText = new Text(Assets.fontPixel, flowRight);
+		timeText.text = 'Time: ${Lib.prettyTime(level.ftime)}';
 
-		scoreText = new Text(Assets.fontPixel, flowScore);
-
-		flowTime = new h2d.Flow(flowRight);
-		flowTime.layout = Horizontal;
-		flowTime.horizontalSpacing = 10;
-		
-		timeText = new Text(Assets.fontPixel, flowTime);
-		timeText.text = 'Time : ${Lib.prettyTime(level.ftime)}';
-
-		flowRight.reflow();
 	}
 
 	public function setLeftHud(wi:Int, he:Int) {
@@ -95,9 +77,6 @@ class Hud extends dn.Process {
 		var menuButton = new Button("Menu", Main.ME.startTitleScreen);
 		flowLeft.addChild(menuButton);
 
-		flowLeft.reflow();
-		flowLeft.setPosition(((w() / Const.SCALE - width * Const.MAP_TILE_SIZE) / 2) - flowLeft.outerWidth - Const.FLOW_MAPTILE_SPACING,
-								((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
 	}
 
 	public function looseLife() {
@@ -107,6 +86,14 @@ class Hud extends dn.Process {
 	override function onResize() {
 		super.onResize();
 		root.setScale(Const.UI_SCALE);
+
+		flowRight.reflow();
+		flowRight.setPosition(Std.int((w() / Const.SCALE + width * Const.MAP_TILE_SIZE) / 2) + Const.FLOW_MAPTILE_SPACING,
+							Std.int((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
+
+		flowLeft.reflow();
+		flowLeft.setPosition(Std.int(((w() / Const.SCALE - width * Const.MAP_TILE_SIZE) / 2) - flowLeft.outerWidth) - Const.FLOW_MAPTILE_SPACING,
+								Std.int((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
 	}
 
 	public inline function invalidate() invalidated = true;
@@ -120,7 +107,7 @@ class Hud extends dn.Process {
 			invalidated = false;
 			render();
 		}
-		timeText.text = 'Time : ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
-		scoreText.text = 'Score : ${game.score}';
+		timeText.text = 'Time: ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
+		scoreText.text = 'Score: ${game.score}';
 	}
 }
