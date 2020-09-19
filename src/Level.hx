@@ -49,9 +49,7 @@ class Level extends dn.Process {
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
 
-		// Init ship
-		var ship = new Ship(this);
-		arMapTile[0].addShipToRoad(ship);
+		arMapTile[0].spawnShip();
 	}
 
 	public function addArrows(mapTile:MapTile) {
@@ -92,7 +90,12 @@ class Level extends dn.Process {
 			var nextRoad = nextTile.getRoadWith(nextEP);
 
 			if (nextRoad != null) {
-				s.addToRoad(nextRoad, nextEP);
+				nextTile.addShipToRoad(s, nextRoad, nextEP);
+			}
+			else {
+				// game.hud.l
+				// TODO : LOSE LIVE
+				// TODO : SUPPR SHIPS
 			}
 		} 
 	}

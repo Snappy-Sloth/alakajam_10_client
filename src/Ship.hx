@@ -8,7 +8,7 @@ class Ship extends dn.Process {
 	public var to : EP;
 	var currentRoadRatio : Float = 0;
 
-	var speed = 0.5;
+	var speed = 0.25;
 
 	var level : Level;
 
@@ -23,7 +23,8 @@ class Ship extends dn.Process {
 		root.addChild(bmp);
 	}
 
-	public function addToRoad(r:Road, from:EP) {
+	@:allow(MapTile)
+	function addToRoad(r:Road, from:EP) {
 		currentRoadRatio = 0;
 		currentRoad = r;
 		currentMapTile = r.mapTile;

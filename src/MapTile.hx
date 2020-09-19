@@ -92,8 +92,16 @@ class MapTile extends h2d.Layers {
 		return out;
 	}
 
-	public function addShipToRoad(ship:Ship) {
-		ship.addToRoad(roads[0], roads[0].pointA);
+	public function spawnShip() {
+		var ship = new Ship(level);
+		for (road in roads) {
+			addShipToRoad(ship, roads[0], roads[0].pointA);
+			break;
+		}
+	}
+
+	public function addShipToRoad(ship:Ship, road:Road, from:EP) {
+		ship.addToRoad(road, from);
 
 		ship.currentMapTile.removeShip(ship);
 		ships.push(ship);
