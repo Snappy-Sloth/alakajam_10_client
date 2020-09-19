@@ -34,7 +34,7 @@ class Ship extends dn.Process {
 	}
 
 	function reachEnd() {
-		level.moveShip(this);
+		level.onShipReachingEnd(this);
 	}
 
 	public override function onDispose() {

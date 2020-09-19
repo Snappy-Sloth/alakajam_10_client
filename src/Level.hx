@@ -16,6 +16,10 @@ class Level extends dn.Process {
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
 
+	var nextSpawnTiming : Float = 0;
+	var spawnTiming : Float = 3;
+	// var spawnTiming : Float = 999999999;
+
 	public function new(w, h) {
 		super(Game.ME);
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
@@ -50,8 +54,6 @@ class Level extends dn.Process {
 		leftArrow = new Arrow(false);
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
-
-		arMapTile[0].spawnShip();
 	}
 
 	public function addArrows(mapTile:MapTile) {
@@ -64,7 +66,21 @@ class Level extends dn.Process {
 		leftArrow.hide();
 	}
 
-	public function moveShip(s:Ship) {
+	public function spawnShip() {
+		// arMapTile[0].spawnShipOnEP();
+		var shuffleArMapTile = arMapTile.copy();
+		Lib.shuffleArray(shuffleArMapTile, Std.random);
+
+		for (tile in shuffleArMapTile) {
+			var ep = tile.hasAnExternalEP();
+			if (ep != null) {
+				tile.spawnShipOnEP(ep);
+				return;
+			}
+		}
+	}
+
+	public function onShipReachingEnd(s:Ship) {
 		var nextTile = null;
 		nextTile = switch (s.to) {
 			case North_1, North_2: getMapTile(s.currentMapTile.cx, s.currentMapTile.cy - 1);
@@ -75,7 +91,7 @@ class Level extends dn.Process {
 
 		if (nextTile == null) {
 			// TODO : ADD POINTS
-			// TODO : Suppr ship			
+			s.destroy();			
 		}
 		else {
 			var nextEP = switch s.to {
@@ -146,12 +162,19 @@ class Level extends dn.Process {
 	override function update() {
 		super.update();
 
+		#if debug
 		if (hxd.Key.isPressed(Key.A)) {
 			game.looseLife();
 		}
-
+		
 		if (hxd.Key.isPressed(Key.F1)) {
-			arMapTile[0].spawnShip();
+			spawnShip();
+		}
+		#end
+
+		if (ftime >= nextSpawnTiming) {
+			spawnShip();
+			nextSpawnTiming += spawnTiming * Const.FPS;
 		}
 	}
 }

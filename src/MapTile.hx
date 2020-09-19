@@ -92,10 +92,11 @@ class MapTile extends h2d.Layers {
 		return out;
 	}
 
-	public function spawnShip() {
+	public function spawnShipOnEP(ep:EP) {
 		var ship = new Ship(level);
+		var road = getRoadOnEP(ep);
 		for (road in roads) {
-			addShipToRoad(ship, roads[0], roads[0].pointA);
+			addShipToRoad(ship, road, ep);
 			break;
 		}
 	}
@@ -116,6 +117,54 @@ class MapTile extends h2d.Layers {
 			if (ep == r.pointA || ep == r.pointB) {
 				return r;
 			}
+
+		return null;
+	}
+
+	public function hasAnExternalEP():Null<EP> {
+		var externalEPs = [];
+
+		if (cy == 0) {
+			for (road in roads) {
+				if (road.pointA == North_1 || road.pointB == North_1)
+					externalEPs.push(North_1);
+				if (road.pointA == North_2 || road.pointB == North_2)
+					externalEPs.push(North_2);
+			}
+		}
+		if (cy == level.hei - 1) {
+			for (road in roads) {
+				if (road.pointA == South_1 || road.pointB == South_1)
+					externalEPs.push(South_1);
+				if (road.pointA == South_2 || road.pointB == South_2)
+					externalEPs.push(South_2);
+			}
+		}
+		if (cx == 0) {
+			for (road in roads) {
+				if (road.pointA == West_1 || road.pointB == West_1)
+					externalEPs.push(West_1);
+				if (road.pointA == West_2 || road.pointB == West_2)
+					externalEPs.push(West_2);
+			}
+		}
+		if (cy == level.wid - 1) {
+			for (road in roads) {
+				if (road.pointA == East_1 || road.pointB == East_1)
+					externalEPs.push(East_1);
+				if (road.pointA == East_2 || road.pointB == East_2)
+					externalEPs.push(East_2);
+			}
+		}
+
+		return externalEPs.length == 0 ? null : externalEPs[Std.random(externalEPs.length)];
+	}
+
+	function getRoadOnEP(ep:EP):Road {
+		for (road in roads) {
+			if (road.pointA == ep || road.pointB == ep)
+				return road;
+		}
 
 		return null;
 	}
