@@ -49,8 +49,8 @@ class Level extends dn.Process {
 
 		rightArrow = new Arrow(true);
 		leftArrow = new Arrow(false);
-		wrapperMapTile.addChild(rightArrow);
-		wrapperMapTile.addChild(leftArrow);
+		wrapperMapTile.add(rightArrow, Const.DP_UI);
+		wrapperMapTile.add(leftArrow, Const.DP_UI);
 	}
 
 	public function addArrows(mapTile:MapTile) {
