@@ -12,6 +12,8 @@ class Hud extends dn.Process {
 	var flowLife : h2d.Flow;
 	var flowLevel : h2d.Flow;
 	var flowScore : h2d.Flow;
+	var flowTime : h2d.Flow;
+	var timeText : Text;
 	var invalidated = true;
 
 	var width : Int;
@@ -56,10 +58,9 @@ class Hud extends dn.Process {
 			arLife.push(life);
 		}
 
-		flowLife.reflow();
 		//flow.setPosition((w() - flow.outerWidth) >> 1, (h() - flow.outerHeight) >> 1);
-		flowLife.setPosition((w()/Const.SCALE+width*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING,
-							(h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2+10);
+		//flowLife.setPosition((w()/Const.SCALE+width*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING,
+		//					(h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2+10);
 		
 		flowScore = new h2d.Flow(flow);
 		flowScore.layout = Horizontal;
@@ -67,6 +68,15 @@ class Hud extends dn.Process {
 
 		var scoreText = new Text(Assets.fontPixel, flowScore);
 		scoreText.text = 'Score : ${game.score}';
+
+		flowTime = new h2d.Flow(flow);
+		flowTime.layout = Horizontal;
+		flowTime.horizontalSpacing = 10;
+		
+		timeText = new Text(Assets.fontPixel, flowTime);
+		timeText.text = 'Time : ${Lib.prettyTime(level.ftime)}';
+
+		flow.reflow();
 	}
 
 	public function looseLife() {
@@ -89,5 +99,6 @@ class Hud extends dn.Process {
 			invalidated = false;
 			render();
 		}
+		timeText.text = 'Time : ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
 	}
 }
