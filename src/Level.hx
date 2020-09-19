@@ -33,11 +33,35 @@ class Level extends dn.Process {
 
 		for (i in 0...width) {
 			for (j in 0...height) {
-				var mapTile = new MapTile(i, j);
+				var mapTile = new MapTile(i, j, this);
 				wrapperMapTile.addChild(mapTile);
 				arMapTile.push(mapTile);
 			}
 		}
+	}
+
+	public function checkOtherTiles(mapTile:MapTile) {
+		for (mt in arMapTile) {
+			if (mt != mapTile && mt.selected) {
+				exchangeTiles(mt, mapTile);
+				return;
+			}
+		}
+	}
+
+	public function exchangeTiles(mt1:MapTile, mt2:MapTile) {
+		var mapTile1cx = mt1.cx;
+		var mapTile1cy = mt1.cy;
+
+		mt1.cx = mt2.cx;
+		mt1.cy = mt2.cy;
+		mt2.cx = mapTile1cx;
+		mt2.cy = mapTile1cy;
+
+		mt1.setPosition(mt1.cx*Const.MAP_TILE_SIZE, mt1.cy*Const.MAP_TILE_SIZE);
+		mt2.setPosition(mt2.cx*Const.MAP_TILE_SIZE, mt2.cy*Const.MAP_TILE_SIZE);
+
+		mt1.selected = mt2.selected = false;
 	}
 
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;
