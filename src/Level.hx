@@ -18,7 +18,6 @@ class Level extends dn.Process {
 
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
-	// var spawnTiming : Float = 999999999;
 
 	public function new(w, h) {
 		super(Game.ME);
@@ -54,6 +53,13 @@ class Level extends dn.Process {
 		leftArrow = new Arrow(false);
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
+
+		for (tile in arMapTile) {
+			trace(tile.cx + " " + tile.cy);
+			@:privateAccess for (road in tile.roads) {
+				trace(road.pointA + " " + road.pointB);
+			}
+		}
 	}
 
 	public function addArrows(mapTile:MapTile) {
@@ -67,7 +73,6 @@ class Level extends dn.Process {
 	}
 
 	public function spawnShip() {
-		// arMapTile[0].spawnShipOnEP();
 		var shuffleArMapTile = arMapTile.copy();
 		Lib.shuffleArray(shuffleArMapTile, Std.random);
 
@@ -113,6 +118,7 @@ class Level extends dn.Process {
 			else {
 				game.looseLife();
 				s.destroy();
+				spawnShip();
 			}
 		} 
 	}

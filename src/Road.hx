@@ -19,18 +19,15 @@ class Road {
 		this.mapTile = mapTile;
 	}
 
-	public function onRotation(newPointA:EP, newPointB:EP) {
-		trace(mapTile.ships.length);
+	public function modifyPoints(newPointA:EP, newPointB:EP) {
 		for (ship in mapTile.ships) {
 			if (ship.from == pointA) {
 				ship.from = newPointA;
 				ship.to = newPointB;
-				trace('trololo');
 			}
 			else if (ship.to == pointA) {
 				ship.to = newPointA;
 				ship.from = newPointB;
-				trace('trololo');
 			}
 		}
 

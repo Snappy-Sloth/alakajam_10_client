@@ -66,15 +66,27 @@ class MapTile extends h2d.Layers {
 			}
 		}
 		
-		// for (i in 0...2)
+		for (i in 0...2)
 			createRoad();
 	}
 
 	function createRoad() {
-		var from = getRandomEntryPoint();
-		var to = getRandomEntryPoint(from);
+		var currentlyUsedPE = [];
+
+		for (road in roads) {
+			currentlyUsedPE.push(road.pointA);
+			currentlyUsedPE.push(road.pointB);
+		}
+
+		var from = getRandomEntryPoint(currentlyUsedPE);
+		var to = getRandomEntryPoint(from, currentlyUsedPE);
 
 		var r = new Road(from, to, this);
+		while (r.distance < 50) {
+			var from = getRandomEntryPoint(currentlyUsedPE);
+			var to = getRandomEntryPoint(from, currentlyUsedPE);
+			r.modifyPoints(from, to);
+		}
 		roads.push(r);
 
 		var gr = new h2d.Graphics(wrapper);
@@ -83,22 +95,32 @@ class MapTile extends h2d.Layers {
 		gr.lineTo(r.pointBX, r.pointBY);
 	}
 
-	function getRandomEntryPoint(differentFrom:Null<EP> = null) {
-		var out : EP = null;
-		while (out == null || (differentFrom != null && out.getName().split("_")[0] == differentFrom.getName().split("_")[0] )) {
-			out = EP.createByIndex(Std.random(EP.createAll().length));
+	function getRandomEntryPoint(fromSide:EP = null, differentFrom:Array<EP>) {
+		var possibleOut : Array<EP> = [];
+
+		for (ep in EP.createAll()) {
+			if (fromSide != null && ep.getName().split("_")[0] == fromSide.getName().split("_")[0])
+				continue;
+
+			var canAdd = true;
+			for (epf in differentFrom)
+				if (epf == ep) {
+					canAdd = false;
+					break;
+				}
+			
+			if (canAdd)
+				possibleOut.push(ep);
 		}
 
-		return out;
+
+		return possibleOut[Std.random(possibleOut.length)];
 	}
 
 	public function spawnShipOnEP(ep:EP) {
 		var ship = new Ship(level);
 		var road = getRoadOnEP(ep);
-		for (road in roads) {
-			addShipToRoad(ship, road, ep);
-			break;
-		}
+		addShipToRoad(ship, road, ep);
 	}
 
 	public function addShipToRoad(ship:Ship, road:Road, from:EP) {
@@ -124,40 +146,21 @@ class MapTile extends h2d.Layers {
 	public function hasAnExternalEP():Null<EP> {
 		var externalEPs = [];
 
-		if (cy == 0) {
-			for (road in roads) {
-				if (road.pointA == North_1 || road.pointB == North_1)
-					externalEPs.push(North_1);
-				if (road.pointA == North_2 || road.pointB == North_2)
-					externalEPs.push(North_2);
-			}
-		}
-		if (cy == level.hei - 1) {
-			for (road in roads) {
-				if (road.pointA == South_1 || road.pointB == South_1)
-					externalEPs.push(South_1);
-				if (road.pointA == South_2 || road.pointB == South_2)
-					externalEPs.push(South_2);
-			}
-		}
-		if (cx == 0) {
-			for (road in roads) {
-				if (road.pointA == West_1 || road.pointB == West_1)
-					externalEPs.push(West_1);
-				if (road.pointA == West_2 || road.pointB == West_2)
-					externalEPs.push(West_2);
-			}
-		}
-		if (cy == level.wid - 1) {
-			for (road in roads) {
-				if (road.pointA == East_1 || road.pointB == East_1)
-					externalEPs.push(East_1);
-				if (road.pointA == East_2 || road.pointB == East_2)
-					externalEPs.push(East_2);
-			}
+		for (ep in EP.createAll()) {
+			if (isEPExternal(ep) && getRoadOnEP(ep) != null)
+				externalEPs.push(ep);
 		}
 
 		return externalEPs.length == 0 ? null : externalEPs[Std.random(externalEPs.length)];
+	}
+
+	function isEPExternal(ep:EP):Bool {
+		return switch ep {
+			case North_1, North_2: cy == 0;
+			case South_1, South_2: cy == level.hei - 1;
+			case West_1, West_2: cx == 0;
+			case East_1, East_2: cx == level.wid - 1;
+		}
 	}
 
 	function getRoadOnEP(ep:EP):Road {
@@ -183,7 +186,7 @@ class MapTile extends h2d.Layers {
 		// Rotate roads
 
 		for (r in roads) {
-			r.onRotation(getNextRoadWhenRotateRight(r.pointA), getNextRoadWhenRotateRight(r.pointB));
+			r.modifyPoints(getNextRoadWhenRotateRight(r.pointA), getNextRoadWhenRotateRight(r.pointB));
 		}
 
 		// Rotate art
@@ -194,7 +197,7 @@ class MapTile extends h2d.Layers {
 		// Rotate roads
 
 		for (r in roads) {
-			r.onRotation(getNextRoadWhenRotateLeft(r.pointA), getNextRoadWhenRotateLeft(r.pointB));
+			r.modifyPoints(getNextRoadWhenRotateLeft(r.pointA), getNextRoadWhenRotateLeft(r.pointB));
 		}
 
 		// Rotate art
