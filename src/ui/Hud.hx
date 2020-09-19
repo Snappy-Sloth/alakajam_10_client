@@ -16,6 +16,8 @@ class Hud extends dn.Process {
 
 	var flowLeft : h2d.Flow;
 
+	var scoreText : Text;
+
 	var timeText : Text;
 	var invalidated = true;
 
@@ -70,8 +72,7 @@ class Hud extends dn.Process {
 		flowScore.layout = Horizontal;
 		flowScore.horizontalSpacing = 10;
 
-		var scoreText = new Text(Assets.fontPixel, flowScore);
-		scoreText.text = 'Score : ${game.score}';
+		scoreText = new Text(Assets.fontPixel, flowScore);
 
 		flowTime = new h2d.Flow(flowRight);
 		flowTime.layout = Horizontal;
@@ -120,5 +121,6 @@ class Hud extends dn.Process {
 			render();
 		}
 		timeText.text = 'Time : ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
+		scoreText.text = 'Score : ${game.score}';
 	}
 }

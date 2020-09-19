@@ -18,6 +18,69 @@ mapTile
   orig: 100, 100
   offset: 0, 0
   index: -1
+questMark0
+  rotate: false
+  xy: 117, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark1
+  rotate: false
+  xy: 126, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark2
+  rotate: false
+  xy: 135, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark3
+  rotate: false
+  xy: 144, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark4
+  rotate: false
+  xy: 153, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark5
+  rotate: false
+  xy: 162, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark6
+  rotate: false
+  xy: 171, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark7
+  rotate: false
+  xy: 180, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+questMark8
+  rotate: false
+  xy: 189, 293
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
 ship
   rotate: false
   xy: 103, 293

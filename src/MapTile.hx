@@ -69,8 +69,25 @@ class MapTile extends h2d.Layers {
 			}
 		}
 		
-		for (i in 0...2)
+		createRoads(4);
+
+		// Draw Roads
+		for (r in roads) {
+			var gr = new h2d.Graphics(wrapper);
+			gr.lineStyle(1);
+			gr.moveTo(r.pointAX, r.pointAY);
+			gr.lineTo(r.pointBX, r.pointBY);
+		}
+	}
+
+	function createRoads(num:Int) {
+		roads = [];
+
+		for (i in 0...num)
 			createRoad();
+
+		if (roads.length < num)
+			createRoads(num);
 	}
 
 	function createRoad() {
@@ -84,18 +101,11 @@ class MapTile extends h2d.Layers {
 		var from = getRandomEntryPoint(currentlyUsedPE);
 		var to = getRandomEntryPoint(from, currentlyUsedPE);
 
-		var r = new Road(from, to, this);
-		while (r.distance < 50) {
-			var from = getRandomEntryPoint(currentlyUsedPE);
-			var to = getRandomEntryPoint(from, currentlyUsedPE);
-			r.modifyPoints(from, to);
-		}
-		roads.push(r);
+		if (from == null || to == null)
+			return;
 
-		var gr = new h2d.Graphics(wrapper);
-		gr.lineStyle(1);
-		gr.moveTo(r.pointAX, r.pointAY);
-		gr.lineTo(r.pointBX, r.pointBY);
+		var r = new Road(from, to, this);
+		roads.push(r);
 	}
 
 	function getRandomEntryPoint(fromSide:EP = null, differentFrom:Array<EP>) {

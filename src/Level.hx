@@ -16,6 +16,15 @@ class Level extends dn.Process {
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
 
+	var shipOnScreen(get, never) : Int; inline function get_shipOnScreen() {
+		var i = 0;
+		for (tile in arMapTile) {
+			i += tile.ships.length;
+		}
+		return i;
+	}
+
+	var shipToSpawn = 3;
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
 
@@ -69,6 +78,7 @@ class Level extends dn.Process {
 	}
 
 	public function spawnShip() {
+		shipToSpawn--;
 		var shuffleArMapTile = arMapTile.copy();
 		Lib.shuffleArray(shuffleArMapTile, Std.random);
 
@@ -91,8 +101,10 @@ class Level extends dn.Process {
 		}
 
 		if (nextTile == null) {
-			// TODO : ADD POINTS
-			s.destroy();			
+			s.destroy();
+			if (shipToSpawn == 0 && shipOnScreen == 0) {
+				// TODO : SHOW VICTORY
+			}
 		}
 		else {
 			var nextEP = switch s.to {
@@ -112,6 +124,7 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
+				shipToSpawn++;
 				game.looseLife();
 				s.destroy();
 				spawnShip();
@@ -174,7 +187,7 @@ class Level extends dn.Process {
 		}
 		#end
 
-		if (ftime >= nextSpawnTiming) {
+		if (shipToSpawn > 0 && ftime >= nextSpawnTiming) {
 			spawnShip();
 			nextSpawnTiming += spawnTiming * Const.FPS;
 		}
