@@ -16,7 +16,6 @@ class Ship extends dn.Process {
 
 	public function addToRoad(r:Road) {
 		currentRoad = r;
-		r.mapTile.addChild(root);
 		root.setPosition(r.fromX, r.fromY);
 	}
 

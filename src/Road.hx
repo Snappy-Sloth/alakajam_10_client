@@ -16,4 +16,9 @@ class Road {
 
 		this.mapTile = mapTile;
 	}
+
+	public function onRotation(newFrom:EP, newTo:EP) {
+		from = newFrom;
+		to = newTo;
+	}
 }
