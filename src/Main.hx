@@ -1,3 +1,4 @@
+import ui.ChooseLevelScreen;
 import Data;
 import hxd.Key;
 
@@ -67,6 +68,13 @@ class Main extends dn.Process {
 		new ui.TitleScreen();
 	}
 
+	public function startChooseLevelScreen() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+		new ui.ChooseLevelScreen();
+	}
+
 	/*public function showDebugTita() {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
@@ -107,13 +115,13 @@ class Main extends dn.Process {
 		startGame(3, 3);
 	}
 
-	public function showDebugTipyx() {
+	/*public function showDebugTipyx() {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
 
 		startGame(1, 1);
-	}
+	}*/
 
 	public function startGame(wi:Int, he:Int) {
 		if( Game.ME!=null ) {
