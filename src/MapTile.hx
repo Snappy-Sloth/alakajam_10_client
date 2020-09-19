@@ -92,7 +92,7 @@ class MapTile extends h2d.Layers {
 		ship.addToRoad(roads[0]);
 
 		// wrapper.addChild(ship.root);
-		this.addChild(ship.root);
+		// this.addChild(ship.root);
 	}
 
 	public function select() {

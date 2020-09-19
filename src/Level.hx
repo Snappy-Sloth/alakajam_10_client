@@ -6,7 +6,7 @@ class Level extends dn.Process {
 	public var hei(get,never) : Int; inline function get_hei() return 16;
 
 	var arMapTile : Array<MapTile>;
-	var wrapperMapTile : h2d.Object;
+	var wrapperMapTile : h2d.Layers;
 
 	var width : Int;
 	var height : Int;
@@ -36,12 +36,13 @@ class Level extends dn.Process {
 		width = w;
 		height = h;
 
-		wrapperMapTile = new h2d.Object(root);
+		wrapperMapTile = new h2d.Layers(root);
+		// root.add(wrapperMapTile, Const.DP_MAIN);
 
 		for (i in 0...width) {
 			for (j in 0...height) {
 				var mapTile = new MapTile(i, j, this);
-				wrapperMapTile.addChild(mapTile);
+				wrapperMapTile.add(mapTile, Const.DP_MAIN);
 				arMapTile.push(mapTile);
 			}
 		}
