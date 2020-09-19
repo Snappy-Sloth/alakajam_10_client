@@ -143,6 +143,12 @@ class Level extends dn.Process {
 		return false;
 	}
 
+	public function unselectAllMapTiles() {
+		for (tile in arMapTile) {
+			tile.unSelect();
+		}
+	}
+
 	public function getMapTile(cx:Int, cy:Int):MapTile {
 		if (!isValid(cx, cy))
 			return null;
