@@ -12,8 +12,11 @@ class MapTile extends h2d.Layers {
 	var inter : Interactive;
 
 	public var selected : Bool;
+	
 	var wrapper : Layers;
 	var wrapperRotation : Layers;
+
+	var roads : Array<Road> = [];
 	
 	public function new(tx:Int, ty:Int, level:Level) {
 		super();
@@ -58,7 +61,38 @@ class MapTile extends h2d.Layers {
 					level.addArrows(this);
 				}
 			}
-        }
+		}
+		
+		createRoad();
+	}
+
+	function createRoad() {
+		var from = getRandomEntryPoint();
+		var to = getRandomEntryPoint(from);
+
+		var r = new Road(from, to, this);
+		roads.push(r);
+
+		trace(from + " " + to);
+
+		var gr = new h2d.Graphics(this);
+		gr.lineStyle(1);
+		gr.moveTo(r.fromX, r.fromY);
+		gr.lineTo(r.toX, r.toY);
+
+	}
+
+	function getRandomEntryPoint(differentFrom:Null<EP> = null) {
+		var out : EP = null;
+		while (out == null || (differentFrom != null && out.getName().split("_")[0] == differentFrom.getName().split("_")[0] )) {
+			out = EP.createByIndex(Std.random(EP.createAll().length));
+		}
+
+		return out;
+	}
+
+	public function addShipToRoad(ship:Ship) {
+		ship.addToRoad(roads[0]);
 	}
 
 	public function select() {

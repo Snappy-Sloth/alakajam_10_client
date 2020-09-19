@@ -112,7 +112,7 @@ class Main extends dn.Process {
 			ui.TitleScreen.ME.destroy();
 		}
 
-		new DebugTipyx();
+		startGame(1, 1);
 	}
 
 	public function startGame(wi:Int, he:Int) {
