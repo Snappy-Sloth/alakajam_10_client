@@ -1,26 +1,29 @@
 class Road {
 
-	public var from(default, null) : EP;
-	public var to(default, null) : EP;
+	public var pointA(default, null) : EP;
+	public var pointB(default, null) : EP;
 
-	public var fromX(get, never) : Float; inline function get_fromX() return dn.Lib.getEnumMetaFloat(from, "x") * Const.MAP_TILE_SIZE;
-	public var fromY(get, never) : Float; inline function get_fromY() return dn.Lib.getEnumMetaFloat(from, "y") * Const.MAP_TILE_SIZE;
-	public var toX(get, never) : Float; inline function get_toX() return dn.Lib.getEnumMetaFloat(to, "x") * Const.MAP_TILE_SIZE;
-	public var toY(get, never) : Float; inline function get_toY() return dn.Lib.getEnumMetaFloat(to, "y") * Const.MAP_TILE_SIZE;
+	public var pointAX(get, never) : Float; inline function get_pointAX() return dn.Lib.getEnumMetaFloat(pointA, "x") * Const.MAP_TILE_SIZE;
+	public var pointAY(get, never) : Float; inline function get_pointAY() return dn.Lib.getEnumMetaFloat(pointA, "y") * Const.MAP_TILE_SIZE;
+	public var pointBX(get, never) : Float; inline function get_pointBX() return dn.Lib.getEnumMetaFloat(pointB, "x") * Const.MAP_TILE_SIZE;
+	public var pointBY(get, never) : Float; inline function get_pointBY() return dn.Lib.getEnumMetaFloat(pointB, "y") * Const.MAP_TILE_SIZE;
 
 	public var mapTile : MapTile;
 
-	public var distance(get, never) : Float; inline function get_distance() return M.dist(fromX, fromY, toX, toY);
+	public var distance(get, never) : Float; inline function get_distance() return M.dist(pointAX, pointAY, pointBX, pointBY);
 
-	public function new(from:EP, to:EP, mapTile:MapTile) {
-		this.from = from;
-		this.to = to;
+	public function new(pointA:EP, pointB:EP, mapTile:MapTile) {
+		this.pointA = pointA;
+		this.pointB = pointB;
 
 		this.mapTile = mapTile;
 	}
 
-	public function onRotation(newFrom:EP, newTo:EP) {
-		from = newFrom;
-		to = newTo;
+	public function onRotation(newPointA:EP, newPointB:EP) {
+		pointA = newPointA;
+		pointB = newPointB;
 	}
+
+	public inline function getEpX(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "x") * Const.MAP_TILE_SIZE; 
+	public inline function getEpY(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "y") * Const.MAP_TILE_SIZE; 
 }

@@ -2,8 +2,8 @@ class Level extends dn.Process {
 	public var game(get,never) : Game; inline function get_game() return Game.ME;
 	public var fx(get,never) : Fx; inline function get_fx() return Game.ME.fx;
 
-	public var wid(get,never) : Int; inline function get_wid() return 16;
-	public var hei(get,never) : Int; inline function get_hei() return 16;
+	public var wid(get,never) : Int; inline function get_wid() return width;
+	public var hei(get,never) : Int; inline function get_hei() return height;
 
 	var arMapTile : Array<MapTile>;
 	var wrapperMapTile : h2d.Layers;
@@ -63,6 +63,39 @@ class Level extends dn.Process {
 		leftArrow.hide();
 	}
 
+	public function moveShip(s:Ship) {
+		var nextTile = null;
+		nextTile = switch (s.to) {
+			case North_1, North_2: getMapTile(s.currentMapTile.cx, s.currentMapTile.cy - 1);
+			case South_1, South_2: getMapTile(s.currentMapTile.cx, s.currentMapTile.cy + 1);
+			case West_1, West_2: getMapTile(s.currentMapTile.cx - 1, s.currentMapTile.cy);
+			case East_1, East_2: getMapTile(s.currentMapTile.cx + 1, s.currentMapTile.cy);
+		}
+
+		if (nextTile == null) {
+			// TODO : ADD POINTS
+			// TODO : Suppr ship			
+		}
+		else {
+			var nextEP = switch s.to {
+				case North_1: South_1;
+				case North_2: South_2;
+				case South_1: North_1;
+				case South_2: North_2;
+				case West_1: East_1;
+				case West_2: East_2;
+				case East_1: West_1;
+				case East_2: West_2;
+			}
+
+			var nextRoad = nextTile.getRoadWith(nextEP);
+
+			if (nextRoad != null) {
+				s.addToRoad(nextRoad, nextEP);
+			}
+		}
+	}
+
 	public function checkOtherTiles(mapTile:MapTile) {
 		for (mt in arMapTile) {
 			if (mt != mapTile && mt.selected) {
@@ -72,6 +105,18 @@ class Level extends dn.Process {
 			}
 		}
 		return false;
+	}
+
+	public function getMapTile(cx:Int, cy:Int):MapTile {
+		if (!isValid(cx, cy))
+			return null;
+
+		for (tile in arMapTile) {
+			if (tile.cx == cx && tile.cy == cy)
+				return tile;
+		}
+
+		return null;
 	}
 
 	public function exchangeTiles(mt1:MapTile, mt2:MapTile) {

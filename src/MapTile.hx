@@ -75,8 +75,8 @@ class MapTile extends h2d.Layers {
 
 		var gr = new h2d.Graphics(wrapper);
 		gr.lineStyle(1);
-		gr.moveTo(r.fromX, r.fromY);
-		gr.lineTo(r.toX, r.toY);
+		gr.moveTo(r.pointAX, r.pointAY);
+		gr.lineTo(r.pointBX, r.pointBY);
 	}
 
 	function getRandomEntryPoint(differentFrom:Null<EP> = null) {
@@ -89,10 +89,19 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function addShipToRoad(ship:Ship) {
-		ship.addToRoad(roads[0]);
+		ship.addToRoad(roads[0], roads[0].pointA);
 
 		// wrapper.addChild(ship.root);
 		// this.addChild(ship.root);
+	}
+
+	public function getRoadWith(ep:EP):Road {
+		for (r in roads)
+			if (ep == r.pointA || ep == r.pointB) {
+				return r;
+			}
+
+		return null;
 	}
 
 	public function select() {
@@ -109,7 +118,7 @@ class MapTile extends h2d.Layers {
 		// Rotate roads
 
 		for (r in roads) {
-			r.onRotation(getNextRoadWhenRotateRight(r.from), getNextRoadWhenRotateRight(r.to));
+			r.onRotation(getNextRoadWhenRotateRight(r.pointA), getNextRoadWhenRotateRight(r.pointB));
 		}
 
 		// Rotate art
@@ -120,7 +129,7 @@ class MapTile extends h2d.Layers {
 		// Rotate roads
 
 		for (r in roads) {
-			r.onRotation(getNextRoadWhenRotateLeft(r.from), getNextRoadWhenRotateLeft(r.to));
+			r.onRotation(getNextRoadWhenRotateLeft(r.pointA), getNextRoadWhenRotateLeft(r.pointB));
 		}
 
 		// Rotate art
