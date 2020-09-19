@@ -46,18 +46,21 @@ class Level extends dn.Process {
 				arMapTile.push(mapTile);
 			}
 		}
-	}
 
-	public function addArrows(mapTile:MapTile) {
-		rightArrow = new Arrow(mapTile.cx+1, mapTile.cy, mapTile, true);
-		leftArrow = new Arrow(mapTile.cx, mapTile.cy, mapTile, false);
+		rightArrow = new Arrow(true);
+		leftArrow = new Arrow(false);
 		wrapperMapTile.addChild(rightArrow);
 		wrapperMapTile.addChild(leftArrow);
 	}
 
+	public function addArrows(mapTile:MapTile) {
+		rightArrow.show(mapTile);
+		leftArrow.show(mapTile);
+	}
+
 	public function removeArrows(mapTile:MapTile) {
-		wrapperMapTile.removeChild(rightArrow);
-		wrapperMapTile.removeChild(leftArrow);
+		rightArrow.hide();
+		leftArrow.hide();
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {

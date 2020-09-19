@@ -14,12 +14,16 @@ class Game extends Process {
 	var width : Int;
 	var height : Int;
 
+	public var numberLife(default, null) : Int;
+
 	public function new(wi:Int, he:Int) {
 		super(Main.ME);
 		ME = this;
 
 		width = wi;
 		height = he;
+
+		numberLife = 3;
 
 		ca = Main.ME.controller.createAccess("game");
 		ca.setLeftDeadZone(0.2);
@@ -33,7 +37,7 @@ class Game extends Process {
 		// camera = new Camera();
 		level = new Level(width, height);
 		fx = new Fx();
-		hud = new ui.Hud();
+		hud = new ui.Hud(width, height);
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
