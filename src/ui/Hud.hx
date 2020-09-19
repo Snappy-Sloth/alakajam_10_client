@@ -43,7 +43,7 @@ class Hud extends dn.Process {
 		flowRight.layout = Vertical;
 		flowRight.verticalSpacing = 20;
 		flowRight.setPosition(((w() / Const.SCALE + width * Const.MAP_TILE_SIZE) / 2) + Const.FLOW_MAPTILE_SPACING,
-							((h() / Const.SCALE - height * Const.MAP_TILE_SIZE)) / 2 + Const.FLOW_MAPTILE_SPACING);
+							((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
 
 		flowLevel = new h2d.Flow(flowRight);
 		flowLevel.layout = Horizontal;
@@ -96,7 +96,7 @@ class Hud extends dn.Process {
 
 		flowLeft.reflow();
 		flowLeft.setPosition(((w() / Const.SCALE - width * Const.MAP_TILE_SIZE) / 2) - flowLeft.outerWidth - Const.FLOW_MAPTILE_SPACING,
-								((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2) + Const.FLOW_MAPTILE_SPACING);
+								((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
 	}
 
 	public function looseLife() {
