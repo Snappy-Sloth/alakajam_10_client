@@ -19,9 +19,6 @@ class Level extends dn.Process {
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 
 		createLevel(w, h);
-
-		var ship = new Ship(this);
-		arMapTile[0].addShipToRoad(ship);
 	}
 
 	override function onResize() {
@@ -51,6 +48,10 @@ class Level extends dn.Process {
 		leftArrow = new Arrow(false);
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
+
+		// Init ship
+		var ship = new Ship(this);
+		arMapTile[0].addShipToRoad(ship);
 	}
 
 	public function addArrows(mapTile:MapTile) {

@@ -17,6 +17,8 @@ class MapTile extends h2d.Layers {
 	var wrapperRotation : Layers;
 
 	var roads : Array<Road> = [];
+
+	public var ships : Array<Ship> = [];
 	
 	public function new(tx:Int, ty:Int, level:Level) {
 		super();
@@ -31,7 +33,8 @@ class MapTile extends h2d.Layers {
 		wrapper.setPosition(-Const.MAP_TILE_SIZE/2, -Const.MAP_TILE_SIZE/2);
 
 		var bmp = new Graphics(wrapper);
-		bmp.beginFill(Color.randomColor());
+		bmp.beginFill(0xFFFFFF);
+		bmp.lineStyle(3, 0xcc0000);
 		bmp.drawRect(0, 0, Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
 
 		var rotationField = new Graphics(wrapper);
@@ -63,7 +66,8 @@ class MapTile extends h2d.Layers {
 			}
 		}
 		
-		createRoad();
+		// for (i in 0...2)
+			createRoad();
 	}
 
 	function createRoad() {
@@ -91,8 +95,12 @@ class MapTile extends h2d.Layers {
 	public function addShipToRoad(ship:Ship) {
 		ship.addToRoad(roads[0], roads[0].pointA);
 
-		// wrapper.addChild(ship.root);
-		// this.addChild(ship.root);
+		ship.currentMapTile.removeShip(ship);
+		ships.push(ship);
+	}
+
+	public function removeShip(ship:Ship) {
+		ships.remove(ship);
 	}
 
 	public function getRoadWith(ep:EP):Road {

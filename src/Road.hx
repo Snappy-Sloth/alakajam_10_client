@@ -20,6 +20,17 @@ class Road {
 	}
 
 	public function onRotation(newPointA:EP, newPointB:EP) {
+		for (ship in mapTile.ships) {
+			if (ship.from == pointA) {
+				ship.from = newPointA;
+				ship.to = newPointB;
+			}
+			else if (ship.to == pointA) {
+				ship.to = newPointA;
+				ship.from = newPointB;
+			}
+		}
+
 		pointA = newPointA;
 		pointB = newPointB;
 	}

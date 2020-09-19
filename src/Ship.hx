@@ -24,11 +24,12 @@ class Ship extends dn.Process {
 	}
 
 	public function addToRoad(r:Road, from:EP) {
+		currentRoadRatio = 0;
 		currentRoad = r;
 		currentMapTile = r.mapTile;
 		this.from = from;
 		to = from == r.pointA ? r.pointB : r.pointA;
-		root.setPosition(r.getEpX(from), r.getEpY(from));
+		root.setPosition(r.getEpX(from) + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1), r.getEpY(from) + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
 	}
 
 	function reachEnd() {
@@ -40,12 +41,16 @@ class Ship extends dn.Process {
 
 		currentRoadRatio = currentRoadRatio + (speed / currentRoad.distance);
 		if (currentRoadRatio >= 1) {
-			reachEnd();
 			currentRoadRatio = 1;
+			root.setPosition(	currentRoad.getEpX(from) + (currentRoad.getEpX(to) - currentRoad.getEpX(from)) * currentRoadRatio + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1),
+								currentRoad.getEpY(from) + (currentRoad.getEpY(to) - currentRoad.getEpY(from)) * currentRoadRatio + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
+			reachEnd();
 		}
-		
-		root.setPosition(currentRoad.getEpX(from) + (currentRoad.getEpX(to) - currentRoad.getEpX(from)) * currentRoadRatio, currentRoad.getEpY(from) + (currentRoad.getEpY(to) - currentRoad.getEpY(from)) * currentRoadRatio);
-		root.setPosition(root.x - (Const.MAP_TILE_SIZE >> 1), root.y - (Const.MAP_TILE_SIZE >> 1));
+		else {
+			root.setPosition(	currentRoad.getEpX(from) + (currentRoad.getEpX(to) - currentRoad.getEpX(from)) * currentRoadRatio + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1),
+								currentRoad.getEpY(from) + (currentRoad.getEpY(to) - currentRoad.getEpY(from)) * currentRoadRatio + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
+		}
+
 	}
 
 }
