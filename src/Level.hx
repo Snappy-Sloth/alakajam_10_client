@@ -24,7 +24,8 @@ class Level extends dn.Process {
 	override function onResize() {
 		super.onResize();
 		
-		wrapperMapTile.setPosition(((w()/Const.SCALE-width*Const.MAP_TILE_SIZE)/2), ((h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2));
+		wrapperMapTile.setPosition(((w()/Const.SCALE-width*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2,
+									((h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2);
 	}
 
 	public function createLevel(w, h) {
@@ -44,8 +45,8 @@ class Level extends dn.Process {
 	}
 
 	public function addArrows(mapTile:MapTile) {
-		rightArrow = new Arrow(mapTile.cx, mapTile.cy);
-		leftArrow = new Arrow(mapTile.cx+1, mapTile.cy);
+		rightArrow = new Arrow(mapTile.cx+1, mapTile.cy, mapTile, true);
+		leftArrow = new Arrow(mapTile.cx, mapTile.cy, mapTile, false);
 		wrapperMapTile.addChild(rightArrow);
 		wrapperMapTile.addChild(leftArrow);
 	}
