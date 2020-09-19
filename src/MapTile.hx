@@ -32,10 +32,13 @@ class MapTile extends h2d.Layers {
 		wrapper = new Layers(wrapperRotation);
 		wrapper.setPosition(-Const.MAP_TILE_SIZE/2, -Const.MAP_TILE_SIZE/2);
 
-		var bmp = new Graphics(wrapper);
-		bmp.beginFill(0xFFFFFF);
-		bmp.lineStyle(3, 0xcc0000);
-		bmp.drawRect(0, 0, Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
+		// var bmp = new Graphics(wrapper);
+		// bmp.beginFill(0xFFFFFF);
+		// bmp.lineStyle(3, 0xcc0000);
+		// bmp.drawRect(0, 0, Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
+
+		var bg = Assets.tiles.h_get("mapTile");
+		wrapper.addChild(bg);
 
 		var rotationField = new Graphics(wrapper);
 		rotationField.beginFill(0xff00ff, 0.5);

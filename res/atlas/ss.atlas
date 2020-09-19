@@ -1,0 +1,27 @@
+
+ss.png
+size: 394,394
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg
+  rotate: false
+  xy: 1, 1
+  size: 290, 290
+  orig: 290, 290
+  offset: 0, 0
+  index: -1
+mapTile
+  rotate: false
+  xy: 1, 293
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+ship
+  rotate: false
+  xy: 103, 293
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1

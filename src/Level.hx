@@ -39,7 +39,10 @@ class Level extends dn.Process {
 		height = h;
 
 		wrapperMapTile = new h2d.Layers(root);
-		// root.add(wrapperMapTile, Const.DP_MAIN);
+		
+		var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
+		wrapperMapTile.add(bg, Const.DP_BG);
+		bg.setPosition(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1);
 
 		for (i in 0...width) {
 			for (j in 0...height) {
@@ -53,13 +56,6 @@ class Level extends dn.Process {
 		leftArrow = new Arrow(false);
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
-
-		for (tile in arMapTile) {
-			trace(tile.cx + " " + tile.cy);
-			@:privateAccess for (road in tile.roads) {
-				trace(road.pointA + " " + road.pointB);
-			}
-		}
 	}
 
 	public function addArrows(mapTile:MapTile) {

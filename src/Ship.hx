@@ -8,9 +8,11 @@ class Ship extends dn.Process {
 	public var to : EP;
 	var currentRoadRatio : Float = 0;
 
-	var speed = 0.25;
+	var speed = 0.1;
 
 	var level : Level;
+
+	var spr : HSprite;
 
 	public function new(level:Level) {
 		super(level);
@@ -19,8 +21,9 @@ class Ship extends dn.Process {
 
 		createRootInLayers(@:privateAccess level.wrapperMapTile, Const.DP_FRONT);
 
-		var bmp = new h2d.Bitmap(h2d.Tile.fromColor(0x00FF00, 11, 7));
-		root.addChild(bmp);
+		// var bmp = new h2d.Bitmap(h2d.Tile.fromColor(0x00FF00, 11, 7));
+		// root.addChild(bmp);
+		spr = Assets.tiles.h_get("ship", 0.5, 0.5, root);
 	}
 
 	@:allow(MapTile)
@@ -31,6 +34,8 @@ class Ship extends dn.Process {
 		this.from = from;
 		to = from == r.pointA ? r.pointB : r.pointA;
 		root.setPosition(r.getEpX(from) + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1), r.getEpY(from) + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
+
+
 	}
 
 	function reachEnd() {
@@ -58,6 +63,7 @@ class Ship extends dn.Process {
 								currentRoad.getEpY(from) + (currentRoad.getEpY(to) - currentRoad.getEpY(from)) * currentRoadRatio + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
 		}
 
+		spr.rotation = Math.atan2(currentRoad.getEpY(to) - currentRoad.getEpY(from), currentRoad.getEpX(to) - currentRoad.getEpX(from));
 	}
 
 }
