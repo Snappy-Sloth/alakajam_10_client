@@ -95,9 +95,8 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
-				// game.hud.l
-				// TODO : LOSE LIVE
-				// TODO : SUPPR SHIPS
+				game.looseLife();
+				s.destroy();
 			}
 		} 
 	}
@@ -144,11 +143,15 @@ class Level extends dn.Process {
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;
 	public inline function coordId(cx,cy) return cx + cy*wid;
 
-	override function postUpdate() {
-		super.postUpdate();
+	override function update() {
+		super.update();
 
 		if (hxd.Key.isPressed(Key.A)) {
 			game.looseLife();
+		}
+
+		if (hxd.Key.isPressed(Key.F1)) {
+			arMapTile[0].spawnShip();
 		}
 	}
 }

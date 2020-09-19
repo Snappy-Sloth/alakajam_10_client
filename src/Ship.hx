@@ -37,10 +37,16 @@ class Ship extends dn.Process {
 		level.moveShip(this);
 	}
 
+	public override function onDispose() {
+		super.onDispose();
+
+		currentMapTile.removeShip(this);
+	}
+
 	public override function update() {
 		super.update();
 
-		currentRoadRatio = currentRoadRatio + (speed / currentRoad.distance);
+		currentRoadRatio = currentRoadRatio + (speed / currentRoad.distance) * tmod;
 		if (currentRoadRatio >= 1) {
 			currentRoadRatio = 1;
 			root.setPosition(	currentRoad.getEpX(from) + (currentRoad.getEpX(to) - currentRoad.getEpX(from)) * currentRoadRatio + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1),
