@@ -21,4 +21,6 @@ class Const {
 	public static var DP_UI = _inc++;
 
 	public static var MAP_TILE_SIZE = 100;
+	public static var ARROW_TILE_WIDTH = 25;
+	public static var ARROW_TILE_HEIGHT = 50;
 }

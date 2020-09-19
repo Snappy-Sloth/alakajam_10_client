@@ -11,6 +11,9 @@ class Level extends dn.Process {
 	var width : Int;
 	var height : Int;
 
+	var rightArrow : Arrow;
+	var leftArrow : Arrow;
+
 	public function new(w, h) {
 		super(Game.ME);
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
@@ -40,13 +43,27 @@ class Level extends dn.Process {
 		}
 	}
 
+	public function addArrows(mapTile:MapTile) {
+		rightArrow = new Arrow(mapTile.cx, mapTile.cy);
+		leftArrow = new Arrow(mapTile.cx+1, mapTile.cy);
+		wrapperMapTile.addChild(rightArrow);
+		wrapperMapTile.addChild(leftArrow);
+	}
+
+	public function removeArrows(mapTile:MapTile) {
+		wrapperMapTile.removeChild(rightArrow);
+		wrapperMapTile.removeChild(leftArrow);
+	}
+
 	public function checkOtherTiles(mapTile:MapTile) {
 		for (mt in arMapTile) {
 			if (mt != mapTile && mt.selected) {
 				exchangeTiles(mt, mapTile);
-				return;
+				removeArrows(mapTile);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public function exchangeTiles(mt1:MapTile, mt2:MapTile) {
@@ -61,7 +78,8 @@ class Level extends dn.Process {
 		mt1.setPosition(mt1.cx*Const.MAP_TILE_SIZE, mt1.cy*Const.MAP_TILE_SIZE);
 		mt2.setPosition(mt2.cx*Const.MAP_TILE_SIZE, mt2.cy*Const.MAP_TILE_SIZE);
 
-		mt1.selected = mt2.selected = false;
+		mt1.unSelect();
+		mt2.unSelect();
 	}
 
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;
