@@ -45,6 +45,16 @@ class Game extends Process {
 		trace(Lang.t._("Game is ready."));
 	}
 
+	public function looseLife() {
+		numberLife--;
+		hud.looseLife();
+		if (numberLife == 0) {
+			level.destroy();
+			hud.destroy();
+			new ui.GameOverScreen();
+		}
+	}
+
 	public function onCdbReload() {
 	}
 

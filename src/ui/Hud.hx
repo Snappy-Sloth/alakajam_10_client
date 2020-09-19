@@ -69,6 +69,10 @@ class Hud extends dn.Process {
 		scoreText.text = 'Score : ${game.score}';
 	}
 
+	public function looseLife() {
+		arLife[game.numberLife].visible = false;
+	}
+
 	override function onResize() {
 		super.onResize();
 		root.setScale(Const.UI_SCALE);
