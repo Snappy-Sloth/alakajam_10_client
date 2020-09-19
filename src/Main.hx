@@ -67,12 +67,44 @@ class Main extends dn.Process {
 		new ui.TitleScreen();
 	}
 
-	public function showDebugTita() {
+	/*public function showDebugTita() {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
 
 		startGame();
+	}*/
+
+	public function showDebugLevel2x2() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		startGame(2, 2);
+	}
+
+	public function showDebugLevel2x3() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		startGame(2, 3);
+	}
+
+	public function showDebugLevel3x2() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		startGame(3, 2);
+	}
+
+	public function showDebugLevel3x3() {
+		if( ui.TitleScreen.ME!=null ) {
+			ui.TitleScreen.ME.destroy();
+		}
+
+		startGame(3, 3);
 	}
 
 	public function showDebugTipyx() {
@@ -83,15 +115,15 @@ class Main extends dn.Process {
 		new DebugTipyx();
 	}
 
-	public function startGame() {
+	public function startGame(wi:Int, he:Int) {
 		if( Game.ME!=null ) {
 			Game.ME.destroy();
 			delayer.addF(function() {
-				new Game();
+				new Game(wi, he);
 			}, 1);
 		}
 		else
-			new Game();
+			new Game(wi, he);
 	}
 
 	override public function onResize() {

@@ -11,9 +11,16 @@ class Game extends Process {
 	public var level : Level;
 	public var hud : ui.Hud;
 
-	public function new() {
+	var width : Int;
+	var height : Int;
+
+	public function new(wi:Int, he:Int) {
 		super(Main.ME);
 		ME = this;
+
+		width = wi;
+		height = he;
+
 		ca = Main.ME.controller.createAccess("game");
 		ca.setLeftDeadZone(0.2);
 		ca.setRightDeadZone(0.2);
@@ -24,7 +31,7 @@ class Game extends Process {
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 
 		// camera = new Camera();
-		level = new Level();
+		level = new Level(width, height);
 		fx = new Fx();
 		hud = new ui.Hud();
 
@@ -97,7 +104,7 @@ class Game extends Process {
 
 			// Restart
 			if( ca.selectPressed() )
-				Main.ME.startGame();
+				Main.ME.startGame(width, height);
 		}
 	}
 }
