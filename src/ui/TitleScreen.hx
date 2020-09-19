@@ -4,6 +4,8 @@ class TitleScreen extends dn.Process {
 
 	public static var ME : TitleScreen;
 
+	var flow : h2d.Flow;
+
 	public function new() {
 		super(Main.ME);
 
@@ -11,7 +13,7 @@ class TitleScreen extends dn.Process {
 
 		ME = this;
 
-		var flow = new h2d.Flow(root);
+		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
 		flow.verticalSpacing = 20;
 
@@ -41,14 +43,22 @@ class TitleScreen extends dn.Process {
 		flow.addChild(tipyxBtn);*/
 		#end
 
-		flow.reflow();
-		flow.setPosition((w() - flow.outerWidth) >> 1, (h() - flow.outerHeight) >> 1);
+		onResize();
 	}
 
 	override function onDispose() {
 		super.onDispose();
 
 		ME = null;
+	}
+
+	override function onResize() {
+		super.onResize();
+
+		root.setScale(Const.SCALE);
+		
+		flow.reflow();
+		flow.setPosition(Std.int((w() / Const.SCALE) - flow.outerWidth) >> 1, Std.int((h() / Const.SCALE) - flow.outerHeight) >> 1);
 	}
 
 }

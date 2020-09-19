@@ -35,6 +35,11 @@ class ChooseLevelScreen extends dn.Process {
 		super.onDispose();
 
 		ME = null;
+    }
+    
+    override function onResize() {
+		super.onResize();
+		root.setScale(Const.SCALE);
 	}
 
 }

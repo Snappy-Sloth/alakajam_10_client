@@ -65,6 +65,9 @@ class Main extends dn.Process {
 	}
 
 	public function startTitleScreen() {
+		if (Game.ME != null) {
+			Game.ME.destroy();
+		}
 		new ui.TitleScreen();
 	}
 
@@ -87,6 +90,9 @@ class Main extends dn.Process {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
+		if( ui.ChooseLevelScreen.ME!=null ) {
+			ui.ChooseLevelScreen.ME.destroy();
+		}
 
 		startGame(2, 2);
 	}
@@ -94,6 +100,9 @@ class Main extends dn.Process {
 	public function showDebugLevel2x3() {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
+		}
+		if( ui.ChooseLevelScreen.ME!=null ) {
+			ui.ChooseLevelScreen.ME.destroy();
 		}
 
 		startGame(2, 3);
@@ -103,6 +112,9 @@ class Main extends dn.Process {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
+		if( ui.ChooseLevelScreen.ME!=null ) {
+			ui.ChooseLevelScreen.ME.destroy();
+		}
 
 		startGame(3, 2);
 	}
@@ -110,6 +122,9 @@ class Main extends dn.Process {
 	public function showDebugLevel3x3() {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
+		}
+		if( ui.ChooseLevelScreen.ME!=null ) {
+			ui.ChooseLevelScreen.ME.destroy();
 		}
 
 		startGame(3, 3);
