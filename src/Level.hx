@@ -94,7 +94,7 @@ class Level extends dn.Process {
 			if (nextRoad != null) {
 				s.addToRoad(nextRoad, nextEP);
 			}
-		}
+		} 
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {
