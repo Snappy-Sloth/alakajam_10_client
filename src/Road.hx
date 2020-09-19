@@ -10,6 +10,8 @@ class Road {
 
 	public var mapTile : MapTile;
 
+	public var distance(get, never) : Float; inline function get_distance() return M.dist(fromX, fromY, toX, toY);
+
 	public function new(from:EP, to:EP, mapTile:MapTile) {
 		this.from = from;
 		this.to = to;
