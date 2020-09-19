@@ -15,6 +15,7 @@ class Game extends Process {
 	var height : Int;
 
 	public var numberLife(default, null) : Int;
+	public var score(default, null): Int;
 
 	public function new(wi:Int, he:Int) {
 		super(Main.ME);
@@ -24,6 +25,7 @@ class Game extends Process {
 		height = he;
 
 		numberLife = 3;
+		score = 0;
 
 		ca = Main.ME.controller.createAccess("game");
 		ca.setLeftDeadZone(0.2);

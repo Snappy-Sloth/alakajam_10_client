@@ -8,7 +8,10 @@ class Hud extends dn.Process {
 	public var fx(get,never) : Fx; inline function get_fx() return Game.ME.fx;
 	public var level(get,never) : Level; inline function get_level() return Game.ME.level;
 
+	var flow : h2d.Flow;
 	var flowLife : h2d.Flow;
+	var flowLevel : h2d.Flow;
+	var flowScore : h2d.Flow;
 	var invalidated = true;
 
 	var width : Int;
@@ -26,7 +29,20 @@ class Hud extends dn.Process {
 		createRootInLayers(game.root, Const.DP_UI);
 		root.filter = new h2d.filter.ColorMatrix(); // force pixel perfect rendering
 
-		flowLife = new h2d.Flow(root);
+		flow = new h2d.Flow(root);
+		flow.layout = Vertical;
+		flow.verticalSpacing = 20;
+		flow.setPosition((w()/Const.SCALE+width*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING,
+							(h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING);
+
+		flowLevel = new h2d.Flow(flow);
+		flowLevel.layout = Horizontal;
+		flowLevel.horizontalSpacing = 10;
+		
+		var levelText = new Text(Assets.fontPixel, flowLevel);
+		levelText.text = 'Level : 1';
+		
+		flowLife = new h2d.Flow(flow);
 		flowLife.layout = Horizontal;
 		flowLife.horizontalSpacing = 10;
 
@@ -42,7 +58,15 @@ class Hud extends dn.Process {
 
 		flowLife.reflow();
 		//flow.setPosition((w() - flow.outerWidth) >> 1, (h() - flow.outerHeight) >> 1);
-		flowLife.setPosition((w()/Const.SCALE+width*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING, (h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2+10);
+		flowLife.setPosition((w()/Const.SCALE+width*Const.MAP_TILE_SIZE)/2+Const.FLOW_MAPTILE_SPACING,
+							(h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2+10);
+		
+		flowScore = new h2d.Flow(flow);
+		flowScore.layout = Horizontal;
+		flowScore.horizontalSpacing = 10;
+
+		var scoreText = new Text(Assets.fontPixel, flowScore);
+		scoreText.text = 'Score : ${game.score}';
 	}
 
 	override function onResize() {
