@@ -8,7 +8,7 @@ class Ship extends dn.Process {
 	public var to : EP;
 	var currentRoadRatio : Float = 0;
 
-	var speed = 0.1;
+	var speed = 0.5;
 
 	var level : Level;
 
@@ -45,16 +45,16 @@ class Ship extends dn.Process {
 		switch (start_ep) {
 			case North_1, North_2 :
 				spr.rotation = Math.PI / 2;
-				root.y -= 10;
+				// root.y -= 10;
 			case South_1, South_2 :
 				spr.rotation = -Math.PI / 2;
-				root.y += 10;
+				// root.y += 10;
 			case West_1, West_2 :
 				spr.rotation = 0;
-				root.x -= 10;
+				// root.x -= 10;
 			case East_1, East_2 :
 				spr.rotation = Math.PI;
-				root.x += 10;
+				// root.x += 10;
 		}
 
 		for (i in 0...9) {

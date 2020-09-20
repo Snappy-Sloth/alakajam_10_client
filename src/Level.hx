@@ -16,21 +16,15 @@ class Level extends dn.Process {
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
 
-	var shipOnScreen(get, never) : Int; inline function get_shipOnScreen() {
-		var i = 0;
-		for (tile in arMapTile) {
-			i += tile.ships.length;
-		}
-		return i;
-	}
-
 	public var ships : Array<Ship> = [];
 
 	// var shipToSpawn = 1;
 	// var shipToSpawn = 5;
 	var shipToSpawn = 3;
+	var shipsOver = 0;
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
+	var shipAreGone : Bool = false;
 
 	public function new(w, h) {
 		super(Game.ME);
@@ -79,7 +73,7 @@ class Level extends dn.Process {
 		}
 
 		// Randomize mapTiles position
-		var rnd = new dn.Rand(Std.random(99999));
+		/* var rnd = new dn.Rand(Std.random(99999));
 		for (i in 0...arMapTile.length) {
 			var arMP = arMapTile.copy();
 			var mp1 = rnd.arraySplice(arMP);
@@ -91,7 +85,7 @@ class Level extends dn.Process {
 		for (i in 0...arMapTile.length * 2) {
 			var mp = rnd.arrayPick(arMapTile);
 			rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
-		}
+		} */
 	}
 
 	function generateShipsAndRoad(numTry:Int) {
@@ -236,9 +230,13 @@ class Level extends dn.Process {
 		}
 
 		if (nextTile == null) {
+			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep)
+				shipsOver++;
 			s.destroy();
-			if (shipToSpawn == 0 && shipOnScreen == 0) {
-				// TODO : SHOW VICTORY
+			trace(shipToSpawn + " " + shipsOver);
+
+			if (shipToSpawn == shipsOver) {
+				game.levelVictory();
 			}
 		}
 		else {
@@ -262,7 +260,6 @@ class Level extends dn.Process {
 				shipToSpawn++;
 				game.looseLife();
 				s.destroy();
-				// spawnShip();
 			}
 		} 
 	}
@@ -331,6 +328,14 @@ class Level extends dn.Process {
 
 	public function playBtnPressed() {
 		setTimeMultiplier(1);
+		
+		if (!shipAreGone)
+			for (ship in ships) {
+				var mp = ship.start_mp;
+				mp.addShipToRoad(ship, mp.getRoadWith(ship.start_ep), ship.start_ep);
+			}
+		
+		shipAreGone = true;
 	}
 
 	public function forwardBtnPressed() {
