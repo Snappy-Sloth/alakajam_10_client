@@ -53,7 +53,7 @@ class MapTile extends h2d.Layers {
 
 			if (selected) {
 				unSelect();
-				level.removeArrows(this);
+				level.removeArrows();
 			}
 			else {
 				if (level.lvlData.numRotation > 0) {

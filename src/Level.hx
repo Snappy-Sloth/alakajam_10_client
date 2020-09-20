@@ -52,9 +52,9 @@ class Level extends dn.Process {
 
 		wrapperMapTile = new h2d.Layers(root);
 		
-		var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
-		wrapperMapTile.add(bg, Const.DP_BG);
-		bg.setPosition(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1);
+		// var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
+		// wrapperMapTile.add(bg, Const.DP_BG);
+		// bg.setPosition(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1);
 
 		// Create MapTiles
 		for (i in 0...wid) {
@@ -249,7 +249,7 @@ class Level extends dn.Process {
 		leftArrow.show(mapTile);
 	}
 
-	public function removeArrows(mapTile:MapTile) {
+	public function removeArrows() {
 		rightArrow.hide();
 		leftArrow.hide();
 	}
@@ -308,7 +308,7 @@ class Level extends dn.Process {
 		for (mt in arMapTile) {
 			if (mt != mapTile && mt.selected) {
 				exchangeTiles(mt, mapTile, false);
-				removeArrows(mapTile);
+				removeArrows();
 				return true;
 			}
 		}
@@ -404,6 +404,8 @@ class Level extends dn.Process {
 			}
 		
 		shipAreGone = true;
+
+		removeArrows();
 	}
 
 	/* public function forwardBtnPressed() {
