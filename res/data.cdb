@@ -129,53 +129,179 @@
 					"height": 3,
 					"numShips": 3,
 					"numSwap": 3,
-					"numRotation": 3,
+					"numRotation": 2,
 					"timerMax": 180
 				},
 				{
 					"id": "level_12",
 					"width": 2,
 					"height": 3,
-					"numShips": 4,
-					"numSwap": 3,
-					"numRotation": 4,
+					"numShips": 3,
+					"numSwap": 2,
+					"numRotation": 3,
 					"timerMax": 200
 				},
 				{
 					"id": "level_13",
-					"width": 3,
-					"height": 2,
-					"numShips": 5,
-					"numSwap": 4,
-					"numRotation": 3,
+					"width": 2,
+					"height": 3,
+					"numShips": 4,
+					"numSwap": 3,
+					"numRotation": 4,
 					"timerMax": 220
 				},
 				{
 					"id": "level_14",
-					"width": 3,
-					"height": 2,
-					"numShips": 6,
-					"numSwap": 6,
-					"numRotation": 6,
+					"width": 2,
+					"height": 3,
+					"numShips": 4,
+					"numSwap": 3,
+					"numRotation": 5,
 					"timerMax": 240
 				},
 				{
 					"id": "level_15",
-					"width": 3,
+					"width": 2,
 					"height": 3,
-					"numShips": 7,
-					"numSwap": 6,
+					"numShips": 5,
+					"numSwap": 2,
 					"numRotation": 7,
 					"timerMax": 260
 				},
 				{
 					"id": "level_16",
 					"width": 3,
+					"height": 2,
+					"numShips": 5,
+					"numSwap": 4,
+					"numRotation": 6,
+					"timerMax": 280
+				},
+				{
+					"id": "level_17",
+					"width": 3,
+					"height": 2,
+					"numShips": 6,
+					"numSwap": 4,
+					"numRotation": 7,
+					"timerMax": 300
+				},
+				{
+					"id": "level_18",
+					"width": 3,
+					"height": 2,
+					"numShips": 6,
+					"numSwap": 3,
+					"numRotation": 5,
+					"timerMax": 320
+				},
+				{
+					"id": "level_19",
+					"width": 3,
+					"height": 2,
+					"numShips": 7,
+					"numSwap": 5,
+					"numRotation": 7,
+					"timerMax": 340
+				},
+				{
+					"id": "level_20",
+					"width": 3,
+					"height": 2,
+					"numShips": 7,
+					"numSwap": 4,
+					"numRotation": 9,
+					"timerMax": 360
+				},
+				{
+					"id": "level_21",
+					"width": 3,
+					"height": 3,
+					"numShips": 5,
+					"numSwap": 3,
+					"numRotation": 4,
+					"timerMax": 380
+				},
+				{
+					"id": "level_22",
+					"width": 3,
+					"height": 3,
+					"numShips": 5,
+					"numSwap": 4,
+					"numRotation": 5,
+					"timerMax": 400
+				},
+				{
+					"id": "level_23",
+					"width": 3,
+					"height": 3,
+					"numShips": 6,
+					"numSwap": 5,
+					"numRotation": 6,
+					"timerMax": 420
+				},
+				{
+					"id": "level_24",
+					"width": 3,
+					"height": 3,
+					"numShips": 6,
+					"numSwap": 6,
+					"numRotation": 7,
+					"timerMax": 440
+				},
+				{
+					"id": "level_25",
+					"width": 3,
+					"height": 3,
+					"numShips": 7,
+					"numSwap": 5,
+					"numRotation": 8,
+					"timerMax": 460
+				},
+				{
+					"id": "level_26",
+					"width": 3,
+					"height": 3,
+					"numShips": 7,
+					"numSwap": 6,
+					"numRotation": 7,
+					"timerMax": 480
+				},
+				{
+					"id": "level_27",
+					"width": 3,
 					"height": 3,
 					"numShips": 8,
+					"numSwap": 7,
+					"numRotation": 6,
+					"timerMax": 500
+				},
+				{
+					"id": "level_28",
+					"width": 3,
+					"height": 3,
+					"numShips": 8,
+					"numSwap": 6,
+					"numRotation": 10,
+					"timerMax": 520
+				},
+				{
+					"id": "level_29",
+					"width": 3,
+					"height": 3,
+					"numShips": 9,
 					"numSwap": 8,
-					"numRotation": 7,
-					"timerMax": 280
+					"numRotation": 9,
+					"timerMax": 540
+				},
+				{
+					"id": "level_30",
+					"width": 3,
+					"height": 3,
+					"numShips": 9,
+					"numSwap": 7,
+					"numRotation": 11,
+					"timerMax": 560
 				}
 			],
 			"separators": [],
