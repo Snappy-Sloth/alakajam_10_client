@@ -13,11 +13,8 @@ class Game extends Process {
 	public var level : Level;
 	public var hud : ui.Hud;
 
-	// var width(get, never) : Int; inline function get_width() return lvlData.width;
-	// var height(get, never) : Int; inline function get_height() return lvlData.height;
-
 	public var numberLife(default, null) : Int;
-	public var score(default, null): Int;
+	public var score(default, null): Float;
 
 	var levelsToDo : Array<Data.Campaign> = [];
 
@@ -71,12 +68,13 @@ class Game extends Process {
 	}
 
 	public function levelVictory() {
-		level.destroy();
+		score += level.currentScore;
 		hud.destroy();
 		if (levelsToDo.length > 0)
 			new ui.EndLevelScreen();
 		else
 			new ui.EndCampaignScreen();	
+		level.destroy();
 	}
 
 	public function onCdbReload() {

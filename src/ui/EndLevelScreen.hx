@@ -44,7 +44,7 @@ class EndLevelScreen extends dn.Process {
 		flowInfo2.horizontalSpacing = 40;
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flowInfo2);
-		scoreText.text = 'Score: ${Game.ME.score}';
+		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
 		
 		var flowLife = new h2d.Flow(flowInfo2);
 		flowLife.layout = Horizontal;
@@ -57,6 +57,9 @@ class EndLevelScreen extends dn.Process {
 			life.drawRect(0, 0, 10, 10);
 			arLife.push(life);
 		}
+		
+		var scoreText = new h2d.Text(Assets.fontPixel, flow);
+		scoreText.text = 'Score Maximum: ${Std.int(Game.ME.score)}';
 			
 
 		var gameTimeText = new h2d.Text(Assets.fontPixel, flow);

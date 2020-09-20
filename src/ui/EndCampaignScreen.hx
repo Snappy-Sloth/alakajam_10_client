@@ -33,7 +33,7 @@ class EndCampaignScreen extends dn.Process {
 		flow.addSpacing(20);
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
-		scoreText.text = 'Score: ${Game.ME.score}';			
+		scoreText.text = 'Score maximum: ${Std.int(Game.ME.score)}';			
 
 		var gameTimeText = new h2d.Text(Assets.fontPixel, flow);
 		gameTimeText.text = 'Total Campaign Time: à définir';

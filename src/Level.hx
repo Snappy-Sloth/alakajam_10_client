@@ -20,6 +20,8 @@ class Level extends dn.Process {
 	var spawnTiming : Float = 3;
 	var shipAreGone : Bool = false;
 
+	public var currentScore(default, null) : Float;
+
 	public var lvlData(default, null) : Data.Campaign;
 
 	public function new(lvlData:Data.Campaign) {
@@ -30,6 +32,8 @@ class Level extends dn.Process {
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 
 		createLevel(wid, hei);
+
+		currentScore = lvlData.timerMax * Const.SCORE_BY_SECOND;
 
 		onResize();
 	}
@@ -361,13 +365,12 @@ class Level extends dn.Process {
 			game.looseLife();
 		}
 		
-		/* if (hxd.Key.isPressed(Key.F1)) {
-			spawnShip();
-		} */
-
 		if (hxd.Key.isPressed(Key.F3)) {
 			game.levelVictory();
 		}
 		#end
+
+		currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;
+		if (currentScore < 0) currentScore = 0;
 	}
 }

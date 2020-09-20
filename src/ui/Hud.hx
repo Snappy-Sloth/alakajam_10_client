@@ -127,6 +127,6 @@ class Hud extends dn.Process {
 			render();
 		}
 		timeText.text = 'Time: ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
-		scoreText.text = 'Score: ${game.score}';
+		scoreText.text = 'Score: ${Std.int(game.level.currentScore)}';
 	}
 }

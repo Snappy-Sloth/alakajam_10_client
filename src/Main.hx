@@ -120,8 +120,8 @@ class Main extends dn.Process {
 			levelsToDo.push(lvl);
 		}
 
-		startGame(levelsToDo);
-		// startGame([levelsToDo[0]]); // For debug only
+		// startGame(levelsToDo);
+		startGame([levelsToDo[0]]); // For debug only
 	}
 
 	public function startOneLevel(level:Data.Campaign) {

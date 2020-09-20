@@ -27,4 +27,7 @@ class Const {
 
 	public static var BUTTON_WIDTH = 100;
 	public static var BUTTON_HEIGHT = 50;
+
+	public static var SCORE_BY_SECOND = 50;
+	public static var SCORE_LOOSE_BY_SECOND = 10;
 }
