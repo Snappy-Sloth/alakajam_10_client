@@ -77,12 +77,12 @@ class Hud extends dn.Process {
 		//playInter.backgroundColor = 0x55ff00ff;
 		playInter.onClick = (e)->level.playBtnPressed();
 
-		var forwardBtn = new Graphics(flowButtons);
+		/* var forwardBtn = new Graphics(flowButtons);
 		forwardBtn.beginFill(0xff7f00);
 		forwardBtn.drawRect(0, 0, 20, 20);
 		var forwardInter = new h2d.Interactive(20, 20, forwardBtn);
 		//forwardInter.backgroundColor = 0x55ff00ff;
-		forwardInter.onClick = (e)->level.forwardBtnPressed();
+		forwardInter.onClick = (e)->level.forwardBtnPressed(); */
 	}
 
 	public function setLeftHud(wi:Int, he:Int) {

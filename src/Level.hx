@@ -206,20 +206,6 @@ class Level extends dn.Process {
 		leftArrow.hide();
 	}
 
-	/* public function spawnShip() {
-		shipToSpawn--;
-		var shuffleArMapTile = arMapTile.copy();
-		Lib.shuffleArray(shuffleArMapTile, Std.random);
-
-		for (tile in shuffleArMapTile) {
-			var ep = tile.getRandomExternalEP();
-			if (ep != null) {
-				tile.spawnShipOnEP(ep);
-				return;
-			}
-		}
-	} */
-
 	public function onShipReachingEnd(s:Ship) {
 		var nextTile = null;
 		nextTile = switch (s.to) {
@@ -233,7 +219,6 @@ class Level extends dn.Process {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep)
 				shipsOver++;
 			s.destroy();
-			trace(shipToSpawn + " " + shipsOver);
 
 			if (shipToSpawn == shipsOver) {
 				game.levelVictory();
@@ -257,7 +242,6 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
-				shipToSpawn++;
 				game.looseLife();
 				s.destroy();
 			}
@@ -365,10 +349,5 @@ class Level extends dn.Process {
 			game.campaignVictory();
 		}
 		#end
-
-		/* if (shipToSpawn > 0 && ftime >= nextSpawnTiming) {
-			spawnShip();
-			nextSpawnTiming += spawnTiming * Const.FPS;
-		} */
 	}
 }
