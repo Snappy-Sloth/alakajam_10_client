@@ -23,7 +23,7 @@ class GameOverScreen extends dn.Process {
 		
 		var menuBtn = new Button("Menu", Main.ME.startTitleScreen);
 		flow.addChild(menuBtn);
-		//menuBtn.setPosition((flow.outerWidth - Const.BUTTON_WIDTH) / 2, 0);
+		flow.horizontalAlign = Middle;
 
 		onResize();
 	}
