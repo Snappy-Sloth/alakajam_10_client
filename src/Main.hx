@@ -1,3 +1,5 @@
+import ui.EndCampaignScreen;
+import ui.EndLevelScreen;
 import ui.GameOverScreen;
 import ui.ChooseLevelScreen;
 import Data;
@@ -72,6 +74,9 @@ class Main extends dn.Process {
 		if( GameOverScreen.ME!=null ) {
 			GameOverScreen.ME.destroy();
 		}
+		if( EndCampaignScreen.ME!=null ) {
+			EndCampaignScreen.ME.destroy();
+		}
 		new ui.TitleScreen();
 	}
 
@@ -96,6 +101,9 @@ class Main extends dn.Process {
 		}
 		if( ui.ChooseLevelScreen.ME!=null ) {
 			ui.ChooseLevelScreen.ME.destroy();
+		}
+		if( EndLevelScreen.ME!=null ) {
+			ui.EndLevelScreen.ME.destroy();
 		}
 
 		startGame(2, 2);
