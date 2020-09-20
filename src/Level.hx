@@ -54,7 +54,10 @@ class Level extends dn.Process {
 		
 		// var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
 		// wrapperMapTile.add(bg, Const.DP_BG);
-		// bg.setPosition(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1);
+		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1)));
+		// bg.setPosition((Const.MAP_TILE_SIZE >> 1) - (bg.tile.width * 0.5), (Const.MAP_TILE_SIZE >> 1) - (bg.tile.height * 0.5));
+		bg.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
+		wrapperMapTile.add(bg, Const.DP_BG);
 
 		// Create MapTiles
 		for (i in 0...wid) {
