@@ -44,7 +44,10 @@ class Hud extends dn.Process {
 		flowRight.verticalSpacing = 20;
 		
 		var levelText = new Text(Assets.fontPixel, flowRight);
-		levelText.text = 'Level: 1';
+		var idLevel = Std.string(level.lvlData.id);
+		var splitId = idLevel.split("_");
+		var numLevel = splitId[1];
+		levelText.text = 'Level: ${numLevel}';
 		
 		flowLife = new h2d.Flow(flowRight);
 		flowLife.layout = Horizontal;
