@@ -77,6 +77,21 @@ class Level extends dn.Process {
 		for (tile in arMapTile) {
 			tile.drawRoads();
 		}
+
+		// Randomize mapTiles position
+		var rnd = new dn.Rand(Std.random(99999));
+		for (i in 0...arMapTile.length) {
+			var arMP = arMapTile.copy();
+			var mp1 = rnd.arraySplice(arMP);
+			var mp2 = rnd.arraySplice(arMP);
+
+			exchangeTiles(mp1, mp2);
+		}
+
+		for (i in 0...arMapTile.length * 2) {
+			var mp = rnd.arrayPick(arMapTile);
+			rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
+		}
 	}
 
 	function generateShipsAndRoad(numTry:Int) {

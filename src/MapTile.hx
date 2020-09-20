@@ -62,12 +62,12 @@ class MapTile extends h2d.Layers {
 				level.removeArrows(this);
 			}
 			else {
-				level.unselectAllMapTiles();
+				// level.unselectAllMapTiles();
 				select();
 
-				// if (!level.checkOtherTiles(this)) {
+				if (!level.checkOtherTiles(this)) {
 					level.addArrows(this);
-				// }
+				}
 			}
 		}
 		
