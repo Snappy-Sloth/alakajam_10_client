@@ -24,6 +24,14 @@ class Level extends dn.Process {
 		return i;
 	}
 
+	public var allShipsOnScreen(get, never) : Array<Ship>; inline function get_allShipsOnScreen() {
+		var ships = [];
+		for (tile in arMapTile) {
+			ships = ships.concat(tile.ships);
+		}
+		return ships;
+	}
+
 	var shipToSpawn = 3;
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
@@ -83,7 +91,7 @@ class Level extends dn.Process {
 		Lib.shuffleArray(shuffleArMapTile, Std.random);
 
 		for (tile in shuffleArMapTile) {
-			var ep = tile.hasAnExternalEP();
+			var ep = tile.getRandomExternalEP();
 			if (ep != null) {
 				tile.spawnShipOnEP(ep);
 				return;
@@ -94,10 +102,10 @@ class Level extends dn.Process {
 	public function onShipReachingEnd(s:Ship) {
 		var nextTile = null;
 		nextTile = switch (s.to) {
-			case North_1, North_2: getMapTile(s.currentMapTile.cx, s.currentMapTile.cy - 1);
-			case South_1, South_2: getMapTile(s.currentMapTile.cx, s.currentMapTile.cy + 1);
-			case West_1, West_2: getMapTile(s.currentMapTile.cx - 1, s.currentMapTile.cy);
-			case East_1, East_2: getMapTile(s.currentMapTile.cx + 1, s.currentMapTile.cy);
+			case North_1, North_2: getMapTileAt(s.currentMapTile.cx, s.currentMapTile.cy - 1);
+			case South_1, South_2: getMapTileAt(s.currentMapTile.cx, s.currentMapTile.cy + 1);
+			case West_1, West_2: getMapTileAt(s.currentMapTile.cx - 1, s.currentMapTile.cy);
+			case East_1, East_2: getMapTileAt(s.currentMapTile.cx + 1, s.currentMapTile.cy);
 		}
 
 		if (nextTile == null) {
@@ -149,7 +157,7 @@ class Level extends dn.Process {
 		}
 	}
 
-	public function getMapTile(cx:Int, cy:Int):MapTile {
+	public function getMapTileAt(cx:Int, cy:Int):MapTile {
 		if (!isValid(cx, cy))
 			return null;
 
@@ -175,6 +183,23 @@ class Level extends dn.Process {
 
 		mt1.unSelect();
 		mt2.unSelect();
+	}
+
+	public function addQuestGoal(cx:Int, cy:Int, ep:EP, id:Int):HSprite {
+		var spr = Assets.tiles.h_get("questMark", id, 0.5, 0.5);
+		wrapperMapTile.add(spr, Const.DP_UI);
+		var tile = getMapTileAt(cx, cy);
+
+		spr.setPos(tile.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1) , tile.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
+
+		switch (ep) {
+			case North_1, North_2 : spr.y -= 10;
+			case South_1, South_2 : spr.y += 10;
+			case West_1, West_2 : spr.x -= 10;
+			case East_1, East_2 : spr.x += 10;
+		}
+
+		return spr;
 	}
 
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;

@@ -40,9 +40,9 @@ class MapTile extends h2d.Layers {
 		var bg = Assets.tiles.h_get("mapTile");
 		wrapper.addChild(bg);
 
-		var rotationField = new Graphics(wrapper);
-		rotationField.beginFill(0xff00ff, 0.5);
-		rotationField.drawRect(0, 0, 10, 10);
+		// var rotationField = new Graphics(wrapper);
+		// rotationField.beginFill(0xff00ff, 0.5);
+		// rotationField.drawRect(0, 0, 10, 10);
 
 		this.setPosition(cx*Const.MAP_TILE_SIZE, cy*Const.MAP_TILE_SIZE);
 
@@ -158,7 +158,7 @@ class MapTile extends h2d.Layers {
 		return null;
 	}
 
-	public function hasAnExternalEP():Null<EP> {
+	public function getRandomExternalEP():Null<EP> {
 		var externalEPs = [];
 
 		for (ep in EP.createAll()) {

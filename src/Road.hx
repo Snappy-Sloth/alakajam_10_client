@@ -35,6 +35,6 @@ class Road {
 		pointB = newPointB;
 	}
 
-	public inline function getEpX(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "x") * Const.MAP_TILE_SIZE; 
-	public inline function getEpY(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "y") * Const.MAP_TILE_SIZE; 
+	public static inline function getEpX(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "x") * Const.MAP_TILE_SIZE; 
+	public static inline function getEpY(ep:EP) return dn.Lib.getEnumMetaFloat(ep, "y") * Const.MAP_TILE_SIZE; 
 }
