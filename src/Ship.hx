@@ -101,6 +101,12 @@ class Ship extends dn.Process {
 		level.onShipReachingEnd(this);
 	}
 
+	public function disappear() {
+		isEnable = false;
+		
+		level.tw.createS(root.alpha, 0, 0.5).onEnd = ()->destroy();
+	}
+
 	public override function onDispose() {
 		super.onDispose();
 
@@ -108,6 +114,8 @@ class Ship extends dn.Process {
 
 		if (currentMapTile != null)
 			currentMapTile.removeShip(this);
+
+		level.ships.remove(this);
 	}
 
 	public override function update() {

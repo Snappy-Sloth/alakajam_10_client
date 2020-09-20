@@ -70,40 +70,7 @@ class MapTile extends h2d.Layers {
 				}
 			}
 		}
-		
-		// createRoads(4);
-
-		// Draw Roads
-		
 	}
-
-	/* function createRoads(num:Int) {
-		roads = [];
-
-		for (i in 0...num)
-			createRoad();
-
-		if (roads.length < num)
-			createRoads(num);
-	} */
-
-	/* function createRoad() {
-		var currentlyUsedPE = [];
-
-		for (road in roads) {
-			currentlyUsedPE.push(road.pointA);
-			currentlyUsedPE.push(road.pointB);
-		}
-
-		var from = getRandomEntryPoint(currentlyUsedPE);
-		var to = getRandomEntryPoint(from, currentlyUsedPE);
-
-		if (from == null || to == null)
-			return;
-
-		var r = new Road(from, to, this);
-		roads.push(r);
-	} */
 
 	public function createRoad(from:EP, to:EP) {
 		var r = new Road(from, to, this);

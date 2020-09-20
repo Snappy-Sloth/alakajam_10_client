@@ -32,7 +32,7 @@ class Level extends dn.Process {
 		super(Game.ME);
 
 		rand = new dn.Rand(Std.random(999999));
-		trace("Seed : " + rand.getSeed());
+		// trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
 
@@ -286,11 +286,7 @@ class Level extends dn.Process {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
 				shipsOver++;
 				
-				s.destroy();
-	
-				if (lvlData.numShips == shipsOver) {
-					game.levelVictory();
-				}
+				s.disappear();
 			}
 			else {
 				for (s in ships)
@@ -463,6 +459,10 @@ class Level extends dn.Process {
 			game.levelVictory();
 		}
 		#end
+
+		if (lvlData.numShips == shipsOver && ships.length == 0) {
+			game.levelVictory();
+		}
 
 		if (!shipAreGone) {
 			currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;
