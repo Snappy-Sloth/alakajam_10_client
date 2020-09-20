@@ -1,3 +1,4 @@
+import ui.LooseLifeScreen;
 import ui.EndCampaignScreen;
 import ui.EndLevelScreen;
 import ui.GameOverScreen;
@@ -101,6 +102,12 @@ class Main extends dn.Process {
 		}
 		if( ChooseLevelScreen.ME!=null ) {
 			ChooseLevelScreen.ME.destroy();
+		}
+		if( EndLevelScreen.ME!=null ) {
+			EndLevelScreen.ME.destroy();
+		}
+		if( LooseLifeScreen.ME!=null ) {
+			LooseLifeScreen.ME.destroy();
 		}
 	}
 
