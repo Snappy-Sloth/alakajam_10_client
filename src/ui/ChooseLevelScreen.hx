@@ -24,7 +24,18 @@ class ChooseLevelScreen extends dn.Process {
 		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
         flow.verticalSpacing = 20;
-        
+		
+
+		for (j in 0...4) {
+			for (i in 0...levels.length) {
+				var levelBtn = new Button('Level ${i+1}', Main.ME.startOneLevel.bind(levels[i]));
+				flow.addChild(levelBtn);
+			}
+		}
+
+		flow.maxHeight = Std.int(h() / Const.SCALE) - 2 * Const.FLOW_MAPTILE_SPACING;
+		flow.overflow = Limit;
+
         /*var level1Btn = new Button("Level 1", Main.ME.showDebugLevel2x2);
 		flow.addChild(level1Btn);
 

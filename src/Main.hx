@@ -99,23 +99,38 @@ class Main extends dn.Process {
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
+		if( ChooseLevelScreen.ME!=null ) {
+			ChooseLevelScreen.ME.destroy();
+		}
 	}
 
 	public function startCampaign() {
 		clean();
 
-		startGame();
+		var levelsToDo = [];
+
+		for (lvl in Data.Campaign.all) {
+			levelsToDo.push(lvl);
+		}
+
+		startGame(levelsToDo);
 	}
 
-	public function startGame() {
+	public function startOneLevel(level:Data.Campaign) {
+		clean();
+
+		startGame([level]);
+	}
+
+	public function startGame(levelsToDo:Array<Data.Campaign>) {
 		if( Game.ME!=null ) {
 			Game.ME.destroy();
 			delayer.addF(function() {
-				new Game();
+				new Game(levelsToDo);
 			}, 1);
 		}
 		else
-			new Game();
+			new Game(levelsToDo);
 	}
 
 	override public function onResize() {

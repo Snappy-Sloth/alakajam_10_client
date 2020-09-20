@@ -21,15 +21,11 @@ class Game extends Process {
 
 	var levelsToDo : Array<Data.Campaign> = [];
 
-	public function new() {
+	public function new(levelsToDo:Array<Data.Campaign>) {
 		super(Main.ME);
 		ME = this;
 
-		levelsToDo = [];
-
-		for (lvl in Data.Campaign.all) {
-			levelsToDo.push(lvl);
-		}
+		this.levelsToDo = levelsToDo;
 
 		numberLife = 3;
 		score = 0;
