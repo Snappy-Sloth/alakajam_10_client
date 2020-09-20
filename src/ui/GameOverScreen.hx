@@ -15,7 +15,8 @@ class GameOverScreen extends dn.Process {
 
 		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
-        flow.verticalSpacing = 50;
+		flow.verticalSpacing = 50;
+		flow.horizontalAlign = Middle;
         
         var gameOverText = new h2d.Text(Assets.fontPixel, flow);
         gameOverText.text = 'GAME OVER';
@@ -23,7 +24,6 @@ class GameOverScreen extends dn.Process {
 		
 		var menuBtn = new Button("Menu", Main.ME.startTitleScreen);
 		flow.addChild(menuBtn);
-		flow.horizontalAlign = Middle;
 
 		onResize();
 	}

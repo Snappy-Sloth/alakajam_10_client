@@ -220,6 +220,10 @@ class Level extends dn.Process {
 		if (hxd.Key.isPressed(Key.F3)) {
 			game.levelVictory();
 		}
+
+		if (hxd.Key.isPressed(Key.F4)) {
+			game.campaignVictory();
+		}
 		#end
 
 		if (shipToSpawn > 0 && ftime >= nextSpawnTiming) {

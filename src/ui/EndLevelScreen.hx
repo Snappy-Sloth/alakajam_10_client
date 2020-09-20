@@ -19,15 +19,34 @@ class EndLevelScreen extends dn.Process {
 
 		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
-        flow.verticalSpacing = 20;
+		flow.verticalSpacing = 20;
+		flow.horizontalAlign = Middle;
         
         var endLevelText = new h2d.Text(Assets.fontPixel, flow);
-        endLevelText.text = 'Victory!';
+		endLevelText.text = 'Victory!';
+		endLevelText.setScale(Const.SCALE);
 
-        var levelText = new h2d.Text(Assets.fontPixel, flow);
-        levelText.text = 'Level: 1';
-        
-        var flowLife = new h2d.Flow(flow);
+		flow.addSpacing(20);
+		
+		var flowInfo1 = new h2d.Flow(flow);
+		flowInfo1.layout = Horizontal;
+		flowInfo1.horizontalSpacing = 40;
+
+		var levelText = new h2d.Text(Assets.fontPixel, flowInfo1);
+		levelText.text = 'Level: 1';
+		
+		var levelTimeText = new h2d.Text(Assets.fontPixel, flowInfo1);
+		levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
+		
+
+		var flowInfo2 = new h2d.Flow(flow);
+		flowInfo2.layout = Horizontal;
+		flowInfo2.horizontalSpacing = 40;
+		
+		var scoreText = new h2d.Text(Assets.fontPixel, flowInfo2);
+		scoreText.text = 'Score: ${Game.ME.score}';
+		
+		var flowLife = new h2d.Flow(flowInfo2);
 		flowLife.layout = Horizontal;
         flowLife.horizontalSpacing = 10;
         
@@ -37,16 +56,13 @@ class EndLevelScreen extends dn.Process {
 			life.beginFill(0xff0000);
 			life.drawRect(0, 0, 10, 10);
 			arLife.push(life);
-        }
-
-        var scoreText = new h2d.Text(Assets.fontPixel, flow);
-		scoreText.text = 'Score: ${Game.ME.score}';
-		
-		var levelTimeText = new h2d.Text(Assets.fontPixel, flow);
-		levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
+		}
+			
 
 		var gameTimeText = new h2d.Text(Assets.fontPixel, flow);
 		gameTimeText.text = 'Total Campaign Time: à définir';
+
+		flow.addSpacing(20);
 
         var nextLevelBtn = new Button("Next Level", Main.ME.showDebugLevel2x2);
 		flow.addChild(nextLevelBtn);

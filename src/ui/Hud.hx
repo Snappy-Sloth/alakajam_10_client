@@ -64,6 +64,18 @@ class Hud extends dn.Process {
 		timeText = new Text(Assets.fontPixel, flowRight);
 		timeText.text = 'Time: ${Lib.prettyTime(level.ftime)}';
 
+		flowRight.addSpacing(30);
+
+		var flowButtons = new h2d.Flow(flowRight);
+		flowButtons.layout = Horizontal;
+		flowButtons.horizontalSpacing = 20;
+
+		for (j in 0...2) {
+			var buttons = new Graphics(flowButtons);
+			buttons.beginFill(0xff7f00);
+			buttons.drawRect(0, 0, 20, 20);
+		}
+
 	}
 
 	public function setLeftHud(wi:Int, he:Int) {
