@@ -26,8 +26,8 @@ class LooseLifeScreen extends dn.Process {
         lifeLostText.text = 'You loose a life';
 		lifeLostText.scale(Const.SCALE);
 		
-		var restartBtn = new Button("Menu", Main.ME.showDebugLevel2x2);
-		flow.addChild(restartBtn);
+		// var restartBtn = new Button("Menu", Main.ME.showDebugLevel2x2);
+		// flow.addChild(restartBtn);
 
 		onResize();
 	}
