@@ -23,10 +23,10 @@ class LooseLifeScreen extends dn.Process {
         levelLostText.scale(2*Const.SCALE);
         
         var lifeLostText = new h2d.Text(Assets.fontPixel, flow);
-        lifeLostText.text = 'You loose a life';
+        lifeLostText.text = 'You loose a life!';
 		lifeLostText.scale(Const.SCALE);
 		
-		var restartBtn = new Button("Menu", function() {
+		var restartBtn = new Button("Restart", function() {
 			Game.ME.restartLevel(lvlData);
 			this.destroy();
 		});

@@ -215,12 +215,19 @@ class Level extends dn.Process {
 		}
 
 		if (nextTile == null) {
-			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep)
+			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
 				shipsOver++;
-			s.destroy();
-
-			if (lvlData.numShips == shipsOver) {
-				game.levelVictory();
+				
+				s.destroy();
+	
+				if (lvlData.numShips == shipsOver) {
+					game.levelVictory();
+				}
+			}
+			else {
+				for (s in ships)
+					s.isEnable = false;
+				game.looseLife();
 			}
 		}
 		else {
@@ -244,7 +251,6 @@ class Level extends dn.Process {
 				for (s in ships)
 					s.isEnable = false;
 				game.looseLife();
-				// s.destroy();
 			}
 		} 
 	}
@@ -301,6 +307,11 @@ class Level extends dn.Process {
 				s.start_mp = mt2;
 			else if (s.start_mp == mt2)
 				s.start_mp = mt1;
+
+			if (s.quest_mp == mt1)
+				s.quest_mp = mt2;
+			else if (s.quest_mp == mt2)
+				s.quest_mp = mt1;
 		}
 	}
 
