@@ -202,10 +202,18 @@ class Level extends dn.Process {
 		return spr;
 	}
 
+	public function playBtnPressed() {
+		setTimeMultiplier(1);
+	}
+
+	public function forwardBtnPressed() {
+		setTimeMultiplier(5);
+	}
+
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;
 	public inline function coordId(cx,cy) return cx + cy*wid;
 
-	override function update() {
+	override function update() {		
 		super.update();
 
 		#if debug
