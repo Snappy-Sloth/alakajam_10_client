@@ -19,12 +19,27 @@ class LooseLifeScreen extends dn.Process {
 		flow.horizontalAlign = Middle;
         
         var levelLostText = new h2d.Text(Assets.fontPixel, flow);
-        levelLostText.text = 'LEVEL LOST';
+        // levelLostText.text = 'LEVEL LOST';
+        levelLostText.text = 'You loose a life';
         levelLostText.scale(2*Const.SCALE);
         
-        var lifeLostText = new h2d.Text(Assets.fontPixel, flow);
-        lifeLostText.text = 'You loose a life!';
+		var lifeLostText = new h2d.Text(Assets.fontPixel, flow);
+        lifeLostText.text = "One of your ship didn't reach it destination!";
 		lifeLostText.scale(Const.SCALE);
+
+		var flowLife = new h2d.Flow(flow);
+		flowLife.layout = Horizontal;
+		flowLife.verticalAlign = Middle;
+		flowLife.horizontalSpacing = 10;
+
+		var lifeLostText = new h2d.Text(Assets.fontPixel, flowLife);
+        lifeLostText.text = "Life left:";
+		lifeLostText.scale(Const.SCALE);
+
+		var numberLife = Game.ME.numberLife;
+		for (i in 0...numberLife) {
+			var life = Assets.tiles.h_get("life", flowLife);
+		}
 		
 		var restartBtn = new Button("Restart", function() {
 			Game.ME.restartLevel(lvlData);

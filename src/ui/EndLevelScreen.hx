@@ -35,9 +35,8 @@ class EndLevelScreen extends dn.Process {
 		var levelText = new h2d.Text(Assets.fontPixel, flowInfo1);
 		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
 		
-		var levelTimeText = new h2d.Text(Assets.fontPixel, flowInfo1);
-		levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
-		
+		// var levelTimeText = new h2d.Text(Assets.fontPixel, flowInfo1);
+		// levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
 
 		var flowInfo2 = new h2d.Flow(flow);
 		flowInfo2.layout = Horizontal;
