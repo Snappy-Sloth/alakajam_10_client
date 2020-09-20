@@ -142,7 +142,7 @@ class MapTile extends h2d.Layers {
 		}
 
 
-		return possibleOut[Std.random(possibleOut.length)];
+		return possibleOut[level.rand.random(possibleOut.length)];
 	}
 
 	public function spawnShipOnEP(ep:EP) {
@@ -170,12 +170,6 @@ class MapTile extends h2d.Layers {
 
 		return null;
 	}
-
-	/* public function getRandomExternalEP():Null<EP> {
-		var externalEPs = getAllExternalEPs();
-
-		return externalEPs.length == 0 ? null : externalEPs[Std.random(externalEPs.length)];
-	} */
 
 	public function getAllExternalEPs():Array<EP> {
 		var externalEPs = [];

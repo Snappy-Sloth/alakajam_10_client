@@ -26,8 +26,13 @@ class Level extends dn.Process {
 
 	public var controlLock(default, null) = false;
 
+	public var rand : dn.Rand;
+
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
+
+		rand = new dn.Rand(Std.random(999999));
+		trace(rand.getSeed());
 
 		this.lvlData = lvlData;
 
@@ -55,7 +60,6 @@ class Level extends dn.Process {
 		// var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
 		// wrapperMapTile.add(bg, Const.DP_BG);
 		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1)));
-		// bg.setPosition((Const.MAP_TILE_SIZE >> 1) - (bg.tile.width * 0.5), (Const.MAP_TILE_SIZE >> 1) - (bg.tile.height * 0.5));
 		bg.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
 		wrapperMapTile.add(bg, Const.DP_BG);
 
@@ -81,7 +85,6 @@ class Level extends dn.Process {
 		}
 
 		// Randomize mapTiles position
-		var rnd = new dn.Rand(Std.random(99999));
 		if (lvlData.numSwap > 0) { // Swapping
 			var isGood = false;
 			var previous = [];
@@ -94,8 +97,8 @@ class Level extends dn.Process {
 				var n = lvlData.numSwap;
 				while (n-- > 0) {
 					var arMP = arMapTile.copy();
-					var mp1 = rnd.arraySplice(arMP);
-					var mp2 = rnd.arraySplice(arMP);
+					var mp1 = rand.arraySplice(arMP);
+					var mp2 = rand.arraySplice(arMP);
 		
 					if (mp1.roads.length == 0 && mp2.roads.length == 0)
 						n++;
@@ -127,7 +130,7 @@ class Level extends dn.Process {
 		}
 
 		if (lvlData.numRotation > 0) { // Rotation
-			var goLeft = rnd.sign() == 1;
+			var goLeft = rand.sign() == 1;
 			var deck = new dn.RandDeck(Std.random);
 			for (tile in arMapTile) {
 				deck.push(tile);
@@ -151,8 +154,6 @@ class Level extends dn.Process {
 			tile.removeAllRoads();
 		}
 
-		var rnd = new dn.Rand(Std.random(99999));
-
 		var availablesExternalEP : Array<{mapTile:MapTile, eps:Array<EP>}> = [];
 		for (tile in arMapTile) {
 			var eps = tile.getAllExternalEPs();
@@ -163,8 +164,8 @@ class Level extends dn.Process {
 
 			// Spawn Ships
 		for (i in 0...lvlData.numShips) {
-			var randomAEEP = rnd.arrayPick(availablesExternalEP);
-			var randomEP = rnd.arraySplice(randomAEEP.eps);
+			var randomAEEP = rand.arrayPick(availablesExternalEP);
+			var randomEP = rand.arraySplice(randomAEEP.eps);
 
 			if (randomAEEP.eps.length == 0)
 				availablesExternalEP.remove(randomAEEP);
@@ -176,10 +177,10 @@ class Level extends dn.Process {
 
 			// Set ships quest goal
 		for (ship in ships) {
-			var randomAEEP = rnd.arrayPick(availablesExternalEP);
+			var randomAEEP = rand.arrayPick(availablesExternalEP);
 			while (randomAEEP == null || randomAEEP.mapTile == ship.start_mp)
-				randomAEEP = rnd.arrayPick(availablesExternalEP);
-			var randomEP = rnd.arraySplice(randomAEEP.eps);
+				randomAEEP = rand.arrayPick(availablesExternalEP);
+			var randomEP = rand.arraySplice(randomAEEP.eps);
 
 			if (randomAEEP.eps.length == 0)
 				availablesExternalEP.remove(randomAEEP);
@@ -227,7 +228,7 @@ class Level extends dn.Process {
 					return;
 				}
 
-				to = rnd.arrayPick(possibleExit);
+				to = rand.arrayPick(possibleExit);
 				currentMP.createRoad(from, to);
 
 				from = switch (to) {
