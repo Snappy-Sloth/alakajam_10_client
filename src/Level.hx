@@ -339,7 +339,7 @@ class Level extends dn.Process {
 
 	public function playBtnPressed() {
 		setTimeMultiplier(1);
-		
+
 		if (!shipAreGone)
 			for (ship in ships) {
 				ship.isEnable = true;
@@ -370,7 +370,9 @@ class Level extends dn.Process {
 		}
 		#end
 
-		currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;
-		if (currentScore < 0) currentScore = 0;
+		if (!shipAreGone) {
+			currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;
+			if (currentScore < 0) currentScore = 0;
+		}
 	}
 }
