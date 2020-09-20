@@ -21,6 +21,12 @@ class GameOverScreen extends dn.Process {
         var gameOverText = new h2d.Text(Assets.fontPixel, flow);
         gameOverText.text = 'GAME OVER';
 		gameOverText.scale(2*Const.SCALE);
+
+		var lastLevelReachedText = new h2d.Text(Assets.fontPixel, flow);
+		lastLevelReachedText.text = 'Last Level Reached: ${Std.int(Game.ME.level.getLevelNumber())}';
+
+		var scoreText = new h2d.Text(Assets.fontPixel, flow);
+		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';
 		
 		var menuBtn = new Button("Menu", Main.ME.startTitleScreen);
 		flow.addChild(menuBtn);

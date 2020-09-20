@@ -15,13 +15,13 @@ class Hud extends dn.Process {
 
 	var scoreText : Text;
 
-	var timeText : Text;
+	// var timeText : Text;
 	var invalidated = true;
 
 	var width : Int;
 	var height : Int;
 
-	var arLife : Array<Graphics>;
+	var arLife : Array<HSprite>;
 
 	public function new(wi:Int, he:Int) {
 		super(Game.ME);
@@ -44,10 +44,7 @@ class Hud extends dn.Process {
 		flowRight.verticalSpacing = 20;
 		
 		var levelText = new Text(Assets.fontPixel, flowRight);
-		var idLevel = Std.string(level.lvlData.id);
-		var splitId = idLevel.split("_");
-		var numLevel = splitId[1];
-		levelText.text = 'Level: ${numLevel}';
+		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
 		
 		flowLife = new h2d.Flow(flowRight);
 		flowLife.layout = Horizontal;
@@ -55,17 +52,15 @@ class Hud extends dn.Process {
 
 		var numberLife = game.numberLife;
 		for (i in 0...numberLife) {
-			var life = new Graphics(flowLife);
-			life.beginFill(0xff0000);
-			life.drawRect(0, 0, 10, 10);
+			var life = Assets.tiles.h_get("life", flowLife);
 			arLife.push(life);
 		}
 
 		scoreText = new Text(Assets.fontPixel, flowRight);
 		scoreText.text = 'Score: ${game.score}';
 		
-		timeText = new Text(Assets.fontPixel, flowRight);
-		timeText.text = 'Time: ${Lib.prettyTime(level.ftime)}';
+		// timeText = new Text(Assets.fontPixel, flowRight);
+		// timeText.text = 'Time: ${Lib.prettyTime(level.ftime)}';
 
 		flowRight.addSpacing(30);
 
@@ -127,7 +122,7 @@ class Hud extends dn.Process {
 			invalidated = false;
 			render();
 		}
-		timeText.text = 'Time: ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
+		// timeText.text = 'Time: ${Lib.prettyTime((level.ftime/Const.FPS)*1000)}';
 		scoreText.text = 'Score: ${Std.int(game.level.currentScore)}';
 	}
 }

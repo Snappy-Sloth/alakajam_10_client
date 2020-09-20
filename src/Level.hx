@@ -45,6 +45,12 @@ class Level extends dn.Process {
 		onResize();
 	}
 
+	public inline function getLevelNumber():Int {
+		var idLevel = Std.string(lvlData.id);
+		var splitId = idLevel.split("_");
+		return Std.parseInt(splitId[1]);
+	}
+
 	override function onResize() {
 		super.onResize();
 		
@@ -124,7 +130,9 @@ class Level extends dn.Process {
 						var s = swaps.pop();
 						exchangeTiles(s.mp1, s.mp2);
 					}
+					#if debug
 					trace("retry swap");
+					#end
 				}
 			}
 		}
@@ -199,8 +207,6 @@ class Level extends dn.Process {
 			var path = dn.Bresenham.getThickLine(ship.start_mp.cx, ship.start_mp.cy, ship.quest_mp.cx, ship.quest_mp.cy, true);
 			var prevDist = -1.;
 			var newPath :Array<MapTile> = [];
-			if (ship.quest_id == 2)
-				trace("-----");
 			var lastAddedToPath : MapTile = null;
 			for (p in path) {
 				if (lastAddedToPath == null || areNearEachOther(lastAddedToPath.cx, lastAddedToPath.cy, p.x, p.y) ) {
@@ -254,7 +260,7 @@ class Level extends dn.Process {
 			ship.quest_mp.createRoad(from, ship.quest_ep);
 		}
 
-		trace("numTry : " + numTry);
+		// trace("numTry : " + numTry);
 	}
 
 	public function addArrows(mapTile:MapTile) {

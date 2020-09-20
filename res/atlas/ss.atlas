@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 257, 293
+  xy: 280, 293
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
@@ -25,6 +25,13 @@ button
   orig: 100, 50
   offset: 0, 0
   index: -1
+life
+  rotate: false
+  xy: 257, 293
+  size: 21, 21
+  orig: 21, 21
+  offset: 0, 0
+  index: -1
 mapTile
   rotate: false
   xy: 1, 293
@@ -41,70 +48,70 @@ play
   index: -1
 questMark0
   rotate: false
-  xy: 290, 293
+  xy: 257, 329
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 290, 305
+  xy: 257, 341
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 276, 306
+  xy: 103, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 285, 317
+  xy: 112, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 276, 318
+  xy: 121, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 294, 317
+  xy: 130, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 285, 329
+  xy: 139, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 276, 330
+  xy: 148, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 294, 329
+  xy: 157, 345
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 276, 293
+  xy: 257, 316
   size: 12, 11
   orig: 12, 11
   offset: 0, 0
