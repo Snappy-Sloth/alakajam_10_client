@@ -18,7 +18,7 @@ class Level extends dn.Process {
 	var shipsOver = 0;
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
-	var shipAreGone : Bool = false;
+	public var shipAreGone(default, null) : Bool = false;
 
 	public var currentScore(default, null) : Float;
 
@@ -339,6 +339,10 @@ class Level extends dn.Process {
 
 	public function playBtnPressed() {
 		setTimeMultiplier(1);
+
+		for (tile in arMapTile) {
+			tile.unSelect();
+		}
 
 		if (!shipAreGone)
 			for (ship in ships) {

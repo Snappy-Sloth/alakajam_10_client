@@ -32,17 +32,8 @@ class MapTile extends h2d.Layers {
 		wrapper = new Layers(wrapperRotation);
 		wrapper.setPosition(-Const.MAP_TILE_SIZE/2, -Const.MAP_TILE_SIZE/2);
 
-		// var bmp = new Graphics(wrapper);
-		// bmp.beginFill(0xFFFFFF);
-		// bmp.lineStyle(3, 0xcc0000);
-		// bmp.drawRect(0, 0, Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
-
 		var bg = Assets.tiles.h_get("mapTile");
 		wrapper.addChild(bg);
-
-		// var rotationField = new Graphics(wrapper);
-		// rotationField.beginFill(0xff00ff, 0.5);
-		// rotationField.drawRect(0, 0, 10, 10);
 
 		this.setPosition(cx*Const.MAP_TILE_SIZE, cy*Const.MAP_TILE_SIZE);
 
@@ -57,16 +48,25 @@ class MapTile extends h2d.Layers {
         //inter.backgroundColor = 0x55ff00ff;
         
         inter.onClick = function(e) {
+			if (level.shipAreGone)
+				return;
+
 			if (selected) {
 				unSelect();
 				level.removeArrows(this);
 			}
 			else {
-				// level.unselectAllMapTiles();
-				select();
-
-				if (!level.checkOtherTiles(this)) {
-					level.addArrows(this);
+				if (level.lvlData.numRotation > 0) {
+					// level.unselectAllMapTiles();
+					select();
+	
+					if (!level.checkOtherTiles(this)) {
+						level.addArrows(this);
+					}
+				}
+				else {
+					select();
+					level.checkOtherTiles(this);
 				}
 			}
 		}
