@@ -24,6 +24,8 @@ class Level extends dn.Process {
 
 	public var lvlData(default, null) : Data.Campaign;
 
+	public var controlLock(default, null) = false;
+
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
@@ -266,7 +268,7 @@ class Level extends dn.Process {
 	public function checkOtherTiles(mapTile:MapTile) {
 		for (mt in arMapTile) {
 			if (mt != mapTile && mt.selected) {
-				exchangeTiles(mt, mapTile);
+				exchangeTiles(mt, mapTile, false);
 				removeArrows(mapTile);
 				return true;
 			}
@@ -292,7 +294,7 @@ class Level extends dn.Process {
 		return null;
 	}
 
-	public function exchangeTiles(mt1:MapTile, mt2:MapTile) {
+	public function exchangeTiles(mt1:MapTile, mt2:MapTile, instant:Bool = true) {
 		var mapTile1cx = mt1.cx;
 		var mapTile1cy = mt1.cy;
 
@@ -301,8 +303,19 @@ class Level extends dn.Process {
 		mt2.cx = mapTile1cx;
 		mt2.cy = mapTile1cy;
 
-		mt1.setPosition(mt1.cx*Const.MAP_TILE_SIZE, mt1.cy*Const.MAP_TILE_SIZE);
-		mt2.setPosition(mt2.cx*Const.MAP_TILE_SIZE, mt2.cy*Const.MAP_TILE_SIZE);
+		if (instant) {
+			mt1.setPosition(mt1.cx*Const.MAP_TILE_SIZE, mt1.cy*Const.MAP_TILE_SIZE);
+			mt2.setPosition(mt2.cx*Const.MAP_TILE_SIZE, mt2.cy*Const.MAP_TILE_SIZE);
+		}
+		else {
+			controlLock = true;
+			var t = 0.2;
+			tw.createS(mt1.x, mt1.cx*Const.MAP_TILE_SIZE, t);
+			tw.createS(mt1.y, mt1.cy*Const.MAP_TILE_SIZE, t);
+			tw.createS(mt2.x, mt2.cx*Const.MAP_TILE_SIZE, t);
+			tw.createS(mt2.y, mt2.cy*Const.MAP_TILE_SIZE, t);
+			delayer.addS(()->controlLock = false, t);
+		}
 
 		mt1.unSelect();
 		mt2.unSelect();

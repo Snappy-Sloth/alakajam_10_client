@@ -48,7 +48,7 @@ class MapTile extends h2d.Layers {
         //inter.backgroundColor = 0x55ff00ff;
         
         inter.onClick = function(e) {
-			if (level.shipAreGone)
+			if (level.shipAreGone || level.controlLock)
 				return;
 
 			if (selected) {
