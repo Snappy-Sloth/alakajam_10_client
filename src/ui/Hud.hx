@@ -70,10 +70,8 @@ class Hud extends dn.Process {
 		flowButtons.layout = Horizontal;
 		flowButtons.horizontalSpacing = 20;
 
-		var playBtn = new Graphics(flowButtons);
-		playBtn.beginFill(0xff7f00);
-		playBtn.drawRect(0, 0, 20, 20);
-		var playInter = new h2d.Interactive(20, 20, playBtn);
+		var playBtn = Assets.tiles.h_get("play", flowButtons);
+		var playInter = new h2d.Interactive(playBtn.tile.width, playBtn.tile.height, playBtn);
 		//playInter.backgroundColor = 0x55ff00ff;
 		playInter.onClick = (e)->level.playBtnPressed();
 

@@ -7,9 +7,11 @@ class Button extends h2d.Layers {
 	public function new(str:String, onClick:Void->Void) {
 		super();
 
-		var button = new Graphics(this);
-		button.beginFill(0xFF888888);
-		button.drawRect(0, 0, Const.BUTTON_WIDTH, Const.BUTTON_HEIGHT);
+		// var button = new Graphics(this);
+		// button.beginFill(0xFF888888);
+		// button.drawRect(0, 0, Const.BUTTON_WIDTH, Const.BUTTON_HEIGHT);
+
+		var button = Assets.tiles.h_get("button", this);
 
 		var inter = new h2d.Interactive(Const.BUTTON_WIDTH, Const.BUTTON_HEIGHT, this);
 		//inter.backgroundColor = 0xFF888888;

@@ -124,13 +124,14 @@ class Level extends dn.Process {
 		}
 
 		if (lvlData.numRotation > 0) { // Rotation
+			var goLeft = rnd.sign() == 1;
 			var deck = new dn.RandDeck(Std.random);
 			for (tile in arMapTile) {
 				deck.push(tile);
 			}
 			for (i in 0...lvlData.numRotation) {
 				var mp = deck.draw();
-				rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
+				goLeft ? mp.rotateLeft() : mp.rotateRight();
 			}
 		}
 	}
