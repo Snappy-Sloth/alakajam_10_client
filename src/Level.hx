@@ -79,21 +79,59 @@ class Level extends dn.Process {
 
 		// Randomize mapTiles position
 		var rnd = new dn.Rand(Std.random(99999));
-		var n = lvlData.numSwap;
-		while (n-- > 0) {
-			var arMP = arMapTile.copy();
-			var mp1 = rnd.arraySplice(arMP);
-			var mp2 = rnd.arraySplice(arMP);
-
-			if (mp1.roads.length == 0 && mp2.roads.length == 0)
-				n++;
-			else
-				exchangeTiles(mp1, mp2);
+		if (lvlData.numSwap > 0) { // Swapping
+			var isGood = false;
+			var previous = [];
+			for (tile in arMapTile) {
+				previous.push({mapTile:tile, cx:tile.cx, cy:tile.cy});
+			}
+			while (!isGood) {
+				var swaps = [];
+				isGood = true;
+				var n = lvlData.numSwap;
+				while (n-- > 0) {
+					var arMP = arMapTile.copy();
+					var mp1 = rnd.arraySplice(arMP);
+					var mp2 = rnd.arraySplice(arMP);
+		
+					if (mp1.roads.length == 0 && mp2.roads.length == 0)
+						n++;
+					else {
+						swaps.push({mp1:mp1, mp2:mp2});
+						exchangeTiles(mp1, mp2);
+					}
+				}
+	
+				var samePlace = 0;
+				for (tile in arMapTile) {
+					for (t in previous) {
+						if (tile == t.mapTile && tile.cx == t.cx && tile.cy == t.cy) {
+							samePlace++;
+						}
+					}
+				}
+	
+				isGood = samePlace < arMapTile.length;
+	
+				if (!isGood) {
+					while (swaps.length > 0) {
+						var s = swaps.pop();
+						exchangeTiles(s.mp1, s.mp2);
+					}
+					trace("retry swap");
+				}
+			}
 		}
 
-		for (i in 0...lvlData.numRotation) {
-			var mp = rnd.arrayPick(arMapTile);
-			rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
+		if (lvlData.numRotation > 0) { // Rotation
+			var deck = new dn.RandDeck(Std.random);
+			for (tile in arMapTile) {
+				deck.push(tile);
+			}
+			for (i in 0...lvlData.numRotation) {
+				var mp = deck.draw();
+				rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
+			}
 		}
 	}
 
