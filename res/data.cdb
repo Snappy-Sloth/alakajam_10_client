@@ -1,5 +1,70 @@
 {
-	"sheets": [],
+	"sheets": [
+		{
+			"name": "Campaign",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "3",
+					"name": "width"
+				},
+				{
+					"typeStr": "3",
+					"name": "height"
+				},
+				{
+					"typeStr": "3",
+					"name": "numShips"
+				},
+				{
+					"typeStr": "3",
+					"name": "numSwap"
+				},
+				{
+					"typeStr": "3",
+					"name": "numRotation"
+				},
+				{
+					"typeStr": "3",
+					"name": "timerMax"
+				}
+			],
+			"lines": [
+				{
+					"id": "level_1",
+					"width": 2,
+					"height": 2,
+					"numShips": 1,
+					"numSwap": 1,
+					"numRotation": 0,
+					"timerMax": 20
+				},
+				{
+					"id": "level_2",
+					"width": 2,
+					"height": 2,
+					"numShips": 2,
+					"numSwap": 3,
+					"numRotation": 0,
+					"timerMax": 30
+				},
+				{
+					"id": "level_3",
+					"width": 2,
+					"height": 2,
+					"numShips": 2,
+					"numSwap": 2,
+					"numRotation": 1,
+					"timerMax": 45
+				}
+			],
+			"separators": [],
+			"props": {}
+		}
+	],
 	"customTypes": [],
 	"compress": false
 }
