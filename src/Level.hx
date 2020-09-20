@@ -20,7 +20,7 @@ class Level extends dn.Process {
 	var spawnTiming : Float = 3;
 	var shipAreGone : Bool = false;
 
-	var lvlData : Data.Campaign;
+	public var lvlData(default, null) : Data.Campaign;
 
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
@@ -241,8 +241,10 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
+				for (s in ships)
+					s.isEnable = false;
 				game.looseLife();
-				s.destroy();
+				// s.destroy();
 			}
 		} 
 	}
@@ -280,6 +282,9 @@ class Level extends dn.Process {
 		var mapTile1cx = mt1.cx;
 		var mapTile1cy = mt1.cy;
 
+		trace(mt1.cx + " " + mt1.cy);
+		trace(mt2.cx + " " + mt2.cy);
+
 		mt1.cx = mt2.cx;
 		mt1.cy = mt2.cy;
 		mt2.cx = mapTile1cx;
@@ -290,6 +295,13 @@ class Level extends dn.Process {
 
 		mt1.unSelect();
 		mt2.unSelect();
+
+		for (s in ships) {
+			if (s.start_mp == mt1)
+				s.start_mp = mt2;
+			else if (s.start_mp == mt2)
+				s.start_mp = mt1;
+		}
 	}
 
 	public function addQuestGoal(mp:MapTile, ep:EP, id:Int):HSprite {
@@ -314,6 +326,7 @@ class Level extends dn.Process {
 		
 		if (!shipAreGone)
 			for (ship in ships) {
+				ship.isEnable = true;
 				var mp = ship.start_mp;
 				mp.addShipToRoad(ship, mp.getRoadWith(ship.start_ep), ship.start_ep);
 			}
@@ -321,9 +334,9 @@ class Level extends dn.Process {
 		shipAreGone = true;
 	}
 
-	public function forwardBtnPressed() {
+	/* public function forwardBtnPressed() {
 		setTimeMultiplier(5);
-	}
+	} */
 
 	public inline function isValid(cx,cy) return cx>=0 && cx<wid && cy>=0 && cy<hei;
 	public inline function coordId(cx,cy) return cx + cy*wid;

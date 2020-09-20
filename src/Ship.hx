@@ -23,6 +23,8 @@ class Ship extends dn.Process {
 	public var quest_ep : EP;
 	var sprQuestGoal : HSprite;
 
+	public var isEnable = false;
+
 	public function new(level:Level) {
 		super(level);
 
@@ -111,7 +113,7 @@ class Ship extends dn.Process {
 	public override function update() {
 		super.update();
 
-		if (currentRoad != null) {
+		if (currentRoad != null && isEnable) {
 			currentRoadRatio = currentRoadRatio + (speed / currentRoad.distance) * tmod;
 			if (currentRoadRatio >= 1) {
 				currentRoadRatio = 1;

@@ -55,14 +55,23 @@ class Game extends Process {
 		hud = new ui.Hud(level.wid, level.hei);
 	}
 
+	public function restartLevel(lvlData:Data.Campaign) {
+		level = new Level(lvlData);
+		fx = new Fx();
+		hud = new ui.Hud(level.wid, level.hei);
+	}
+
 	public function looseLife() {
 		numberLife--;
 		hud.looseLife();
+		hud.destroy();
 		if (numberLife == 0) {
-			level.destroy();
-			hud.destroy();
 			new ui.GameOverScreen();
 		}
+		else {
+			new ui.LooseLifeScreen(level.lvlData);
+		}
+		level.destroy();
 	}
 
 	public function levelVictory() {

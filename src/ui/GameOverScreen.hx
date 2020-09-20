@@ -7,7 +7,7 @@ class GameOverScreen extends dn.Process {
 	var flow : h2d.Flow;
 
 	public function new() {
-		super(Main.ME);
+		super(Game.ME);
 
 		createRoot();
 

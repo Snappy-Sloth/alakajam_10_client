@@ -6,8 +6,8 @@ class LooseLifeScreen extends dn.Process {
 
 	var flow : h2d.Flow;
 
-	public function new() {
-		super(Main.ME); 
+	public function new(lvlData:Data.Campaign) {
+		super(Game.ME); 
 
 		createRoot();
 
@@ -26,8 +26,11 @@ class LooseLifeScreen extends dn.Process {
         lifeLostText.text = 'You loose a life';
 		lifeLostText.scale(Const.SCALE);
 		
-		// var restartBtn = new Button("Menu", Main.ME.showDebugLevel2x2);
-		// flow.addChild(restartBtn);
+		var restartBtn = new Button("Menu", function() {
+			Game.ME.restartLevel(lvlData);
+			this.destroy();
+		});
+		flow.addChild(restartBtn);
 
 		onResize();
 	}
