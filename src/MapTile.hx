@@ -111,6 +111,18 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function drawRoads() {
+		/* var spriteBatch = new HSpriteBatch(Assets.tiles.tile, wrapper);
+		var step = 5;
+
+		for (r in roads) {
+			// for (i in 0...Std.int((r.distance) / step)) {
+			// 	var be = new HSpriteBE(spriteBatch, Assets.tiles, "roadStep");
+			// 	var ratio = (i * step) / r.distance;
+			// 	be.setPosition(r.pointAX + (r.pointBX - r.pointAX) * ratio, r.pointAY + (r.pointBY - r.pointAY) * ratio);
+			// }
+			// while ()
+		} */
+
 		for (r in roads) {
 			var gr = new h2d.Graphics(wrapper);
 			gr.lineStyle(1);

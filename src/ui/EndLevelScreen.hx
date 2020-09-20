@@ -37,32 +37,40 @@ class EndLevelScreen extends dn.Process {
 		
 		// var levelTimeText = new h2d.Text(Assets.fontPixel, flowInfo1);
 		// levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
+		
+		var scoreText = new h2d.Text(Assets.fontPixel, flow);
+		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
 
 		var flowInfo2 = new h2d.Flow(flow);
 		flowInfo2.layout = Horizontal;
+		flowInfo2.verticalAlign = Middle;
 		flowInfo2.horizontalSpacing = 40;
-		
-		var scoreText = new h2d.Text(Assets.fontPixel, flowInfo2);
-		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
 		
 		var flowLife = new h2d.Flow(flowInfo2);
 		flowLife.layout = Horizontal;
-        flowLife.horizontalSpacing = 10;
+		flowLife.verticalAlign = Middle;
+		flowLife.horizontalSpacing = 10;
+		
+		var lifeLostText = new h2d.Text(Assets.fontPixel, flowLife);
+        lifeLostText.text = "Life left:";
+		// lifeLostText.scale(Const.SCALE);
         
         var numberLife = Game.ME.numberLife;
 		for (i in 0...numberLife) {
-			var life = new h2d.Graphics(flowLife);
-			life.beginFill(0xff0000);
-			life.drawRect(0, 0, 10, 10);
-			arLife.push(life);
+			// var life = new h2d.Graphics(flowLife);
+			// life.beginFill(0xff0000);
+			// life.drawRect(0, 0, 10, 10);
+			// arLife.push(life);
+			var life = Assets.tiles.h_get("life", flowLife);
 		}
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';
+		scoreText.scale(Const.SCALE);
 			
 
-		var gameTimeText = new h2d.Text(Assets.fontPixel, flow);
-		gameTimeText.text = 'Total Campaign Time: à définir';
+		// var gameTimeText = new h2d.Text(Assets.fontPixel, flow);
+		// gameTimeText.text = 'Total Campaign Time: à définir';
 
 		flow.addSpacing(20);
 
