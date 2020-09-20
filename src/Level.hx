@@ -31,8 +31,9 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		rand = new dn.Rand(Std.random(999999));
-		trace(rand.getSeed());
+		// rand = new dn.Rand(Std.random(999999));
+		rand = new dn.Rand(761560);
+		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
 
@@ -83,6 +84,8 @@ class Level extends dn.Process {
 		for (tile in arMapTile) {
 			tile.drawRoads();
 		}
+
+		return;
 
 		// Randomize mapTiles position
 		if (lvlData.numSwap > 0) { // Swapping
@@ -192,10 +195,13 @@ class Level extends dn.Process {
 		for (ship in ships) {
 			var path = dn.Bresenham.getThickLine(ship.start_mp.cx, ship.start_mp.cy, ship.quest_mp.cx, ship.quest_mp.cy, true);
 			var prevDist = -1.;
-			var newPath = [];
+			var newPath :Array<MapTile> = [];
+			if (ship.quest_id == 2)
+				trace("-----");
+			var lastAddedToPath : MapTile = null;
 			for (p in path) {
-				if (M.distSqr(ship.start_mp.cx, ship.start_mp.cy, p.x, p.y) > prevDist) {
-					prevDist = M.distSqr(ship.start_mp.cx, ship.start_mp.cy, p.x, p.y);
+				if (lastAddedToPath == null || areNearEachOther(lastAddedToPath.cx, lastAddedToPath.cy, p.x, p.y) ) {
+					lastAddedToPath = getMapTileAt(p.x, p.y);
 					newPath.push(getMapTileAt(p.x, p.y));
 				}
 			}
@@ -410,6 +416,11 @@ class Level extends dn.Process {
 		shipAreGone = true;
 
 		removeArrows();
+	}
+
+	inline function areNearEachOther(x1:Int, y1:Int, x2:Int, y2:Int):Bool {
+		return ((x1 == x2 && (y1 == y2 + 1 || y1 == y2 - 1))
+			||	(y1 == y2 && (x1 == x2 + 1 || x1 == x2 - 1)));
 	}
 
 	/* public function forwardBtnPressed() {
