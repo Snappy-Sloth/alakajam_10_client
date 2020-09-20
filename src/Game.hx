@@ -44,7 +44,6 @@ class Game extends Process {
 		hud = new ui.Hud(width, height);
 
 		Process.resizeAll();
-		trace(Lang.t._("Game is ready."));
 	}
 
 	public function looseLife() {

@@ -71,18 +71,13 @@ class MapTile extends h2d.Layers {
 			}
 		}
 		
-		createRoads(4);
+		// createRoads(4);
 
 		// Draw Roads
-		for (r in roads) {
-			var gr = new h2d.Graphics(wrapper);
-			gr.lineStyle(1);
-			gr.moveTo(r.pointAX, r.pointAY);
-			gr.lineTo(r.pointBX, r.pointBY);
-		}
+		
 	}
 
-	function createRoads(num:Int) {
+	/* function createRoads(num:Int) {
 		roads = [];
 
 		for (i in 0...num)
@@ -90,9 +85,9 @@ class MapTile extends h2d.Layers {
 
 		if (roads.length < num)
 			createRoads(num);
-	}
+	} */
 
-	function createRoad() {
+	/* function createRoad() {
 		var currentlyUsedPE = [];
 
 		for (road in roads) {
@@ -108,6 +103,24 @@ class MapTile extends h2d.Layers {
 
 		var r = new Road(from, to, this);
 		roads.push(r);
+	} */
+
+	public function createRoad(from:EP, to:EP) {
+		var r = new Road(from, to, this);
+		roads.push(r);
+	}
+
+	public function drawRoads() {
+		for (r in roads) {
+			var gr = new h2d.Graphics(wrapper);
+			gr.lineStyle(1);
+			gr.moveTo(r.pointAX, r.pointAY);
+			gr.lineTo(r.pointBX, r.pointBY);
+		}
+	}
+
+	public function removeAllRoads() {
+		roads = [];
 	}
 
 	function getRandomEntryPoint(fromSide:EP = null, differentFrom:Array<EP>) {
@@ -134,7 +147,7 @@ class MapTile extends h2d.Layers {
 
 	public function spawnShipOnEP(ep:EP) {
 		var ship = new Ship(level);
-		var road = getRoadOnEP(ep);
+		var road = getRoadWith(ep);
 		addShipToRoad(ship, road, ep);
 	}
 
@@ -158,15 +171,21 @@ class MapTile extends h2d.Layers {
 		return null;
 	}
 
-	public function getRandomExternalEP():Null<EP> {
+	/* public function getRandomExternalEP():Null<EP> {
+		var externalEPs = getAllExternalEPs();
+
+		return externalEPs.length == 0 ? null : externalEPs[Std.random(externalEPs.length)];
+	} */
+
+	public function getAllExternalEPs():Array<EP> {
 		var externalEPs = [];
 
 		for (ep in EP.createAll()) {
-			if (isEPExternal(ep) && getRoadOnEP(ep) != null)
+			if (isEPExternal(ep) /* && getRoadOnEP(ep) != null */)
 				externalEPs.push(ep);
 		}
 
-		return externalEPs.length == 0 ? null : externalEPs[Std.random(externalEPs.length)];
+		return externalEPs;
 	}
 
 	function isEPExternal(ep:EP):Bool {
@@ -176,15 +195,6 @@ class MapTile extends h2d.Layers {
 			case West_1, West_2: cx == 0;
 			case East_1, East_2: cx == level.wid - 1;
 		}
-	}
-
-	function getRoadOnEP(ep:EP):Road {
-		for (road in roads) {
-			if (road.pointA == ep || road.pointB == ep)
-				return road;
-		}
-
-		return null;
 	}
 
 	public function select() {
