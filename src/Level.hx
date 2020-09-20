@@ -31,7 +31,8 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		rand = new dn.Rand(Std.random(999999));
+		// rand = new dn.Rand(Std.random(999999));
+		rand = new dn.Rand(761560);
 		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
@@ -83,8 +84,6 @@ class Level extends dn.Process {
 		for (tile in arMapTile) {
 			tile.drawRoads();
 		}
-
-		return;
 
 		// Randomize mapTiles position
 		if (lvlData.numSwap > 0) { // Swapping
