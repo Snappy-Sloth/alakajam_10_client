@@ -22,8 +22,12 @@ class EndCampaignScreen extends dn.Process {
 		flow.verticalSpacing = 20;
 		flow.horizontalAlign = Middle;
         
-        var endCampaignText = new h2d.Text(Assets.fontPixel, flow);
-		endCampaignText.text = 'Congratulations!';
+        var congratsText = new h2d.Text(Assets.fontPixel, flow);
+		congratsText.text = 'Congratulations!';
+		congratsText.setScale(Const.SCALE);
+
+		var endCampaignText = new h2d.Text(Assets.fontPixel, flow);
+		endCampaignText.text = 'You finished the Campaign!';
 		endCampaignText.setScale(Const.SCALE);
 
 		flow.addSpacing(20);
