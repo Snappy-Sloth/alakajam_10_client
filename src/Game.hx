@@ -73,13 +73,10 @@ class Game extends Process {
 	public function levelVictory() {
 		level.destroy();
 		hud.destroy();
-		new ui.EndLevelScreen();		
-	}
-
-	public function campaignVictory() {
-		level.destroy();
-		hud.destroy();
-		new ui.EndCampaignScreen();		
+		if (levelsToDo.length > 0)
+			new ui.EndLevelScreen();
+		else
+			new ui.EndCampaignScreen();	
 	}
 
 	public function onCdbReload() {
