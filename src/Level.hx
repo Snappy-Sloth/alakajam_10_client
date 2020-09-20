@@ -140,6 +140,12 @@ class Level extends dn.Process {
 				goLeft ? mp.rotateLeft() : mp.rotateRight();
 			}
 		}
+
+		// Tuto Popup
+		if (lvlData.id == level_1)
+			game.showPopup("You need to connect each ship to it destination. Do it by swapping the tiles, and press the Play button when you think you're done!");
+		else if (lvlData.id == level_3)
+			game.showPopup("From now, you can rotate each tile. \nGood luck!");
 	}
 
 	function generateShipsAndRoad(numTry:Int) {
@@ -396,23 +402,35 @@ class Level extends dn.Process {
 		return spr;
 	}
 
+	public function canPlay():Bool {
+		if (shipAreGone)
+			return false;
+
+		for (ship in ships)
+			if (ship.start_mp.getRoadWith(ship.start_ep) == null) {
+				game.showPopup("Each ship must be connected to a road at least!");
+				return false;
+			}
+
+		return true;
+	}
+
 	public function playBtnPressed() {
-		setTimeMultiplier(1);
-
-		for (tile in arMapTile) {
-			tile.unSelect();
-		}
-
-		if (!shipAreGone)
+		if (canPlay()) {
 			for (ship in ships) {
 				ship.isEnable = true;
 				var mp = ship.start_mp;
 				mp.addShipToRoad(ship, mp.getRoadWith(ship.start_ep), ship.start_ep);
 			}
-		
-		shipAreGone = true;
 
-		removeArrows();
+			for (tile in arMapTile) {
+				tile.unSelect();
+			}
+			
+			shipAreGone = true;
+
+			removeArrows();
+		}
 	}
 
 	inline function areNearEachOther(x1:Int, y1:Int, x2:Int, y2:Int):Bool {

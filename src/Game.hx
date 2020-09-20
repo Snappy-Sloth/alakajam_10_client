@@ -80,6 +80,10 @@ class Game extends Process {
 	public function onCdbReload() {
 	}
 
+	public function showPopup(str:String) {
+		new Popup(str);
+	}
+
 	override function onResize() {
 		super.onResize();
 		scroller.setScale(Const.SCALE);
@@ -146,6 +150,11 @@ class Game extends Process {
 			#end
 
 		}
+
+		#if debug
+			// if (hxd.Key.isPressed(Key.F4))
+			// 	showPopup("Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test !");
+		#end
 	}
 }
 
