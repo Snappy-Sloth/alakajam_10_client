@@ -13,18 +13,23 @@ class Game extends Process {
 	public var level : Level;
 	public var hud : ui.Hud;
 
-	var width : Int;
-	var height : Int;
+	// var width(get, never) : Int; inline function get_width() return lvlData.width;
+	// var height(get, never) : Int; inline function get_height() return lvlData.height;
 
 	public var numberLife(default, null) : Int;
 	public var score(default, null): Int;
 
-	public function new(wi:Int, he:Int) {
+	var levelsToDo : Array<Data.Campaign> = [];
+
+	public function new() {
 		super(Main.ME);
 		ME = this;
 
-		width = wi;
-		height = he;
+		levelsToDo = [];
+
+		for (lvl in Data.Campaign.all) {
+			levelsToDo.push(lvl);
+		}
 
 		numberLife = 3;
 		score = 0;
@@ -38,12 +43,16 @@ class Game extends Process {
 		root.add(scroller, Const.DP_BG);
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 
-		// camera = new Camera();
-		level = new Level(width, height);
-		fx = new Fx();
-		hud = new ui.Hud(width, height);
+		goToNextLevel();
 
-		Process.resizeAll();
+		onResize();
+	}
+
+	public function goToNextLevel() {
+		// camera = new Camera();
+		level = new Level(levelsToDo.shift());
+		fx = new Fx();
+		hud = new ui.Hud(level.wid, level.hei);
 	}
 
 	public function looseLife() {
@@ -75,7 +84,6 @@ class Game extends Process {
 		super.onResize();
 		scroller.setScale(Const.SCALE);
 	}
-
 
 	function gc() {
 		if( Entity.GC==null || Entity.GC.length==0 )
@@ -129,11 +137,14 @@ class Game extends Process {
 					trace(Lang.t._("Press ESCAPE again to exit."));
 				else
 					hxd.System.exit();
+
+				// Restart
+				// #if debug
+				// if( ca.selectPressed() )
+				// 	Main.ME.startGame();
+				// #end
 			#end
 
-			// Restart
-			if( ca.selectPressed() )
-				Main.ME.startGame(width, height);
 		}
 	}
 }

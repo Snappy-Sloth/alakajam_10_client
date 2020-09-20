@@ -65,6 +65,8 @@ class Main extends dn.Process {
 		new dn.heaps.GameFocusHelper(Boot.ME.s2d, Assets.fontMedium);
 		// delayer.addF( startGame, 1 );
 		delayer.addF( startTitleScreen, 1 );
+
+		dn.Process.resizeAll();
 	}
 
 	public function startTitleScreen() {
@@ -87,78 +89,33 @@ class Main extends dn.Process {
 		new ui.ChooseLevelScreen();
 	}
 
-	/*public function showDebugTita() {
+	function clean() {
+		if( GameOverScreen.ME!=null ) {
+			GameOverScreen.ME.destroy();
+		}
+		if( EndCampaignScreen.ME!=null ) {
+			EndCampaignScreen.ME.destroy();
+		}
 		if( ui.TitleScreen.ME!=null ) {
 			ui.TitleScreen.ME.destroy();
 		}
+	}
+
+	public function startCampaign() {
+		clean();
 
 		startGame();
-	}*/
-
-	public function showDebugLevel2x2() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
-		if( ui.ChooseLevelScreen.ME!=null ) {
-			ui.ChooseLevelScreen.ME.destroy();
-		}
-		if( EndLevelScreen.ME!=null ) {
-			ui.EndLevelScreen.ME.destroy();
-		}
-
-		startGame(2, 2);
 	}
 
-	public function showDebugLevel2x3() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
-		if( ui.ChooseLevelScreen.ME!=null ) {
-			ui.ChooseLevelScreen.ME.destroy();
-		}
-
-		startGame(2, 3);
-	}
-
-	public function showDebugLevel3x2() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
-		if( ui.ChooseLevelScreen.ME!=null ) {
-			ui.ChooseLevelScreen.ME.destroy();
-		}
-
-		startGame(3, 2);
-	}
-
-	public function showDebugLevel3x3() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
-		if( ui.ChooseLevelScreen.ME!=null ) {
-			ui.ChooseLevelScreen.ME.destroy();
-		}
-
-		startGame(3, 3);
-	}
-
-	/*public function showDebugTipyx() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
-
-		startGame(1, 1);
-	}*/
-
-	public function startGame(wi:Int, he:Int) {
+	public function startGame() {
 		if( Game.ME!=null ) {
 			Game.ME.destroy();
 			delayer.addF(function() {
-				new Game(wi, he);
+				new Game();
 			}, 1);
 		}
 		else
-			new Game(wi, he);
+			new Game();
 	}
 
 	override public function onResize() {

@@ -4,46 +4,45 @@ class Level extends dn.Process {
 	public var game(get,never) : Game; inline function get_game() return Game.ME;
 	public var fx(get,never) : Fx; inline function get_fx() return Game.ME.fx;
 
-	public var wid(get,never) : Int; inline function get_wid() return width;
-	public var hei(get,never) : Int; inline function get_hei() return height;
+	public var wid(get,never) : Int; inline function get_wid() return lvlData.width;
+	public var hei(get,never) : Int; inline function get_hei() return lvlData.height;
 
 	var arMapTile : Array<MapTile>;
 	var wrapperMapTile : h2d.Layers;
-
-	var width : Int;
-	var height : Int;
 
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
 
 	public var ships : Array<Ship> = [];
 
-	// var shipToSpawn = 1;
-	// var shipToSpawn = 5;
-	var shipToSpawn = 3;
 	var shipsOver = 0;
 	var nextSpawnTiming : Float = 0;
 	var spawnTiming : Float = 3;
 	var shipAreGone : Bool = false;
 
-	public function new(w, h) {
+	var lvlData : Data.Campaign;
+
+	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
+
+		this.lvlData = lvlData;
+
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 
-		createLevel(w, h);
+		createLevel(wid, hei);
+
+		onResize();
 	}
 
 	override function onResize() {
 		super.onResize();
 		
-		wrapperMapTile.setPosition(((w()/Const.SCALE-width*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2,
-									((h()/Const.SCALE-height*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2);
+		wrapperMapTile.setPosition(((w()/Const.SCALE-wid*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2,
+									((h()/Const.SCALE-hei*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2);
 	}
 
 	public function createLevel(w, h) {
 		arMapTile = [];
-		width = w;
-		height = h;
 
 		wrapperMapTile = new h2d.Layers(root);
 		
@@ -52,8 +51,8 @@ class Level extends dn.Process {
 		bg.setPosition(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1);
 
 		// Create MapTiles
-		for (i in 0...width) {
-			for (j in 0...height) {
+		for (i in 0...wid) {
+			for (j in 0...hei) {
 				var mapTile = new MapTile(i, j, this);
 				wrapperMapTile.add(mapTile, Const.DP_MAIN);
 				arMapTile.push(mapTile);
@@ -73,8 +72,8 @@ class Level extends dn.Process {
 		}
 
 		// Randomize mapTiles position
-		/* var rnd = new dn.Rand(Std.random(99999));
-		for (i in 0...arMapTile.length) {
+		var rnd = new dn.Rand(Std.random(99999));
+		for (i in 0...lvlData.numSwap) {
 			var arMP = arMapTile.copy();
 			var mp1 = rnd.arraySplice(arMP);
 			var mp2 = rnd.arraySplice(arMP);
@@ -82,10 +81,10 @@ class Level extends dn.Process {
 			exchangeTiles(mp1, mp2);
 		}
 
-		for (i in 0...arMapTile.length * 2) {
+		for (i in 0...lvlData.numRotation) {
 			var mp = rnd.arrayPick(arMapTile);
 			rnd.random(2) == 0 ? mp.rotateLeft() : mp.rotateRight();
-		} */
+		}
 	}
 
 	function generateShipsAndRoad(numTry:Int) {
@@ -111,7 +110,7 @@ class Level extends dn.Process {
 		}
 
 			// Spawn Ships
-		for (i in 0...shipToSpawn) {
+		for (i in 0...lvlData.numShips) {
 			var randomAEEP = rnd.arrayPick(availablesExternalEP);
 			var randomEP = rnd.arraySplice(randomAEEP.eps);
 
@@ -220,7 +219,7 @@ class Level extends dn.Process {
 				shipsOver++;
 			s.destroy();
 
-			if (shipToSpawn == shipsOver) {
+			if (lvlData.numShips == shipsOver) {
 				game.levelVictory();
 			}
 		}

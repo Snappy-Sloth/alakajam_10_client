@@ -9,7 +9,7 @@ class EndLevelScreen extends dn.Process {
     var arLife : Array<h2d.Graphics>;
 
 	public function new() {
-		super(Main.ME);
+		super(Game.ME);
 
 		createRoot();
 
@@ -64,7 +64,10 @@ class EndLevelScreen extends dn.Process {
 
 		flow.addSpacing(20);
 
-        var nextLevelBtn = new Button("Next Level", Main.ME.showDebugLevel2x2);
+        var nextLevelBtn = new Button("Next Level", function() {
+			this.destroy();
+			Game.ME.goToNextLevel();
+		});
 		flow.addChild(nextLevelBtn);
 
 		onResize();

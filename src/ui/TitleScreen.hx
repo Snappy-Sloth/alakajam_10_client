@@ -17,7 +17,7 @@ class TitleScreen extends dn.Process {
 		flow.layout = Vertical;
 		flow.verticalSpacing = 20;
 
-		var campaignBtn = new Button("Campaign", Main.ME.showDebugLevel2x2);
+		var campaignBtn = new Button("Campaign", Main.ME.startCampaign);
 		flow.addChild(campaignBtn);
 
 		var chooseLevelBtn = new Button("Choose Level", Main.ME.startChooseLevelScreen);
