@@ -73,12 +73,16 @@ class Level extends dn.Process {
 
 		// Randomize mapTiles position
 		var rnd = new dn.Rand(Std.random(99999));
-		for (i in 0...lvlData.numSwap) {
+		var n = lvlData.numSwap;
+		while (n-- > 0) {
 			var arMP = arMapTile.copy();
 			var mp1 = rnd.arraySplice(arMP);
 			var mp2 = rnd.arraySplice(arMP);
 
-			exchangeTiles(mp1, mp2);
+			if (mp1.roads.length == 0 && mp2.roads.length == 0)
+				n++;
+			else
+				exchangeTiles(mp1, mp2);
 		}
 
 		for (i in 0...lvlData.numRotation) {
@@ -287,9 +291,6 @@ class Level extends dn.Process {
 	public function exchangeTiles(mt1:MapTile, mt2:MapTile) {
 		var mapTile1cx = mt1.cx;
 		var mapTile1cy = mt1.cy;
-
-		trace(mt1.cx + " " + mt1.cy);
-		trace(mt2.cx + " " + mt2.cy);
 
 		mt1.cx = mt2.cx;
 		mt1.cy = mt2.cy;

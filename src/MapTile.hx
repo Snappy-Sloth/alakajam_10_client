@@ -16,7 +16,7 @@ class MapTile extends h2d.Layers {
 	var wrapper : Layers;
 	var wrapperRotation : Layers;
 
-	var roads : Array<Road> = [];
+	public var roads(default, null) : Array<Road> = [];
 
 	public var ships : Array<Ship> = [];
 	
