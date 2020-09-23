@@ -458,10 +458,6 @@ class Level extends dn.Process {
 		super.update();
 
 		#if debug
-		if (hxd.Key.isPressed(Key.A)) {
-			game.looseLife();
-		}
-		
 		if (hxd.Key.isPressed(Key.F3)) {
 			game.levelVictory();
 		}

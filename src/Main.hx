@@ -1,7 +1,5 @@
-import ui.LooseLifeScreen;
 import ui.EndCampaignScreen;
 import ui.EndLevelScreen;
-import ui.GameOverScreen;
 import ui.ChooseLevelScreen;
 import Data;
 import hxd.Key;
@@ -89,9 +87,6 @@ class Main extends dn.Process {
 	}
 
 	function clean() {
-		if( GameOverScreen.ME!=null ) {
-			GameOverScreen.ME.destroy();
-		}
 		if( EndCampaignScreen.ME!=null ) {
 			EndCampaignScreen.ME.destroy();
 		}
@@ -103,9 +98,6 @@ class Main extends dn.Process {
 		}
 		if( EndLevelScreen.ME!=null ) {
 			EndLevelScreen.ME.destroy();
-		}
-		if( LooseLifeScreen.ME!=null ) {
-			LooseLifeScreen.ME.destroy();
 		}
 	}
 

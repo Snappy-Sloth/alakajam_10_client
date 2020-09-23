@@ -13,7 +13,6 @@ class Game extends Process {
 	public var level : Level;
 	public var hud : ui.Hud;
 
-	public var numberLife(default, null) : Int;
 	public var score(default, null): Float;
 
 	var levelsToDo : Array<Data.Campaign> = [];
@@ -24,7 +23,6 @@ class Game extends Process {
 
 		this.levelsToDo = levelsToDo;
 
-		numberLife = 3;
 		score = 0;
 
 		ca = Main.ME.controller.createAccess("game");
@@ -52,19 +50,6 @@ class Game extends Process {
 		level = new Level(lvlData);
 		fx = new Fx();
 		hud = new ui.Hud(level.wid, level.hei);
-	}
-
-	public function looseLife() {
-		numberLife--;
-		hud.looseLife();
-		hud.destroy();
-		if (numberLife == 0) {
-			new ui.GameOverScreen();
-		}
-		else {
-			new ui.LooseLifeScreen(level.lvlData);
-		}
-		level.destroy();
 	}
 
 	public function levelVictory() {

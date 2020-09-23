@@ -36,13 +36,13 @@ class EndLevelScreen extends dn.Process {
 		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
-		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
+		scoreText.text = 'Level score: ${Std.int(Game.ME.level.currentScore)}';
 		
 		var previousScoreText = new h2d.Text(Assets.fontPixel, flow);
 		if (Const.GET_HIGHSCORE_ON_LEVEL(Game.ME.level.getLevelNumber()) > Game.ME.level.currentScore)
 			previousScoreText.text = 'Current highscore: ${Const.GET_HIGHSCORE_ON_LEVEL(Game.ME.level.getLevelNumber())}';
 		else
-			previousScoreText.text = 'New highscore!';
+			previousScoreText.text = 'New level highscore!';
 
 		var flowInfo2 = new h2d.Flow(flow);
 		flowInfo2.layout = Horizontal;
@@ -53,14 +53,6 @@ class EndLevelScreen extends dn.Process {
 		flowLife.layout = Horizontal;
 		flowLife.verticalAlign = Middle;
 		flowLife.horizontalSpacing = 10;
-		
-		var lifeLostText = new h2d.Text(Assets.fontPixel, flowLife);
-        lifeLostText.text = "Life left:";
-        
-        var numberLife = Game.ME.numberLife;
-		for (i in 0...numberLife) {
-			var life = Assets.tiles.h_get("life", flowLife);
-		}
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';

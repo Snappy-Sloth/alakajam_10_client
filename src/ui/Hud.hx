@@ -50,12 +50,6 @@ class Hud extends dn.Process {
 		flowLife.layout = Horizontal;
 		flowLife.horizontalSpacing = 10;
 
-		var numberLife = game.numberLife;
-		for (i in 0...numberLife) {
-			var life = Assets.tiles.h_get("life", flowLife);
-			arLife.push(life);
-		}
-
 		scoreText = new Text(Assets.fontPixel, flowRight);
 		scoreText.text = 'Score: ${game.score}';
 
@@ -81,10 +75,6 @@ class Hud extends dn.Process {
 		var menuButton = new Button("Menu", Main.ME.startTitleScreen);
 		flowLeft.addChild(menuButton);
 
-	}
-
-	public function looseLife() {
-		arLife[game.numberLife].visible = false;
 	}
 
 	override function onResize() {
