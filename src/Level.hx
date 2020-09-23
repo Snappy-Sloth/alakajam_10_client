@@ -1,3 +1,4 @@
+import dn.Rand;
 import hxd.Key;
 
 class Level extends dn.Process {
@@ -32,7 +33,8 @@ class Level extends dn.Process {
 		super(Game.ME);
 
 		rand = new dn.Rand(Std.random(999999));
-		// trace("Seed : " + rand.getSeed());
+		// rand = new dn.Rand(304417);
+		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
 
@@ -285,12 +287,12 @@ class Level extends dn.Process {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
 				shipsOver++;
 				
-				s.disappear();
+				s.disappear(function () {
+					if (shipsOver == lvlData.numShips) game.levelVictory();					
+				});
 			}
 			else {
-				for (s in ships)
-					s.isEnable = false;
-				game.looseLife();
+				resetShips();
 			}
 		}
 		else {
@@ -311,11 +313,17 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
-				for (s in ships)
-					s.isEnable = false;
-				game.looseLife();
+				resetShips();
 			}
 		}
+	}
+
+	public function resetShips() {
+		for (s in ships) {
+			s.setInitialPosition(s.start_mp, s.start_ep);
+		}
+		shipAreGone = false;
+		shipsOver = 0;
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {
@@ -459,9 +467,9 @@ class Level extends dn.Process {
 		}
 		#end
 
-		if (lvlData.numShips == shipsOver && ships.length == 0) {
+		/* if (lvlData.numShips == shipsOver && ships.length == 0) {
 			game.levelVictory();
-		}
+		} */
 
 		if (!shipAreGone) {
 			currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;

@@ -18,7 +18,7 @@ class Ship extends dn.Process {
 	public var start_mp : MapTile;
 	public var start_ep : EP;
 
-	public var quest_id : Int;
+	public var quest_id : Int = -1;
 	public var quest_mp : MapTile;
 	public var quest_ep : EP;
 	var sprQuestGoal : HSprite;
@@ -40,6 +40,8 @@ class Ship extends dn.Process {
 	public function setInitialPosition(mp:MapTile, ep:EP) {
 		start_mp = mp;
 		start_ep = ep;
+		
+		currentRoadRatio = 0;
 
 		root.setPosition(	start_mp.x + Road.getEpX(start_ep) - (Const.MAP_TILE_SIZE >> 1) ,
 							start_mp.y + Road.getEpY(start_ep) - (Const.MAP_TILE_SIZE >> 1));
@@ -59,22 +61,27 @@ class Ship extends dn.Process {
 				// root.x += 10;
 		}
 
-		for (i in 0...9) {
-			var isAvailable = true;
-			for (ship in level.ships) {
-				if (ship.quest_id == i) {
-					isAvailable = false;
-					break;
+		if (quest_id == -1) {
+			for (i in 0...9) {
+				var isAvailable = true;
+				for (ship in level.ships) {
+					if (ship.quest_id == i) {
+						isAvailable = false;
+						break;
+					}
 				}
-			}
-			if (isAvailable) {
-				quest_id = i;
-				break;
+				if (isAvailable) {
+					quest_id = i;
+					break;
+				}	
 			}
 		}
 
 		var questMarkSprite = Assets.tiles.h_get("questMark", quest_id, 0.5, 1, root);
 		questMarkSprite.setPosition(0, -10);
+		
+		root.alpha = 1;
+		isEnable = false;
 	}
 
 	public function initQuest(mp:MapTile, ep:EP) {
@@ -86,8 +93,6 @@ class Ship extends dn.Process {
 
 	@:allow(MapTile)
 	function addToRoad(r:Road, from:EP) {
-		var alreadyExist = currentMapTile != null;
-
 		// Set on Road
 		currentRoadRatio = 0;
 		currentRoad = r;
@@ -101,19 +106,16 @@ class Ship extends dn.Process {
 		level.onShipReachingEnd(this);
 	}
 
-	public function disappear() {
+	public function disappear(onEnd:Void->Void) {
 		isEnable = false;
 		
-		level.tw.createS(root.alpha, 0, 0.5).onEnd = ()->destroy();
+		level.tw.createS(root.alpha, 0, 0.5).onEnd = onEnd;
 	}
 
 	public override function onDispose() {
 		super.onDispose();
 
 		sprQuestGoal.remove();
-
-		if (currentMapTile != null)
-			currentMapTile.removeShip(this);
 
 		level.ships.remove(this);
 	}

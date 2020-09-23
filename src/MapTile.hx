@@ -18,7 +18,7 @@ class MapTile extends h2d.Layers {
 
 	public var roads(default, null) : Array<Road> = [];
 
-	public var ships : Array<Ship> = [];
+	//public var ships : Array<Ship> = [];
 	
 	public function new(tx:Int, ty:Int, level:Level) {
 		super();
@@ -132,13 +132,6 @@ class MapTile extends h2d.Layers {
 
 	public function addShipToRoad(ship:Ship, road:Road, from:EP) {
 		ship.addToRoad(road, from);
-
-		ship.currentMapTile.removeShip(ship);
-		ships.push(ship);
-	}
-
-	public function removeShip(ship:Ship) {
-		ships.remove(ship);
 	}
 
 	public function getRoadWith(ep:EP):Road {

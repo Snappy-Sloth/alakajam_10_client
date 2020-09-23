@@ -20,7 +20,7 @@ class Road {
 	}
 
 	public function modifyPoints(newPointA:EP, newPointB:EP) {
-		for (ship in mapTile.ships) {
+		for (ship in mapTile.level.ships) {
 			if (ship.from == pointA) {
 				ship.from = newPointA;
 				ship.to = newPointB;
