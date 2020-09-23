@@ -141,20 +141,8 @@ class Game extends Process {
 					trace(Lang.t._("Press ESCAPE again to exit."));
 				else
 					hxd.System.exit();
-
-				// Restart
-				// #if debug
-				// if( ca.selectPressed() )
-				// 	Main.ME.startGame();
-				// #end
 			#end
-
 		}
-
-		#if debug
-			// if (hxd.Key.isPressed(Key.F4))
-			// 	showPopup("Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test ! Ceci est un test !");
-		#end
 	}
 }
 

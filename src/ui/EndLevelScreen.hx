@@ -35,9 +35,6 @@ class EndLevelScreen extends dn.Process {
 		var levelText = new h2d.Text(Assets.fontPixel, flowInfo1);
 		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
 		
-		// var levelTimeText = new h2d.Text(Assets.fontPixel, flowInfo1);
-		// levelTimeText.text = 'Level Time: ${Lib.prettyTime(Game.ME.level.ftime)}';
-		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
 
@@ -53,14 +50,9 @@ class EndLevelScreen extends dn.Process {
 		
 		var lifeLostText = new h2d.Text(Assets.fontPixel, flowLife);
         lifeLostText.text = "Life left:";
-		// lifeLostText.scale(Const.SCALE);
         
         var numberLife = Game.ME.numberLife;
 		for (i in 0...numberLife) {
-			// var life = new h2d.Graphics(flowLife);
-			// life.beginFill(0xff0000);
-			// life.drawRect(0, 0, 10, 10);
-			// arLife.push(life);
 			var life = Assets.tiles.h_get("life", flowLife);
 		}
 		
@@ -68,9 +60,6 @@ class EndLevelScreen extends dn.Process {
 		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';
 		scoreText.scale(Const.SCALE);
 			
-
-		// var gameTimeText = new h2d.Text(Assets.fontPixel, flow);
-		// gameTimeText.text = 'Total Campaign Time: à définir';
 
 		flow.addSpacing(20);
 

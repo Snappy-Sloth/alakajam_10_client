@@ -74,19 +74,15 @@ class Main extends dn.Process {
 		if (Game.ME != null) {
 			Game.ME.destroy();
 		}
-		if( GameOverScreen.ME!=null ) {
-			GameOverScreen.ME.destroy();
-		}
-		if( EndCampaignScreen.ME!=null ) {
-			EndCampaignScreen.ME.destroy();
-		}
+		
+		clean();
+
 		new ui.TitleScreen();
 	}
 
 	public function startChooseLevelScreen() {
-		if( ui.TitleScreen.ME!=null ) {
-			ui.TitleScreen.ME.destroy();
-		}
+		clean();
+
 		new ui.ChooseLevelScreen();
 	}
 
@@ -121,7 +117,7 @@ class Main extends dn.Process {
 		}
 
 		startGame(levelsToDo);
-		// startGame([levelsToDo[0]]); // For debug only
+		//startGame([levelsToDo[0]]); // For debug only
 	}
 
 	public function startOneLevel(level:Data.Campaign) {

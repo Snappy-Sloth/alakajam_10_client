@@ -29,26 +29,6 @@ class TitleScreen extends dn.Process {
 		var chooseLevelBtn = new Button("Choose Level", Main.ME.startChooseLevelScreen);
 		flow.addChild(chooseLevelBtn);
 
-		#if debug
-		/*var level2x2Btn = new Button("2x2", Main.ME.showDebugLevel2x2);
-		flow.addChild(level2x2Btn);
-
-		var level2x3Btn = new Button("2x3", Main.ME.showDebugLevel2x3);
-		flow.addChild(level2x3Btn);
-
-		var level3x2Btn = new Button("3x2", Main.ME.showDebugLevel3x2);
-		flow.addChild(level3x2Btn);
-
-		var level3x3Btn = new Button("3x3", Main.ME.showDebugLevel3x3);
-		flow.addChild(level3x3Btn);
-
-		var titaBtn = new Button("Tipyx", Main.ME.showDebugTita);
-		flow.addChild(titaBtn);
-
-		var tipyxBtn = new Button("Tipyx", Main.ME.showDebugTipyx);
-		flow.addChild(tipyxBtn);*/
-		#end
-
 		onResize();
 	}
 

@@ -16,8 +16,8 @@ class Level extends dn.Process {
 	public var ships : Array<Ship> = [];
 
 	var shipsOver = 0;
-	var nextSpawnTiming : Float = 0;
-	var spawnTiming : Float = 3;
+	//var nextSpawnTiming : Float = 0;
+	//var spawnTiming : Float = 3;
 	public var shipAreGone(default, null) : Bool = false;
 
 	public var currentScore(default, null) : Float;
@@ -126,10 +126,10 @@ class Level extends dn.Process {
 				isGood = samePlace < arMapTile.length;
 	
 				if (!isGood) {
-					while (swaps.length > 0) {
+					/*while (swaps.length > 0) {
 						var s = swaps.pop();
 						exchangeTiles(s.mp1, s.mp2);
-					}
+					}*/
 					#if debug
 					trace("retry swap");
 					#end
@@ -205,7 +205,6 @@ class Level extends dn.Process {
 			// Create Roads
 		for (ship in ships) {
 			var path = dn.Bresenham.getThickLine(ship.start_mp.cx, ship.start_mp.cy, ship.quest_mp.cx, ship.quest_mp.cy, true);
-			var prevDist = -1.;
 			var newPath :Array<MapTile> = [];
 			var lastAddedToPath : MapTile = null;
 			for (p in path) {
@@ -260,7 +259,7 @@ class Level extends dn.Process {
 			ship.quest_mp.createRoad(from, ship.quest_ep);
 		}
 
-		// trace("numTry : " + numTry);
+		trace("numTry : " + numTry);
 	}
 
 	public function addArrows(mapTile:MapTile) {
