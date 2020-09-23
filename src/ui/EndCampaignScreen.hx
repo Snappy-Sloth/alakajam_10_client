@@ -33,7 +33,7 @@ class EndCampaignScreen extends dn.Process {
 
 		flow.addSpacing(20);
 
-        var menuBtn = new Button("Menu", Main.ME.startTitleScreen);
+        var menuBtn = new ButtonMenu("Menu", Main.ME.startTitleScreen);
 		flow.addChild(menuBtn);
 
 		onResize();

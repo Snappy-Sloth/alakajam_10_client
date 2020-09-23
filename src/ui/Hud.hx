@@ -76,7 +76,7 @@ class Hud extends dn.Process {
 		flowLeft.layout = Vertical;
 		flowLeft.verticalSpacing = 20;
 
-		var menuButton = new Button("Menu", Main.ME.startTitleScreen);
+		var menuButton = new ButtonMenu("Menu", Main.ME.startTitleScreen);
 		flowLeft.addChild(menuButton);
 
 	}

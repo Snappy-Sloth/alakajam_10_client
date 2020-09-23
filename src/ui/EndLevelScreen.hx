@@ -51,7 +51,7 @@ class EndLevelScreen extends dn.Process {
 
 		flow.addSpacing(20);
 
-        var nextLevelBtn = new Button("Next Level", function() {
+        var nextLevelBtn = new ButtonMenu("Next Level", function() {
 			this.destroy();
 			Game.ME.goToNextLevel();
 		});

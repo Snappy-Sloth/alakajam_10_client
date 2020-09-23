@@ -23,10 +23,10 @@ class TitleScreen extends dn.Process {
 
 		flow.addSpacing(50);
 
-		var campaignBtn = new Button("Campaign", Main.ME.startCampaign);
+		var campaignBtn = new ButtonMenu("Campaign", Main.ME.startCampaign);
 		flow.addChild(campaignBtn);
 
-		var chooseLevelBtn = new Button("Choose Level", Main.ME.startChooseLevelScreen);
+		var chooseLevelBtn = new ButtonMenu("Choose Level", Main.ME.startChooseLevelScreen);
 		flow.addChild(chooseLevelBtn);
 
 		onResize();

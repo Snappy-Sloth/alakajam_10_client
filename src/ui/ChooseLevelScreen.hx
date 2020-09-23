@@ -23,24 +23,24 @@ class ChooseLevelScreen extends dn.Process {
 
 		flowVer = new h2d.Flow(root);
 		flowVer.layout = Vertical;
-        flowVer.verticalSpacing = 10;
+        flowVer.verticalSpacing = 20;
 		
 		var numHorFlow = Math.ceil(levels.length/5);
 
 		for (j in 0...numHorFlow) {
 			var flowHor = new h2d.Flow(flowVer);
 			flowHor.layout = Horizontal;
-        	flowHor.horizontalSpacing = 10;
+        	flowHor.horizontalSpacing = 20;
 			
 			if (5*(j+1) < levels.length) {
 				for (i in 5*j...5*(j+1)) {
-					var levelBtn = new Button('Level ${i+1}', Main.ME.startOneLevel.bind(levels[i]));
+					var levelBtn = new ButtonLevel('Level ${i+1}', Main.ME.startOneLevel.bind(levels[i]));
 					flowHor.addChild(levelBtn);
 				}
 			}
 			else {
 				for (i in 5*j...levels.length) {
-					var levelBtn = new Button('Level ${i+1}', Main.ME.startOneLevel.bind(levels[i]));
+					var levelBtn = new ButtonLevel('Level ${i+1}', Main.ME.startOneLevel.bind(levels[i]));
 					flowHor.addChild(levelBtn);
 				}
 			}
