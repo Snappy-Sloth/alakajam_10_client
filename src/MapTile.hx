@@ -174,8 +174,9 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function rotateRight() {
-		// Rotate roads
+		level.currentScore++;
 
+		// Rotate roads
 		for (r in roads) {
 			r.modifyPoints(getNextRoadWhenRotateRight(r.pointA), getNextRoadWhenRotateRight(r.pointB));
 		}
@@ -185,8 +186,9 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function rotateLeft() {
-		// Rotate roads
+		level.currentScore++;
 
+		// Rotate roads
 		for (r in roads) {
 			r.modifyPoints(getNextRoadWhenRotateLeft(r.pointA), getNextRoadWhenRotateLeft(r.pointB));
 		}

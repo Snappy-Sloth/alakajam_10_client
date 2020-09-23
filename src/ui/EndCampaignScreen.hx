@@ -29,7 +29,7 @@ class EndCampaignScreen extends dn.Process {
 		flow.addSpacing(20);
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
-		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';			
+		scoreText.text = 'Total Moves: ${Std.int(Game.ME.score)}';			
 
 		flow.addSpacing(20);
 

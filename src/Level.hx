@@ -21,7 +21,8 @@ class Level extends dn.Process {
 	//var spawnTiming : Float = 3;
 	public var shipAreGone(default, null) : Bool = false;
 
-	public var currentScore(default, null) : Float;
+	public var currentScore : Int;
+	public var levelScoreMin(default, null) : Int;
 
 	public var lvlData(default, null) : Data.Campaign;
 
@@ -42,7 +43,8 @@ class Level extends dn.Process {
 
 		createLevel(wid, hei);
 
-		currentScore = lvlData.timerMax * Const.SCORE_BY_SECOND;
+		levelScoreMin = lvlData.numSwap + lvlData.numRotation;
+		currentScore = 0;
 
 		onResize();
 	}
@@ -356,6 +358,7 @@ class Level extends dn.Process {
 	}
 
 	public function exchangeTiles(mt1:MapTile, mt2:MapTile, instant:Bool = true) {
+		currentScore++;
 		var mapTile1cx = mt1.cx;
 		var mapTile1cy = mt1.cy;
 
@@ -462,14 +465,5 @@ class Level extends dn.Process {
 			game.levelVictory();
 		}
 		#end
-
-		/* if (lvlData.numShips == shipsOver && ships.length == 0) {
-			game.levelVictory();
-		} */
-
-		if (!shipAreGone) {
-			currentScore -= Const.SCORE_LOOSE_BY_SECOND / Const.FPS;
-			if (currentScore < 0) currentScore = 0;
-		}
 	}
 }

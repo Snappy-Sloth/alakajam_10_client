@@ -12,8 +12,9 @@ class Hud extends dn.Process {
 
 	var flowLeft : h2d.Flow;
 
+	var scoreMinText : Text;
 	var scoreText : Text;
-
+	
 	// var timeText : Text;
 	var invalidated = true;
 
@@ -44,8 +45,13 @@ class Hud extends dn.Process {
 
 		flowRight.addSpacing(30);
 
+		scoreMinText = new Text(Assets.fontPixel, flowRight);
+		scoreMinText.text = 'Moves min: ${level.levelScoreMin}';
+
+		flowRight.addSpacing(10);
+
 		scoreText = new Text(Assets.fontPixel, flowRight);
-		scoreText.text = 'Score: ${game.score}';
+		scoreText.text = 'Moves: ${level.currentScore}';
 
 		flowRight.addSpacing(30);
 
@@ -100,6 +106,6 @@ class Hud extends dn.Process {
 			render();
 		}
 
-		scoreText.text = 'Score: ${Std.int(game.level.currentScore)}';
+		scoreText.text = 'Moves: ${Std.int(level.currentScore)}';
 	}
 }
