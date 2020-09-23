@@ -45,29 +45,45 @@ class MapTile extends h2d.Layers {
         whiteSelection.visible = false;
 
 		inter = new Interactive(Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE, wrapper);
-        //inter.backgroundColor = 0x55ff00ff;
-        
-        inter.onClick = function(e) {
+		//inter.backgroundColor = 0x55ff00ff;
+		
+		inter.onPush = function (e) {
 			if (level.shipAreGone || level.controlLock)
 				return;
-
-			if (selected) {
+			
+			if (!selected) {
+				level.unselectAllMapTiles();
+				level.swapFrom = this;
+				select();
+			}
+			else {
 				unSelect();
 				level.removeArrows();
 			}
-			else {
+		}
+
+		inter.onMove = function(e) {
+			if (level.shipAreGone || level.controlLock)
+				return;
+
+			level.showPossibleSwap(this);
+		}
+
+		inter.onRelease = function (e) {
+			if (level.shipAreGone || level.controlLock)
+				return;
+
+			if (level.swapFrom == this) {
+				level.swapFrom = null;
 				if (level.lvlData.numRotation > 0) {
-					// level.unselectAllMapTiles();
+					level.unselectAllMapTiles();
 					select();
-	
-					if (!level.checkOtherTiles(this)) {
-						level.addArrows(this);
-					}
+					level.addArrows(this);
 				}
-				else {
-					select();
-					level.checkOtherTiles(this);
-				}
+			}
+			else if (level.swapFrom != null) {
+				level.unselectAllMapTiles();
+				level.doSwap();
 			}
 		}
 	}

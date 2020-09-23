@@ -6,9 +6,16 @@ filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 155, 327
+  xy: 103, 327
   size: 17, 47
   orig: 17, 47
+  offset: 0, 0
+  index: -1
+arrowSwap
+  rotate: false
+  xy: 351, 53
+  size: 35, 27
+  orig: 35, 27
   offset: 0, 0
   index: -1
 bg
@@ -27,7 +34,7 @@ button
   index: -1
 life
   rotate: false
-  xy: 351, 53
+  xy: 351, 82
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
@@ -41,84 +48,84 @@ mapTile
   index: -1
 play
   rotate: false
-  xy: 103, 327
+  xy: 293, 53
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 117, 379
+  xy: 117, 376
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 126, 379
+  xy: 374, 82
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 135, 379
+  xy: 383, 82
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 144, 379
+  xy: 374, 94
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 153, 379
+  xy: 383, 94
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 162, 376
+  xy: 351, 105
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 171, 376
+  xy: 360, 105
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 374, 53
+  xy: 369, 106
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 383, 53
+  xy: 378, 106
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 103, 392
+  xy: 388, 53
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 103, 379
+  xy: 103, 376
   size: 12, 11
   orig: 12, 11
   offset: 0, 0

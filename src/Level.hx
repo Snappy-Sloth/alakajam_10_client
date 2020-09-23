@@ -30,11 +30,15 @@ class Level extends dn.Process {
 
 	public var rand : dn.Rand;
 
+	public var swapFrom : MapTile = null;
+	public var swapTo : MapTile = null;
+	var lineSwap : h2d.Graphics;
+	var arrowSwap : HSprite;
+
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
 		rand = new dn.Rand(Std.random(999999));
-		// rand = new dn.Rand(304417);
 		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
@@ -72,6 +76,20 @@ class Level extends dn.Process {
 		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1)));
 		bg.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
 		wrapperMapTile.add(bg, Const.DP_BG);
+		var inter = new h2d.Interactive(bg.tile.width, bg.tile.height, bg);
+		inter.onMove = function (e) {
+			if (swapTo != null) {
+				swapTo.unSelect();
+				swapTo = null;
+			}
+			if (swapFrom != null)
+				drawLineSwap(Std.int(e.relX) - Const.MAP_TILE_SIZE, Std.int(e.relY) - Const.MAP_TILE_SIZE);
+		}
+
+		inter.onRelease = function (e) {
+			cancelSwap();
+			unselectAllMapTiles();
+		}
 
 		// Create MapTiles
 		for (i in 0...wid) {
@@ -343,6 +361,7 @@ class Level extends dn.Process {
 		for (tile in arMapTile) {
 			tile.unSelect();
 		}
+		removeArrows();
 	}
 
 	public function getMapTileAt(cx:Int, cy:Int):MapTile {
@@ -395,6 +414,78 @@ class Level extends dn.Process {
 			else if (s.quest_mp == mt2)
 				s.quest_mp = mt1;
 		}
+	}
+
+	public function showPossibleSwap(to:Null<MapTile>) {
+		if (swapFrom == null || swapTo == to)
+			return;
+
+		if (to == swapFrom) {
+			if (swapTo != null) {
+				swapTo.unSelect();
+				swapTo = null;
+			}
+			
+			if (lineSwap != null) lineSwap.visible = false;
+			if (arrowSwap != null) arrowSwap.visible = false;
+
+			return;
+		}
+		
+		swapTo = to;
+
+		unselectAllMapTiles();
+		swapFrom.select();
+		swapTo.select();
+
+		drawLineSwap(Std.int(swapTo.x), Std.int(swapTo.y));
+	}
+
+	inline function drawLineSwap(x:Int, y:Int) {
+		if (lineSwap == null) {
+			lineSwap = new h2d.Graphics();
+			lineSwap.alpha = 0.75;
+			wrapperMapTile.add(lineSwap, Const.DP_UI);
+		}
+		lineSwap.visible = true;
+		lineSwap.clear();
+		lineSwap.lineStyle(5, 0x282e33);
+		lineSwap.moveTo(Std.int(swapFrom.x), Std.int(swapFrom.y));
+		lineSwap.lineTo(x, y);
+		lineSwap.beginFill(0x282e33);
+		lineSwap.drawCircle(Std.int(swapFrom.x), Std.int(swapFrom.y), 5);
+		lineSwap.drawCircle(x, y, 5);
+		lineSwap.endFill();
+		
+		if (arrowSwap == null) {
+			arrowSwap = Assets.tiles.h_get("arrowSwap", 0.5, 0.5);
+			wrapperMapTile.add(arrowSwap, Const.DP_UI);
+		}
+		arrowSwap.visible = true;
+		arrowSwap.setPosition((swapFrom.x + x) * 0.5, (swapFrom.y + y) * 0.5);
+	}
+
+	public function cancelSwap() {
+		if (swapTo != null) {
+			swapTo.unSelect();
+			swapTo = null;
+		}
+		if (swapFrom != null) {
+			swapFrom.unSelect();
+			swapFrom = null;
+		}
+
+		if (lineSwap != null) lineSwap.visible = false;
+		if (arrowSwap != null) arrowSwap.visible = false;
+	}
+
+	public function doSwap() {
+		if (swapFrom == null || swapTo == null)
+			return;
+
+		exchangeTiles(swapFrom, swapTo, false);
+
+		cancelSwap();
 	}
 
 	public function addQuestGoal(mp:MapTile, ep:EP, id:Int):HSprite {
