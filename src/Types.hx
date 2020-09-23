@@ -8,3 +8,8 @@ enum EP {
 	@x(1) @y(0.33) East_1;
 	@x(1) @y(0.66) East_2;
 }
+
+typedef PlayerData = {
+	var scores : Array<Int>;
+	var maxLevelReached : Int;
+}

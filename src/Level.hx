@@ -315,7 +315,7 @@ class Level extends dn.Process {
 					s.isEnable = false;
 				game.looseLife();
 			}
-		} 
+		}
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {

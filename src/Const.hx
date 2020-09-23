@@ -30,4 +30,18 @@ class Const {
 
 	public static var SCORE_BY_SECOND = 20;
 	public static var SCORE_LOOSE_BY_SECOND = 10;
+
+	public static var PLAYER_DATA : PlayerData;
+	
+	public static function INIT() {
+		PLAYER_DATA = dn.LocalStorage.readObject("playerData", {scores:[], maxLevelReached:1});
+	}
+
+	public static function SAVE_PROGRESS() {
+		dn.LocalStorage.writeObject("playerData", PLAYER_DATA);
+	}
+
+	public static function GET_HIGHSCORE_ON_LEVEL(numLevel:Int) {
+		return PLAYER_DATA.scores[numLevel];
+	}
 }

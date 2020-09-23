@@ -37,6 +37,12 @@ class EndLevelScreen extends dn.Process {
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Score: ${Std.int(Game.ME.level.currentScore)}';
+		
+		var previousScoreText = new h2d.Text(Assets.fontPixel, flow);
+		if (Const.GET_HIGHSCORE_ON_LEVEL(Game.ME.level.getLevelNumber()) > Game.ME.level.currentScore)
+			previousScoreText.text = 'Current highscore: ${Const.GET_HIGHSCORE_ON_LEVEL(Game.ME.level.getLevelNumber())}';
+		else
+			previousScoreText.text = 'New highscore!';
 
 		var flowInfo2 = new h2d.Flow(flow);
 		flowInfo2.layout = Horizontal;
@@ -59,7 +65,6 @@ class EndLevelScreen extends dn.Process {
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';
 		scoreText.scale(Const.SCALE);
-			
 
 		flow.addSpacing(20);
 
@@ -68,6 +73,9 @@ class EndLevelScreen extends dn.Process {
 			Game.ME.goToNextLevel();
 		});
 		flow.addChild(nextLevelBtn);
+
+		Const.PLAYER_DATA.scores[Game.ME.level.getLevelNumber()] = Std.int(Game.ME.level.currentScore);
+		Const.SAVE_PROGRESS();
 
 		onResize();
 	}
