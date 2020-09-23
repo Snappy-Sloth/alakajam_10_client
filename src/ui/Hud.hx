@@ -9,7 +9,6 @@ class Hud extends dn.Process {
 	public var level(get,never) : Level; inline function get_level() return Game.ME.level;
 
 	var flowRight : h2d.Flow;
-	var flowLife : h2d.Flow;
 
 	var flowLeft : h2d.Flow;
 
@@ -20,8 +19,6 @@ class Hud extends dn.Process {
 
 	var width : Int;
 	var height : Int;
-
-	var arLife : Array<HSprite>;
 
 	public function new(wi:Int, he:Int) {
 		super(Game.ME);
@@ -37,7 +34,6 @@ class Hud extends dn.Process {
 	public function setrightHud(wi:Int, he:Int) {
 		width = wi;
 		height = he;
-		arLife = [];
 
 		flowRight = new h2d.Flow(root);
 		flowRight.layout = Vertical;
@@ -45,10 +41,8 @@ class Hud extends dn.Process {
 		
 		var levelText = new Text(Assets.fontPixel, flowRight);
 		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
-		
-		flowLife = new h2d.Flow(flowRight);
-		flowLife.layout = Horizontal;
-		flowLife.horizontalSpacing = 10;
+
+		flowRight.addSpacing(30);
 
 		scoreText = new Text(Assets.fontPixel, flowRight);
 		scoreText.text = 'Score: ${game.score}';
@@ -62,6 +56,10 @@ class Hud extends dn.Process {
 		var playBtn = Assets.tiles.h_get("play", flowButtons);
 		var playInter = new h2d.Interactive(playBtn.tile.width, playBtn.tile.height, playBtn);
 		playInter.onClick = (e)->level.playBtnPressed();
+
+		var reinitShipsBtn = Assets.tiles.h_get("play", flowButtons);
+		var reinitShipsInter = new h2d.Interactive(reinitShipsBtn.tile.width, reinitShipsBtn.tile.height, reinitShipsBtn);
+		reinitShipsInter.onClick = (e)->level.resetShips();
 	}
 
 	public function setLeftHud(wi:Int, he:Int) {

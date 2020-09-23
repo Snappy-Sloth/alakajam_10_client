@@ -6,16 +6,12 @@ class EndLevelScreen extends dn.Process {
 
     var flow : h2d.Flow;
 
-    var arLife : Array<h2d.Graphics>;
-
 	public function new() {
 		super(Game.ME);
 
 		createRoot();
 
 		ME = this;
-
-		arLife = [];
 
 		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
@@ -48,11 +44,6 @@ class EndLevelScreen extends dn.Process {
 		flowInfo2.layout = Horizontal;
 		flowInfo2.verticalAlign = Middle;
 		flowInfo2.horizontalSpacing = 40;
-		
-		var flowLife = new h2d.Flow(flowInfo2);
-		flowLife.layout = Horizontal;
-		flowLife.verticalAlign = Middle;
-		flowLife.horizontalSpacing = 10;
 		
 		var scoreText = new h2d.Text(Assets.fontPixel, flow);
 		scoreText.text = 'Total Score: ${Std.int(Game.ME.score)}';

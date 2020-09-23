@@ -6,16 +6,12 @@ class EndCampaignScreen extends dn.Process {
 
     var flow : h2d.Flow;
 
-    var arLife : Array<h2d.Graphics>;
-
 	public function new() {
 		super(Main.ME);
 
 		createRoot();
 
 		ME = this;
-
-		arLife = [];
 
 		flow = new h2d.Flow(root);
 		flow.layout = Vertical;
