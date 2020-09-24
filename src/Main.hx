@@ -6,8 +6,6 @@ import hxd.Key;
 
 class Main extends dn.Process {
 	public static var ME : Main;
-	public var controller : dn.heaps.Controller;
-	public var ca : dn.heaps.Controller.ControllerAccess;
 
 	public function new(s:h2d.Scene) {
 		super();
@@ -48,17 +46,6 @@ class Main extends dn.Process {
 		new ui.Console(Assets.fontTiny, s);
 		Lang.init("en");
 		Data.load( hxd.Res.data.entry.getText() );
-
-		// Game controller
-		controller = new dn.heaps.Controller(s);
-		ca = controller.createAccess("main");
-		controller.bind(AXIS_LEFT_X_NEG, Key.LEFT, Key.Q, Key.A);
-		controller.bind(AXIS_LEFT_X_POS, Key.RIGHT, Key.D);
-		controller.bind(X, Key.SPACE, Key.F, Key.E);
-		controller.bind(A, Key.UP, Key.Z, Key.W);
-		controller.bind(B, Key.ENTER, Key.NUMPAD_ENTER);
-		controller.bind(SELECT, Key.R);
-		controller.bind(START, Key.N);
 
 		Const.INIT();
 

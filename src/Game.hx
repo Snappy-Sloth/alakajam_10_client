@@ -6,7 +6,6 @@ import hxd.Key;
 class Game extends Process {
 	public static var ME : Game;
 
-	public var ca : dn.heaps.Controller.ControllerAccess;
 	public var fx : Fx;
 	public var scroller : h2d.Layers;
 	public var level : Level;
@@ -24,9 +23,6 @@ class Game extends Process {
 
 		score = 0;
 
-		ca = Main.ME.controller.createAccess("game");
-		ca.setLeftDeadZone(0.2);
-		ca.setRightDeadZone(0.2);
 		createRootInLayers(Main.ME.root, Const.DP_BG);
 
 		scroller = new h2d.Layers();
@@ -86,7 +82,7 @@ class Game extends Process {
 		if( !ui.Console.ME.isActive() && !ui.Modal.hasAny() ) {
 			#if hl
 			// Exit
-			if( ca.isKeyboardPressed(Key.ESCAPE) )
+			if( Key.isPressed(Key.ESCAPE) )
 				if( !cd.hasSetS("exitWarn",3) )
 					trace(Lang.t._("Press ESCAPE again to exit."));
 				else
