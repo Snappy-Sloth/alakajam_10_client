@@ -38,8 +38,8 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		// rand = new dn.Rand(Std.random(999999));
-		rand = new dn.Rand(885636);
+		rand = new dn.Rand(Std.random(999999));
+		// rand = new dn.Rand(885636);
 		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
