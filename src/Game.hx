@@ -8,7 +8,6 @@ class Game extends Process {
 
 	public var ca : dn.heaps.Controller.ControllerAccess;
 	public var fx : Fx;
-	public var camera : Camera;
 	public var scroller : h2d.Layers;
 	public var level : Level;
 	public var hud : ui.Hud;
@@ -40,7 +39,6 @@ class Game extends Process {
 	}
 
 	public function goToNextLevel() {
-		// camera = new Camera();
 		level = new Level(levelsToDo.shift());
 		fx = new Fx();
 		hud = new ui.Hud(level.wid, level.hei);
@@ -74,49 +72,16 @@ class Game extends Process {
 		scroller.setScale(Const.SCALE);
 	}
 
-	function gc() {
-		if( Entity.GC==null || Entity.GC.length==0 )
-			return;
-
-		for(e in Entity.GC)
-			e.dispose();
-		Entity.GC = [];
-	}
-
 	override function onDispose() {
 		super.onDispose();
 
-		fx.destroy();
-		for(e in Entity.ALL)
-			e.destroy();
-		gc();
+ 		fx.destroy();
 
 		ME = null;
 	}
 
-	override function preUpdate() {
-		super.preUpdate();
-
-		for(e in Entity.ALL) if( !e.destroyed ) e.preUpdate();
-	}
-
-	override function postUpdate() {
-		super.postUpdate();
-
-		for(e in Entity.ALL) if( !e.destroyed ) e.postUpdate();
-		gc();
-	}
-
-	override function fixedUpdate() {
-		super.fixedUpdate();
-
-		for(e in Entity.ALL) if( !e.destroyed ) e.fixedUpdate();
-	}
-
 	override function update() {
 		super.update();
-
-		for(e in Entity.ALL) if( !e.destroyed ) e.update();
 
 		if( !ui.Console.ME.isActive() && !ui.Modal.hasAny() ) {
 			#if hl
