@@ -101,8 +101,8 @@ class Level extends dn.Process {
 			}
 		}
 
-		rightArrow = new Arrow(true);
-		leftArrow = new Arrow(false);
+		rightArrow = new Arrow(true, this);
+		leftArrow = new Arrow(false, this);
 		wrapperMapTile.add(rightArrow, Const.DP_UI);
 		wrapperMapTile.add(leftArrow, Const.DP_UI);
 

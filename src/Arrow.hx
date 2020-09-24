@@ -5,10 +5,12 @@ class Arrow extends h2d.Layers {
     public var rightArrow : Bool;
     
     var inter : Interactive;
+    var level : Level;
 
-    public function new(rightArrow:Bool) {
+    public function new(rightArrow:Bool, level:Level) {
         super();
         this.rightArrow = rightArrow;
+        this.level = level;
         
 		var arrow = Assets.tiles.h_get("arrow", 0.5, 0.5, this);
 		if (!rightArrow)
@@ -28,6 +30,8 @@ class Arrow extends h2d.Layers {
         this.visible = true;
 
         inter.onClick = function(e) {
+            if (level.controlLock) return;
+            
             if (rightArrow) {
                 // mapTile.rotateLeft();
 				mapTile.rotateRight(false);
