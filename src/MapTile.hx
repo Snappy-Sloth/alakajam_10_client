@@ -51,15 +51,15 @@ class MapTile extends h2d.Layers {
 			if (level.shipAreGone || level.controlLock)
 				return;
 			
-			if (!selected) {
+			// if (!selected) {
 				level.unselectAllMapTiles();
 				level.swapFrom = this;
 				select();
-			}
-			else {
-				unSelect();
-				level.removeArrows();
-			}
+			// }
+			// else {
+			// 	unSelect();
+			// 	level.removeArrows();
+			// }
 		}
 
 		inter.onMove = function(e) {

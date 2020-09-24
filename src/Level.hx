@@ -414,6 +414,9 @@ class Level extends dn.Process {
 			else if (s.quest_mp == mt2)
 				s.quest_mp = mt1;
 		}
+
+		wrapperMapTile.add(mt1, Const.DP_MAIN);
+		wrapperMapTile.add(mt2, Const.DP_MAIN);
 	}
 
 	public function showPossibleSwap(to:Null<MapTile>) {
