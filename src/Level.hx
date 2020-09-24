@@ -38,7 +38,8 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		rand = new dn.Rand(Std.random(999999));
+		// rand = new dn.Rand(Std.random(999999));
+		rand = new dn.Rand(885636);
 		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
@@ -119,15 +120,18 @@ class Level extends dn.Process {
 			for (tile in arMapTile) {
 				previous.push({mapTile:tile, cx:tile.cx, cy:tile.cy});
 			}
+			var deck = new dn.RandDeck(Std.random);
+			for (tile in arMapTile) {
+				deck.push(tile);
+			}
 			while (!isGood) {
 				var swaps = [];
 				isGood = true;
 				var n = lvlData.numSwap;
 				while (n-- > 0) {
-					var arMP = arMapTile.copy();
-					var mp1 = rand.arraySplice(arMP);
-					var mp2 = rand.arraySplice(arMP);
-		
+					var mp1 = deck.draw();
+					var mp2 = deck.draw();
+
 					if (mp1.roads.length == 0 && mp2.roads.length == 0)
 						n++;
 					else {
@@ -148,10 +152,6 @@ class Level extends dn.Process {
 				isGood = samePlace < arMapTile.length;
 	
 				if (!isGood) {
-					/*while (swaps.length > 0) {
-						var s = swaps.pop();
-						exchangeTiles(s.mp1, s.mp2);
-					}*/
 					#if debug
 					trace("retry swap");
 					#end
@@ -165,9 +165,13 @@ class Level extends dn.Process {
 			for (tile in arMapTile) {
 				deck.push(tile);
 			}
-			for (i in 0...lvlData.numRotation) {
-				var mp = deck.draw();
-				goLeft ? mp.rotateLeft(true) : mp.rotateRight(true);
+			var n = lvlData.numRotation;
+			while (n-- > 0) {
+				var mt = deck.draw();
+				if (mt.roads.length == 0)
+					n++;
+				else
+					goLeft ? mt.rotateLeft(true) : mt.rotateRight(true);
 			}
 		}
 
