@@ -189,7 +189,7 @@ class MapTile extends h2d.Layers {
 		whiteSelection.visible = false;
 	}
 
-	public function rotateRight() {
+	public function rotateRight(instant:Bool) {
 		level.currentScore++;
 
 		// Rotate roads
@@ -198,10 +198,15 @@ class MapTile extends h2d.Layers {
 		}
 
 		// Rotate art
-		wrapperRotation.rotate(0.5*Math.PI);
+		if (instant)
+			wrapperRotation.rotate(0.5*Math.PI);
+		else {
+			level.lockControl(0.2);
+			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation + 0.5*Math.PI, 0.2);
+		}
 	}
 
-	public function rotateLeft() {
+	public function rotateLeft(instant:Bool) {
 		level.currentScore++;
 
 		// Rotate roads
@@ -210,7 +215,12 @@ class MapTile extends h2d.Layers {
 		}
 
 		// Rotate art
-		wrapperRotation.rotate(-0.5*Math.PI);
+		if (instant)
+			wrapperRotation.rotate(-0.5*Math.PI);
+		else {
+			level.lockControl(0.2);
+			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation - 0.5*Math.PI, 0.2);
+		}
 	}
 
 	function getNextRoadWhenRotateRight(ep:EP):EP {

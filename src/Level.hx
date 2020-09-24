@@ -167,7 +167,7 @@ class Level extends dn.Process {
 			}
 			for (i in 0...lvlData.numRotation) {
 				var mp = deck.draw();
-				goLeft ? mp.rotateLeft() : mp.rotateRight();
+				goLeft ? mp.rotateLeft(true) : mp.rotateRight(true);
 			}
 		}
 
@@ -539,6 +539,16 @@ class Level extends dn.Process {
 	inline function areNearEachOther(x1:Int, y1:Int, x2:Int, y2:Int):Bool {
 		return ((x1 == x2 && (y1 == y2 + 1 || y1 == y2 - 1))
 			||	(y1 == y2 && (x1 == x2 + 1 || x1 == x2 - 1)));
+	}
+
+	public inline function lockControl(duration:Float = -1) {
+		controlLock = true;
+		if (duration > 0)
+			delayer.addS("lockControl", ()->controlLock = false, duration);
+	}
+	public inline function unlockControl() {
+		controlLock = false;
+		delayer.cancelById("lockControl");
 	}
 
 	/* public function forwardBtnPressed() {

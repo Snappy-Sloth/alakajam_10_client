@@ -13,6 +13,7 @@ class Arrow extends h2d.Layers {
 		var arrow = Assets.tiles.h_get("arrow", 0.5, 0.5, this);
 		if (!rightArrow)
 			arrow.scaleX = -1;
+		arrow.scaleY = -1;
 		arrow.setPosition(Const.ARROW_TILE_WIDTH >> 1, Const.ARROW_TILE_HEIGHT >> 1);
 
         inter = new Interactive(Const.ARROW_TILE_WIDTH, Const.ARROW_TILE_HEIGHT, this);
@@ -28,10 +29,12 @@ class Arrow extends h2d.Layers {
 
         inter.onClick = function(e) {
             if (rightArrow) {
-                mapTile.rotateLeft();
+                // mapTile.rotateLeft();
+				mapTile.rotateRight(false);
             }
             else {
-                mapTile.rotateRight();
+				mapTile.rotateLeft(false);
+                // mapTile.rotateRight();
             }
         }
     }
