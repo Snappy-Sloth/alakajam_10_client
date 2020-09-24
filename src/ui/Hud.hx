@@ -21,18 +21,21 @@ class Hud extends dn.Process {
 	var width : Int;
 	var height : Int;
 
+	var playBtn : PlayButton;
+
 	public function new(wi:Int, he:Int) {
 		super(Game.ME);
 
 		createRootInLayers(game.root, Const.DP_UI);
 		root.filter = new h2d.filter.ColorMatrix(); // force pixel perfect rendering
 
-		setrightHud(wi, he);
+		setRightHud(wi, he);
 		setLeftHud(wi, he);
+
 		onResize();
 	}
 
-	public function setrightHud(wi:Int, he:Int) {
+	function setRightHud(wi:Int, he:Int) {
 		width = wi;
 		height = he;
 
@@ -59,16 +62,11 @@ class Hud extends dn.Process {
 		flowButtons.layout = Horizontal;
 		flowButtons.horizontalSpacing = 20;
 
-		var playBtn = Assets.tiles.h_get("play", flowButtons);
-		var playInter = new h2d.Interactive(playBtn.tile.width, playBtn.tile.height, playBtn);
-		playInter.onClick = (e)->level.playBtnPressed();
-
-		var reinitShipsBtn = Assets.tiles.h_get("play", flowButtons);
-		var reinitShipsInter = new h2d.Interactive(reinitShipsBtn.tile.width, reinitShipsBtn.tile.height, reinitShipsBtn);
-		reinitShipsInter.onClick = (e)->level.resetShips();
+		playBtn = new PlayButton(level);
+		flowButtons.addChild(playBtn);
 	}
 
-	public function setLeftHud(wi:Int, he:Int) {
+	function setLeftHud(wi:Int, he:Int) {
 		width = wi;
 		height = he;
 
@@ -78,7 +76,10 @@ class Hud extends dn.Process {
 
 		var menuButton = new ButtonMenu("Menu", Main.ME.startTitleScreen);
 		flowLeft.addChild(menuButton);
+	}
 
+	public function onResetShips() {
+		playBtn.reset();
 	}
 
 	override function onResize() {

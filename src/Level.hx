@@ -348,6 +348,7 @@ class Level extends dn.Process {
 		}
 		shipAreGone = false;
 		shipsOver = 0;
+		game.hud.onResetShips();
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {

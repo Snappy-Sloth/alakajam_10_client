@@ -125,9 +125,16 @@ questMark7
   index: -1
 questMark8
   rotate: false
-  xy: 378, 202
+  xy: 351, 213
   size: 7, 10
   orig: 7, 10
+  offset: 0, 0
+  index: -1
+restartBtn
+  rotate: false
+  xy: 293, 153
+  size: 50, 50
+  orig: 50, 50
   offset: 0, 0
   index: -1
 roadStep
