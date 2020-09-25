@@ -50,16 +50,14 @@ class EndLevelScreen extends dn.Process {
 			previousScoreText.text = 'New level highscore!';
 		previousScoreText.alpha = 0;
 		
+		flow.addSpacing(20);
+
 		totalScoreText = new h2d.Text(Assets.fontPixel, flow);
 		totalScoreText.text = 'Total Moves: ${Std.int(Game.ME.score)}';
 		totalScoreText.scale(Const.SCALE);
 
 		flow.addSpacing(20);
 
-        /* var nextLevelBtn = new ButtonMenu("Next Level", function() {
-			this.destroy();
-			Game.ME.goToNextLevel();
-		}); */
 		nextLevelBtn = new ButtonMenu("Next Level", onClickBtn);
 		flow.addChild(nextLevelBtn);
 
