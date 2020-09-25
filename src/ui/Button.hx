@@ -2,7 +2,7 @@ package ui;
 
 class Button extends h2d.Layers {
 
-	public function new(wid:Int, hei:Int, str:String, onClick:Void->Void) {
+	public function new(wid:Int, hei:Int, idSpr:String, str:String, onClick:Void->Void) {
 		super();
 
 		// var button = new Graphics(this);
@@ -12,9 +12,12 @@ class Button extends h2d.Layers {
 		//Assets.tiles.h_get("button", this);
 
 		var inter = new h2d.Interactive(wid, hei);
-		inter.backgroundColor = 0xFF888888;
+		// inter.backgroundColor = 0xFF888888;
 		inter.onClick = (e)->onClick();
 		this.add(inter, 0);
+
+        var button = Assets.tiles.h_get(idSpr);
+        this.add(button, 1);
 
 		var text = new h2d.Text(Assets.fontPixel);
 		text.text = str;

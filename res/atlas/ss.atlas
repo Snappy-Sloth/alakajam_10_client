@@ -6,14 +6,14 @@ filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 103, 327
+  xy: 368, 188
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
   index: -1
 arrowSwap
   rotate: false
-  xy: 351, 101
+  xy: 355, 101
   size: 35, 27
   orig: 35, 27
   offset: 0, 0
@@ -32,9 +32,16 @@ button
   orig: 100, 50
   offset: 0, 0
   index: -1
+levelButton
+  rotate: false
+  xy: 293, 101
+  size: 60, 25
+  orig: 60, 25
+  offset: 0, 0
+  index: -1
 life
   rotate: false
-  xy: 351, 178
+  xy: 345, 188
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
@@ -48,7 +55,7 @@ mapBorder
   index: -1
 mapCorner
   rotate: false
-  xy: 345, 130
+  xy: 345, 140
   size: 46, 46
   orig: 46, 46
   offset: 0, 0
@@ -62,91 +69,91 @@ mapTile
   index: -1
 play
   rotate: false
-  xy: 293, 101
+  xy: 293, 128
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 117, 376
+  xy: 345, 128
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 374, 178
+  xy: 359, 211
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 383, 178
+  xy: 359, 223
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 374, 190
+  xy: 345, 224
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 383, 190
+  xy: 354, 235
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 351, 201
+  xy: 363, 237
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 360, 201
+  xy: 372, 237
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 369, 202
+  xy: 381, 237
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 351, 213
+  xy: 293, 232
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 293, 153
+  xy: 293, 180
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 388, 101
+  xy: 392, 101
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 103, 376
+  xy: 345, 211
   size: 12, 11
   orig: 12, 11
   offset: 0, 0
