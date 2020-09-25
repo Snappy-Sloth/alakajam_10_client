@@ -72,12 +72,13 @@ class Level extends dn.Process {
 
 		wrapperMapTile = new h2d.Layers(root);
 		
-		// var bg = Assets.tiles.h_get("bg", 0.5, 0.5);
-		// wrapperMapTile.add(bg, Const.DP_BG);
-		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1)));
-		bg.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
+		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Std.int(Const.MAP_TILE_SIZE * (wid + 0.5)), Std.int(Const.MAP_TILE_SIZE * (hei + 0.5))));
+		bg.setPosition(-Const.MAP_TILE_SIZE * 0.75, -Const.MAP_TILE_SIZE * 0.75);
 		wrapperMapTile.add(bg, Const.DP_BG);
-		var inter = new h2d.Interactive(bg.tile.width, bg.tile.height, bg);
+		var inter = new h2d.Interactive(Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1));
+		wrapperMapTile.add(inter, Const.DP_BG);
+		inter.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
+		// inter.backgroundColor = 0xFFFF00FF;
 		inter.onMove = function (e) {
 			if (swapTo != null) {
 				swapTo.unSelect();
@@ -99,6 +100,57 @@ class Level extends dn.Process {
 				wrapperMapTile.add(mapTile, Const.DP_MAIN);
 				arMapTile.push(mapTile);
 			}
+		}
+
+		{	// Draw Map borders
+			var sbMapBorders = new HSpriteBatch(Assets.tiles.tile);
+			sbMapBorders.hasRotationScale = true;
+			wrapperMapTile.add(sbMapBorders, Const.DP_BG);
+			for (tile in arMapTile) {
+				if (tile.cy == 0) {
+					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
+					border.setCenterRatio(0.5, 1);
+					border.setPos(tile.x, tile.y - (Const.MAP_TILE_SIZE >> 1));
+				}
+				else if (tile.cy == hei - 1) {
+					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
+					border.scaleY = -1;
+					border.setCenterRatio(0.5, 1);
+					border.setPos(tile.x, tile.y + (Const.MAP_TILE_SIZE >> 1));
+				}
+				if (tile.cx == 0) {
+					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
+					border.rotation = -Math.PI / 2;
+					border.setCenterRatio(0.5, 1);
+					border.setPos(tile.x - (Const.MAP_TILE_SIZE >> 1), tile.y);
+				}
+				if (tile.cx == wid - 1) {
+					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
+					border.rotation = Math.PI / 2;
+					border.setCenterRatio(0.5, 1);
+					border.setPos(tile.x + (Const.MAP_TILE_SIZE >> 1), tile.y);
+				}
+			}
+
+			var tlCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
+			tlCorner.setCenterRatio(1, 1);
+			tlCorner.setPos(- (Const.MAP_TILE_SIZE >> 1), - (Const.MAP_TILE_SIZE >> 1));
+
+			var trCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
+			trCorner.setCenterRatio(1, 1);
+			trCorner.scaleX = -1;
+			trCorner.setPos(wid * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1), - (Const.MAP_TILE_SIZE >> 1));
+			
+			var blCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
+			blCorner.setCenterRatio(1, 1);
+			blCorner.scaleY = -1;
+			blCorner.setPos(-(Const.MAP_TILE_SIZE >> 1), hei * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1));
+
+			var brCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
+			brCorner.setCenterRatio(1, 1);
+			brCorner.scaleX = -1;
+			brCorner.scaleY = -1;
+			brCorner.setPos(wid * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1), hei * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1));
 		}
 
 		rightArrow = new Arrow(true, this);

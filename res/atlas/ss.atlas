@@ -1,166 +1,159 @@
 
 ss.png
-size: 394,394
+size: 248,248
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 368, 188
+  xy: 228, 64
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
   index: -1
 arrowSwap
   rotate: false
-  xy: 355, 101
+  xy: 205, 35
   size: 35, 27
   orig: 35, 27
   offset: 0, 0
   index: -1
-bg
-  rotate: false
-  xy: 1, 1
-  size: 290, 290
-  orig: 290, 290
-  offset: 0, 0
-  index: -1
 button
   rotate: false
-  xy: 293, 1
+  xy: 103, 35
   size: 100, 50
   orig: 100, 50
   offset: 0, 0
   index: -1
 levelButton
   rotate: false
-  xy: 293, 101
+  xy: 103, 135
   size: 60, 25
   orig: 60, 25
   offset: 0, 0
   index: -1
 life
   rotate: false
-  xy: 345, 188
+  xy: 205, 64
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
   index: -1
 mapBorder
   rotate: false
-  xy: 293, 53
+  xy: 103, 87
   size: 100, 46
   orig: 100, 46
   offset: 0, 0
   index: -1
 mapCorner
   rotate: false
-  xy: 345, 140
+  xy: 53, 137
   size: 46, 46
   orig: 46, 46
   offset: 0, 0
   index: -1
 mapTile
   rotate: false
-  xy: 1, 293
+  xy: 1, 35
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 293, 128
+  xy: 165, 136
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 345, 128
+  xy: 219, 87
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 359, 211
+  xy: 219, 99
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 359, 223
+  xy: 205, 100
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 345, 224
+  xy: 214, 111
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 354, 235
+  xy: 205, 112
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 363, 237
+  xy: 223, 113
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 372, 237
+  xy: 214, 123
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 381, 237
+  xy: 205, 124
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 293, 232
+  xy: 232, 113
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 293, 180
+  xy: 1, 188
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 392, 101
+  xy: 242, 35
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 345, 211
+  xy: 205, 87
   size: 12, 11
   orig: 12, 11
   offset: 0, 0
   index: -1
 title
   rotate: false
-  xy: 103, 293
+  xy: 1, 1
   size: 246, 32
   orig: 246, 32
   offset: 0, 0
