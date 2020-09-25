@@ -74,16 +74,17 @@ class EndLevelScreen extends dn.Process {
 		nextLevelBtn.y += h()/Const.SCALE;
 
 		cinematic.create({
+			250;
 			tw.createS(endLevelText.alpha, 1, 0.5).end(()->cinematic.signal());
 			end;
 			tw.createS(levelText.x, levelText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
 			end;
 			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
 			end;
-			10;
+			400;
 			tw.createS(previousScoreText.alpha, 1, 0.4).end(()->cinematic.signal());
 			end;
-			10;
+			200;
 			tw.createS(totalScoreText.x, totalScoreText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
 			end;
 			tw.createS(nextLevelBtn.y, nextLevelBtn.y-(h()/Const.SCALE), 0.5);
@@ -92,11 +93,11 @@ class EndLevelScreen extends dn.Process {
 
 	public function onClickBtn() {
 		cinematic.create({
-			tw.createS(endLevelText.x, endLevelText.x+(w()/Const.SCALE), 0.2);
-			tw.createS(levelText.x, levelText.x+(w()/Const.SCALE), 0.2);
-			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.2);
-			tw.createS(previousScoreText.x, previousScoreText.x+(w()/Const.SCALE), 0.2);
-			tw.createS(totalScoreText.x, totalScoreText.x+(w()/Const.SCALE), 0.2);
+			tw.createS(endLevelText.x, endLevelText.x+(w()/Const.SCALE), 0.3);
+			tw.createS(levelText.x, levelText.x+(w()/Const.SCALE), 0.3);
+			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.3);
+			tw.createS(previousScoreText.x, previousScoreText.x+(w()/Const.SCALE), 0.3);
+			tw.createS(totalScoreText.x, totalScoreText.x+(w()/Const.SCALE), 0.3);
 			tw.createS(nextLevelBtn.y, nextLevelBtn.y+(h()/Const.SCALE), 0.5).end(()->cinematic.signal());
 			end;
 			this.destroy();
