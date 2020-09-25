@@ -38,21 +38,21 @@ class TitleScreen extends dn.Process {
 
 		onResize();
 
-		campaignBtn.x += w()/2;
-		chooseLevelBtn.x -= w()/2;
+		campaignBtn.x += w()/Const.SCALE;
+		chooseLevelBtn.x -= w()/Const.SCALE;
 
 		cinematic.create({
 			tw.createS(title.alpha, 0>1, 0.5).end(()->cinematic.signal());
-			tw.createS(campaignBtn.x, campaignBtn.x-(w()/2), 0.5);
-			tw.createS(chooseLevelBtn.x, chooseLevelBtn.x+(w()/2), 0.5);
+			tw.createS(campaignBtn.x, campaignBtn.x-(w()/Const.SCALE), 0.5);
+			tw.createS(chooseLevelBtn.x, chooseLevelBtn.x+(w()/Const.SCALE), 0.5);
 		});
 	}
 
 	public function onClickBtn(onEnd:Void->Void) {
 		cinematic.create({
 			tw.createS(title.alpha, 0, 0.5);
-			tw.createS(campaignBtn.x, campaignBtn.x-(w()/2), 0.5);
-			tw.createS(chooseLevelBtn.x, chooseLevelBtn.x+(w()/2), 0.5).end(()->cinematic.signal());
+			tw.createS(campaignBtn.x, campaignBtn.x-(w()/Const.SCALE), 0.5);
+			tw.createS(chooseLevelBtn.x, chooseLevelBtn.x+(w()/Const.SCALE), 0.5).end(()->cinematic.signal());
 			end;
 			onEnd();
 		});

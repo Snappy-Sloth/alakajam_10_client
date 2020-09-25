@@ -67,10 +67,10 @@ class ChooseLevelScreen extends dn.Process {
 
 		onResize();
 
-		returnMenuBtn.y += h()/2;
+		returnMenuBtn.y += h()/Const.SCALE;
 
 		cinematic.create({
-			tw.createS(returnMenuBtn.y, returnMenuBtn.y-(h()/2), 0.5);
+			tw.createS(returnMenuBtn.y, returnMenuBtn.y-(h()/Const.SCALE), 0.5);
 			for (b in arLevelBtn) {
 				tw.createS(b.alpha, 1, 0.5);
 				10;
@@ -84,7 +84,7 @@ class ChooseLevelScreen extends dn.Process {
 				tw.createS(b.alpha, 0, 0.5);
 				10;
 			}
-			tw.createS(returnMenuBtn.y, returnMenuBtn.y+(h()/2), 0.5).end(()->cinematic.signal());
+			tw.createS(returnMenuBtn.y, returnMenuBtn.y+(h()/Const.SCALE), 0.5).end(()->cinematic.signal());
 			end;
 			onEnd();
 		});
