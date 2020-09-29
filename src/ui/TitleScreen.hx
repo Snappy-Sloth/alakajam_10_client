@@ -9,6 +9,8 @@ class TitleScreen extends dn.Process {
 	var campaignBtn : ButtonMenu;
 	var chooseLevelBtn : ButtonMenu;
 
+	var controlLock(default, null) = false;
+
 	var cinematic : dn.Cinematic;
 
 	public function new() {
@@ -49,6 +51,8 @@ class TitleScreen extends dn.Process {
 	}
 
 	public function onClickBtn(onEnd:Void->Void) {
+		if (controlLock) return;
+		controlLock = true;
 		cinematic.create({
 			tw.createS(title.alpha, 0, 0.5);
 			tw.createS(campaignBtn.x, campaignBtn.x-(w()/Const.SCALE), 0.5);

@@ -11,6 +11,8 @@ class EndLevelScreen extends dn.Process {
 	var previousScoreText : h2d.Text;
 	var totalScoreText : h2d.Text;
 	var nextLevelBtn : ButtonMenu;
+
+	var controlLock(default, null) = false;
 	
 	var cinematic : dn.Cinematic;
 
@@ -90,6 +92,8 @@ class EndLevelScreen extends dn.Process {
 	}
 
 	public function onClickBtn() {
+		if (controlLock) return;
+		controlLock = true;
 		cinematic.create({
 			tw.createS(endLevelText.x, endLevelText.x+(w()/Const.SCALE), 0.3);
 			tw.createS(levelText.x, levelText.x+(w()/Const.SCALE), 0.3);

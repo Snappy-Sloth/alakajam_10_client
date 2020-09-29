@@ -10,6 +10,8 @@ class ChooseLevelScreen extends dn.Process {
 	var flowHor : h2d.Flow;
 	var returnMenuBtn : ButtonMenu;
 	var arLevelBtn : Array<ButtonLevel>;
+	
+	var controlLock(default, null) = false;
 
 	var cinematic : dn.Cinematic;
 
@@ -79,6 +81,8 @@ class ChooseLevelScreen extends dn.Process {
 	}
 
 	public function onClickBtn(onEnd:Void->Void) {
+		if (controlLock) return;
+		controlLock = true;
 		cinematic.create({
 			for (b in arLevelBtn) {
 				tw.createS(b.alpha, 0, 0.5);

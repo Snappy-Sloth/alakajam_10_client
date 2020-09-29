@@ -10,6 +10,8 @@ class EndCampaignScreen extends dn.Process {
 	var scoreText : h2d.Text;
 	var menuBtn : ButtonMenu;
 	
+	var controlLock(default, null) = false;
+
 	var cinematic : dn.Cinematic;
 
 	public function new() {
@@ -66,6 +68,8 @@ class EndCampaignScreen extends dn.Process {
 	}
 
 	public function onClickBtn() {
+		if (controlLock) return;
+		controlLock = true;
 		cinematic.create({
 			tw.createS(congratsText.x, congratsText.x+(w()/Const.SCALE), 0.3);
 			tw.createS(endCampaignText.x, endCampaignText.x+(w()/Const.SCALE), 0.3);
