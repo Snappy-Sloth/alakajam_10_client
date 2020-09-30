@@ -38,8 +38,8 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		rand = new dn.Rand(Std.random(999999));
-		// rand = new dn.Rand(885636);
+		// rand = new dn.Rand(Std.random(999999));
+		rand = new dn.Rand(726990);
 		trace("Seed : " + rand.getSeed());
 
 		this.lvlData = lvlData;
@@ -194,12 +194,17 @@ class Level extends dn.Process {
 				var swaps = [];
 				isGood = true;
 				var n = lvlData.numSwap;
-				while (n-- > 0) {
+				var maxTry = 10;
+				while (n-- > 0 && maxTry > 0) {
 					var mp1 = deck.draw();
 					var mp2 = deck.draw();
 
-					if (mp1.roads.length == 0 && mp2.roads.length == 0)
+					if ((mp1.roads.length == 0 && mp2.roads.length == 0) || Const.mapTilesHasSameRoads(mp1, mp2)) {
+						maxTry--;
+						if (maxTry == 0)
+							isGood = false;
 						n++;
+					}
 					else {
 						swaps.push({mp1:mp1, mp2:mp2});
 						exchangeTiles(mp1, mp2);

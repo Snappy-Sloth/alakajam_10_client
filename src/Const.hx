@@ -42,4 +42,20 @@ class Const {
 	public static function GET_HIGHSCORE_ON_LEVEL(numLevel:Int) {
 		return PLAYER_DATA.scores[numLevel];
 	}
+
+	public static function mapTilesHasSameRoads(mt1:MapTile, mt2:MapTile) {
+		if (mt1.roads.length != mt2.roads.length)
+			return false;
+
+		var nIdentical = 0;
+		for (r1 in mt1.roads) {
+			for (r2 in mt2.roads) {
+				if ((r1.pointA == r2.pointA && r1.pointB == r2.pointB)
+				||	(r1.pointB == r2.pointA && r1.pointA == r2.pointB))
+					nIdentical++;
+			}
+		}
+
+		return mt1.roads.length == nIdentical;
+	}
 }
