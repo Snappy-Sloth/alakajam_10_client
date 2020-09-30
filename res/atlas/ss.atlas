@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 1, 137
+  xy: 53, 180
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
@@ -34,7 +34,7 @@ externalClosed
   index: -1
 externalEntrance
   rotate: false
-  xy: 20, 148
+  xy: 1, 148
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
@@ -55,7 +55,7 @@ levelButton
   index: -1
 life
   rotate: false
-  xy: 51, 148
+  xy: 78, 137
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
@@ -83,140 +83,140 @@ mapTile
   index: -1
 play
   rotate: false
-  xy: 196, 135
+  xy: 196, 128
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 questGoal0
   rotate: false
-  xy: 236, 96
-  size: 11, 11
-  orig: 11, 11
+  xy: 1, 232
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal1
   rotate: false
-  xy: 236, 109
-  size: 11, 11
-  orig: 11, 11
+  xy: 16, 232
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal2
   rotate: false
-  xy: 236, 122
-  size: 11, 11
-  orig: 11, 11
+  xy: 31, 232
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal3
   rotate: false
-  xy: 53, 235
-  size: 11, 11
-  orig: 11, 11
+  xy: 46, 232
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal4
   rotate: false
-  xy: 66, 235
-  size: 11, 11
-  orig: 11, 11
+  xy: 78, 229
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal5
   rotate: false
-  xy: 68, 203
-  size: 11, 11
-  orig: 11, 11
+  xy: 93, 229
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal6
   rotate: false
-  xy: 68, 216
-  size: 11, 11
-  orig: 11, 11
+  xy: 89, 180
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal7
   rotate: false
-  xy: 79, 229
-  size: 11, 11
-  orig: 11, 11
+  xy: 100, 160
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal8
   rotate: false
-  xy: 81, 203
-  size: 11, 11
-  orig: 11, 11
+  xy: 89, 195
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 51, 171
-  size: 13, 14
-  orig: 13, 14
+  xy: 61, 229
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 53, 187
-  size: 13, 14
-  orig: 13, 14
+  xy: 32, 160
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 66, 171
-  size: 13, 14
-  orig: 13, 14
+  xy: 49, 160
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 74, 150
-  size: 13, 14
-  orig: 13, 14
+  xy: 66, 160
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 53, 203
-  size: 13, 14
-  orig: 13, 14
+  xy: 32, 137
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 53, 219
-  size: 13, 14
-  orig: 13, 14
+  xy: 49, 137
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 68, 187
-  size: 13, 14
-  orig: 13, 14
+  xy: 72, 180
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 81, 166
-  size: 13, 14
-  orig: 13, 14
+  xy: 83, 160
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 89, 150
-  size: 13, 14
-  orig: 13, 14
+  xy: 72, 198
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 1, 187
+  xy: 1, 180
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
@@ -230,7 +230,7 @@ roadStep
   index: -1
 ship
   rotate: false
-  xy: 74, 137
+  xy: 72, 216
   size: 20, 11
   orig: 20, 11
   offset: 0, 0
