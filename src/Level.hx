@@ -114,7 +114,7 @@ class Level extends dn.Process {
 				}
 				else if (tile.cy == hei - 1) {
 					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
-					border.scaleY = -1;
+					border.rotation = Math.PI;
 					border.setCenterRatio(0.5, 1);
 					border.setPos(tile.x, tile.y + (Const.MAP_TILE_SIZE >> 1));
 				}
@@ -138,18 +138,17 @@ class Level extends dn.Process {
 
 			var trCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
 			trCorner.setCenterRatio(1, 1);
-			trCorner.scaleX = -1;
+			trCorner.rotation = Math.PI / 2;
 			trCorner.setPos(wid * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1), - (Const.MAP_TILE_SIZE >> 1));
 			
 			var blCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
 			blCorner.setCenterRatio(1, 1);
-			blCorner.scaleY = -1;
+			blCorner.rotation = -Math.PI / 2;
 			blCorner.setPos(-(Const.MAP_TILE_SIZE >> 1), hei * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1));
 
 			var brCorner = new HSpriteBE(sbMapBorders, Assets.tiles, "mapCorner");
 			brCorner.setCenterRatio(1, 1);
-			brCorner.scaleX = -1;
-			brCorner.scaleY = -1;
+			brCorner.rotation = Math.PI;
 			brCorner.setPos(wid * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1), hei * Const.MAP_TILE_SIZE - (Const.MAP_TILE_SIZE >> 1));
 		}
 
@@ -163,6 +162,21 @@ class Level extends dn.Process {
 
 		for (tile in arMapTile) {
 			tile.drawRoads();
+		}
+
+		// Add externals entrance
+		for (tile in arMapTile) {
+			for (ep in tile.getAllExternalEPs()) {
+				var spr = Assets.tiles.h_get("external" + getExternalEPType(tile, ep), 0.5, 0.5);
+				wrapperMapTile.add(spr, Const.DP_EXTERNAL);
+				spr.setPosition(tile.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1), tile.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
+				switch (ep) {
+					case North_1, North_2:
+					case South_1, South_2: spr.rotation = Math.PI;
+					case West_1, West_2: spr.rotation = - Math.PI / 2;
+					case East_1, East_2: spr.rotation = Math.PI / 2;
+				}
+			}
 		}
 
 		// Randomize mapTiles position
@@ -549,17 +563,19 @@ class Level extends dn.Process {
 	}
 
 	public function addQuestGoal(mp:MapTile, ep:EP, id:Int):HSprite {
-		var spr = Assets.tiles.h_get("questMark", id, 0.5, 0.5);
+		var spr = Assets.tiles.h_get("questGoal", id, 0.5, 0.5);
 		wrapperMapTile.add(spr, Const.DP_UI);
 		var tile = getMapTileAt(mp.cx, mp.cy);
 
 		spr.setPos(tile.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1) , tile.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
 
+		var offset = 24;
+
 		switch (ep) {
-			case North_1, North_2 : spr.y -= 10;
-			case South_1, South_2 : spr.y += 10;
-			case West_1, West_2 : spr.x -= 10;
-			case East_1, East_2 : spr.x += 10;
+			case North_1, North_2 : spr.y -= offset;
+			case South_1, South_2 : spr.y += offset;
+			case West_1, West_2 : spr.x -= offset;
+			case East_1, East_2 : spr.x += offset;
 		}
 
 		return spr;
@@ -609,6 +625,17 @@ class Level extends dn.Process {
 	public inline function unlockControl() {
 		controlLock = false;
 		delayer.cancelById("lockControl");
+	}
+
+	public function getExternalEPType(mt:MapTile, ep:EP):ExternalEPType {
+		for (ship in ships) {
+			if (ship.start_mp == mt && ship.start_ep == ep)
+				return Entrance;
+			else if (ship.quest_mp == mt && ship.quest_ep == ep)
+				return Exit;
+		}
+
+		return Closed;
 	}
 
 	/* public function forwardBtnPressed() {

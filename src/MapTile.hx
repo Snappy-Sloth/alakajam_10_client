@@ -94,24 +94,48 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function drawRoads() {
-		/* var spriteBatch = new HSpriteBatch(Assets.tiles.tile, wrapper);
-		var step = 5;
+		var spriteBatch = new HSpriteBatch(Assets.tiles.tile, wrapper);
+		var step = 1;
+		// var step = 5;
 
-		for (r in roads) {
+		/* for (r in roads) {
 			// for (i in 0...Std.int((r.distance) / step)) {
 			// 	var be = new HSpriteBE(spriteBatch, Assets.tiles, "roadStep");
 			// 	var ratio = (i * step) / r.distance;
 			// 	be.setPosition(r.pointAX + (r.pointBX - r.pointAX) * ratio, r.pointAY + (r.pointBY - r.pointAY) * ratio);
 			// }
-			// while ()
+			// var pointX = r.pointAX;
+			// var pointY = r.pointAY;
+			// var ang = Math.atan2(r.pointBY - r.pointAY, r.pointBX - r.pointAX);
+			// for (i in 0...Std.int((r.distance) / step)) {
+			// 	var be = new HSpriteBE(spriteBatch, Assets.tiles, "roadStep");
+			// 	be.setPosition(pointX, pointY);
+			// 	pointX += Math.cos(ang) * step;
+			// 	pointY += Math.sin(ang) * step;
+			// }
+		} */
+
+		/* for (r in roads) {
+			var i = 0;
+			for (p in dn.Bresenham.getThinLine(M.round(r.pointAX), M.round(r.pointAY), M.round(r.pointBX), M.round(r.pointBY))) {
+				// if (i++ % 2 == 0) {
+					var be = new HSpriteBE(spriteBatch, Assets.tiles, "roadStep");
+					be.setPosition(hxd.Math.iclamp(p.x, 0, Const.MAP_TILE_SIZE - 1), hxd.Math.iclamp(p.y, 0, Const.MAP_TILE_SIZE - 1));
+				// }
+				
+			}
 		} */
 
 		for (r in roads) {
 			var gr = new h2d.Graphics(wrapper);
-			gr.lineStyle(1);
+			gr.lineStyle(1, 0xFF2a6e83);
 			gr.moveTo(r.pointAX, r.pointAY);
 			gr.lineTo(r.pointBX, r.pointBY);
-		}
+			// gr.curveTo(Const.MAP_TILE_SIZE >> 1, Const.MAP_TILE_SIZE >> 1, r.pointBX, r.pointBY);
+			// trace("----");
+			// trace(r.pointAX + " " + r.pointAY);
+			// trace(r.pointBX + " " + r.pointBY);
+		}	
 	}
 
 	public function removeAllRoads() {
@@ -248,5 +272,4 @@ class MapTile extends h2d.Layers {
 			case East_2:North_2;
 		}
 	}
-
 }

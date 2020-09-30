@@ -8,7 +8,8 @@ class Ship extends dn.Process {
 	public var to : EP;
 	var currentRoadRatio : Float = 0;
 
-	var speed = 0.5;
+	// var speed = 0.5;
+	var speed = 1;
 
 	var level : Level;
 
@@ -24,6 +25,8 @@ class Ship extends dn.Process {
 	var sprQuestGoal : HSprite;
 
 	public var isEnable = false;
+
+	var rotationWanted = 0.;
 
 	public function new(level:Level) {
 		super(level);
@@ -48,18 +51,20 @@ class Ship extends dn.Process {
 
 		switch (start_ep) {
 			case North_1, North_2 :
-				spr.rotation = Math.PI / 2;
+				rotationWanted = Math.PI / 2;
 				// root.y -= 10;
 			case South_1, South_2 :
-				spr.rotation = -Math.PI / 2;
+				rotationWanted = -Math.PI / 2;
 				// root.y += 10;
 			case West_1, West_2 :
-				spr.rotation = 0;
+				rotationWanted = 0;
 				// root.x -= 10;
 			case East_1, East_2 :
-				spr.rotation = Math.PI;
+				rotationWanted = Math.PI;
 				// root.x += 10;
 		}
+
+		spr.rotation = rotationWanted;
 
 		if (quest_id == -1) {
 			for (i in 0...9) {
@@ -110,6 +115,21 @@ class Ship extends dn.Process {
 		isEnable = false;
 		
 		level.tw.createS(root.alpha, 0, 0.5).onEnd = onEnd;
+		var dist = 5;
+		switch (quest_ep) {
+			case North_1, North_2: 
+				rotationWanted = -Math.PI / 2;
+				level.tw.createS(root.y, root.y - dist, 0.5);
+			case South_1, South_2:
+				rotationWanted = Math.PI / 2;
+				level.tw.createS(root.y, root.y + dist, 0.5);
+			case West_1, West_2:
+				rotationWanted = Math.PI;
+				level.tw.createS(root.x, root.x - dist, 0.5);
+			case East_1, East_2:
+				rotationWanted = 0;
+				level.tw.createS(root.x, root.x + dist, 0.5);
+		}
 	}
 
 	public override function onDispose() {
@@ -134,10 +154,12 @@ class Ship extends dn.Process {
 			else {
 				root.setPosition(	Road.getEpX(from) + (Road.getEpX(to) - Road.getEpX(from)) * currentRoadRatio + currentMapTile.x - (Const.MAP_TILE_SIZE >> 1),
 				Road.getEpY(from) + (Road.getEpY(to) - Road.getEpY(from)) * currentRoadRatio + currentMapTile.y - (Const.MAP_TILE_SIZE >> 1));
+
+				rotationWanted = Math.atan2(Road.getEpY(to) - Road.getEpY(from), Road.getEpX(to) - Road.getEpX(from));
 			}
-	
-			spr.rotation = Math.atan2(Road.getEpY(to) - Road.getEpY(from), Road.getEpX(to) - Road.getEpX(from));
 		}
+		
+		spr.rotation += (M.radSubstract(rotationWanted, spr.rotation)) * 0.1;
 	}
 
 }
