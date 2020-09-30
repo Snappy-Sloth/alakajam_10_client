@@ -159,7 +159,7 @@ class Ship extends dn.Process {
 			}
 		}
 		
-		spr.rotation += (M.radSubstract(rotationWanted, spr.rotation)) * 0.1;
+		spr.rotation += (M.radSubstract(rotationWanted, spr.rotation)) * 0.1 * tmod;
 	}
 
 }

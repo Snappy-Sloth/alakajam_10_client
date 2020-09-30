@@ -38,11 +38,11 @@ class Level extends dn.Process {
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
-		rand = new dn.Rand(Std.random(999999));
-		// rand = new dn.Rand(726990);
-		trace("Seed : " + rand.getSeed());
-
 		this.lvlData = lvlData;
+
+		rand = new dn.Rand(Std.random(999999));
+		// rand = new dn.Rand(13278);
+		trace("Level " + getLevelNumber() + " - Seed : " + rand.getSeed());
 
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 
@@ -178,7 +178,7 @@ class Level extends dn.Process {
 				}
 			}
 		}
-
+		
 		// Randomize mapTiles position
 		if (lvlData.numSwap > 0) { // Swapping
 			var isGood = false;
@@ -380,9 +380,8 @@ class Level extends dn.Process {
 
 		if (nextTile == null) {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
-				shipsOver++;
-				
 				s.disappear(function () {
+					shipsOver++;
 					if (shipsOver == lvlData.numShips) game.levelVictory();					
 				});
 			}
