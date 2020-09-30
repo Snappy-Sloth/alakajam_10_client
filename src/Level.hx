@@ -46,7 +46,7 @@ class Level extends dn.Process {
 
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 
-		createLevel(wid, hei);
+		createLevel();
 
 		levelScoreMin = lvlData.numSwap + lvlData.numRotation;
 		currentScore = 0;
@@ -67,31 +67,26 @@ class Level extends dn.Process {
 									((h()/Const.SCALE-hei*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2);
 	}
 
-	public function createLevel(w, h) {
+	public function createLevel() {
 		arMapTile = [];
-
-		wrapperMapTile = new h2d.Layers(root);
 		
-		var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x957d56, Std.int(Const.MAP_TILE_SIZE * (wid + 0.5)), Std.int(Const.MAP_TILE_SIZE * (hei + 0.5))));
-		bg.setPosition(-Const.MAP_TILE_SIZE * 0.75, -Const.MAP_TILE_SIZE * 0.75);
-		wrapperMapTile.add(bg, Const.DP_BG);
-		var inter = new h2d.Interactive(Const.MAP_TILE_SIZE * (wid + 1), Const.MAP_TILE_SIZE * (hei + 1));
-		wrapperMapTile.add(inter, Const.DP_BG);
-		inter.setPosition(-Const.MAP_TILE_SIZE, -Const.MAP_TILE_SIZE);
-		// inter.backgroundColor = 0xFFFF00FF;
+		var inter = new h2d.Interactive(w(), h(), root);
+		// inter.backgroundColor = 0x55FF00FF;
 		inter.onMove = function (e) {
 			if (swapTo != null) {
 				swapTo.unSelect();
 				swapTo = null;
 			}
 			if (swapFrom != null)
-				drawLineSwap(Std.int(e.relX) - Const.MAP_TILE_SIZE, Std.int(e.relY) - Const.MAP_TILE_SIZE);
+				drawLineSwap(Std.int(e.relX - wrapperMapTile.x), Std.int(e.relY - wrapperMapTile.y));
 		}
 
 		inter.onRelease = function (e) {
 			cancelSwap();
 			unselectAllMapTiles();
 		}
+
+		wrapperMapTile = new h2d.Layers(root);
 
 		// Create MapTiles
 		for (i in 0...wid) {
@@ -592,6 +587,7 @@ class Level extends dn.Process {
 		for (ship in ships)
 			if (ship.start_mp.getRoadWith(ship.start_ep) == null) {
 				game.showPopup("Each ship must be connected to a road at least!");
+				game.hud.playBtn.reset();
 				return false;
 			}
 

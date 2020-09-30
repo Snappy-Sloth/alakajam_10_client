@@ -21,7 +21,7 @@ class Hud extends dn.Process {
 	var width : Int;
 	var height : Int;
 
-	var playBtn : PlayButton;
+	public var playBtn(default, null) : PlayButton;
 
 	public function new(wi:Int, he:Int) {
 		super(Game.ME);

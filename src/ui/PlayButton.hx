@@ -27,9 +27,9 @@ class PlayButton extends h2d.Object {
 	public function onClick() {
 		switch (currentStatus) {
 			case Play:
-				level.playBtnPressed();
 				currentStatus = Pause;
 				spr.set("restartBtn");
+				level.playBtnPressed();
 				case Pause:
 				level.resetShips();
 		}
