@@ -1,6 +1,5 @@
 package ui;
 
-import h2d.Graphics;
 import h2d.Text;
 
 class Hud extends dn.Process {
@@ -9,13 +8,14 @@ class Hud extends dn.Process {
 	public var level(get,never) : Level; inline function get_level() return Game.ME.level;
 
 	var flowRight : h2d.Flow;
-
-	var flowLeft : h2d.Flow;
-
+	var levelText : h2d.Text;
 	var scoreMinText : Text;
 	var scoreText : Text;
+
+	var flowLeft : h2d.Flow;
+	var menuButton : ButtonMenu;
+
 	
-	// var timeText : Text;
 	var invalidated = true;
 
 	var width : Int;
@@ -33,6 +33,17 @@ class Hud extends dn.Process {
 		setLeftHud(wi, he);
 
 		onResize();
+
+		flowRight.x += w()/Const.SCALE;
+		flowLeft.x -= w()/Const.SCALE;
+
+		tw.createS(flowRight.x, flowRight.x-(w()/Const.SCALE), 0.5);
+		tw.createS(flowLeft.x, flowLeft.x+(w()/Const.SCALE), 0.5);
+	}
+
+	function disappear() {
+		tw.createS(flowRight.x, flowRight.x+(w()/Const.SCALE), 0.5);
+		tw.createS(flowLeft.x, flowLeft.x-(w()/Const.SCALE), 0.5);
 	}
 
 	function setRightHud(wi:Int, he:Int) {
@@ -43,7 +54,7 @@ class Hud extends dn.Process {
 		flowRight.layout = Vertical;
 		flowRight.verticalSpacing = 20;
 		
-		var levelText = new Text(Assets.fontPixel, flowRight);
+		levelText = new Text(Assets.fontPixel, flowRight);
 		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
 
 		flowRight.addSpacing(30);
@@ -58,12 +69,8 @@ class Hud extends dn.Process {
 
 		flowRight.addSpacing(30);
 
-		var flowButtons = new h2d.Flow(flowRight);
-		flowButtons.layout = Horizontal;
-		flowButtons.horizontalSpacing = 20;
-
 		playBtn = new PlayButton(level);
-		flowButtons.addChild(playBtn);
+		flowRight.addChild(playBtn);
 	}
 
 	function setLeftHud(wi:Int, he:Int) {
@@ -74,7 +81,7 @@ class Hud extends dn.Process {
 		flowLeft.layout = Vertical;
 		flowLeft.verticalSpacing = 20;
 
-		var menuButton = new ButtonMenu("Menu", Main.ME.startTitleScreen);
+		menuButton = new ButtonMenu("Menu", Main.ME.startTitleScreen);
 		flowLeft.addChild(menuButton);
 	}
 
