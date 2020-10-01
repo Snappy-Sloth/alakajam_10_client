@@ -9,7 +9,8 @@ class Level extends dn.Process {
 	public var hei(get,never) : Int; inline function get_hei() return lvlData.height;
 
 	var arMapTile : Array<MapTile>;
-	var wrapperMapTile : h2d.Layers;
+	var mainWrapper : h2d.Object;
+	var wrapperGameZone : h2d.Layers;
 
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
@@ -63,8 +64,7 @@ class Level extends dn.Process {
 	override function onResize() {
 		super.onResize();
 		
-		wrapperMapTile.setPosition(((w()/Const.SCALE-wid*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2,
-									((h()/Const.SCALE-hei*Const.MAP_TILE_SIZE)/2)+Const.MAP_TILE_SIZE/2);
+		mainWrapper.setPosition(w() / (2 * Const.SCALE), h() / (2 * Const.SCALE));
 	}
 
 	public function createLevel() {
@@ -78,7 +78,7 @@ class Level extends dn.Process {
 				swapTo = null;
 			}
 			if (swapFrom != null)
-				drawLineSwap(Std.int(e.relX - wrapperMapTile.x), Std.int(e.relY - wrapperMapTile.y));
+				drawLineSwap(Std.int(e.relX - wrapperGameZone.x), Std.int(e.relY - wrapperGameZone.y));
 		}
 
 		inter.onRelease = function (e) {
@@ -86,13 +86,21 @@ class Level extends dn.Process {
 			unselectAllMapTiles();
 		}
 
-		wrapperMapTile = new h2d.Layers(root);
+		var t = 0.5;
+		mainWrapper = new h2d.Object(root);
+		tw.createS(mainWrapper.alpha, 0 > 1, t);
+		tw.createS(mainWrapper.scaleX, 0.9 > 1, t);
+		tw.createS(mainWrapper.scaleY, 0.9 > 1, t);
+
+		wrapperGameZone = new h2d.Layers(mainWrapper);
+		wrapperGameZone.setPosition(Const.MAP_TILE_SIZE/2 - (wid*Const.MAP_TILE_SIZE)/2,
+									Const.MAP_TILE_SIZE/2 - (hei*Const.MAP_TILE_SIZE)/2);
 
 		// Create MapTiles
 		for (i in 0...wid) {
 			for (j in 0...hei) {
 				var mapTile = new MapTile(i, j, this);
-				wrapperMapTile.add(mapTile, Const.DP_MAIN);
+				wrapperGameZone.add(mapTile, Const.DP_MAIN);
 				arMapTile.push(mapTile);
 			}
 		}
@@ -100,7 +108,7 @@ class Level extends dn.Process {
 		{	// Draw Map borders
 			var sbMapBorders = new HSpriteBatch(Assets.tiles.tile);
 			sbMapBorders.hasRotationScale = true;
-			wrapperMapTile.add(sbMapBorders, Const.DP_BG);
+			wrapperGameZone.add(sbMapBorders, Const.DP_BG);
 			for (tile in arMapTile) {
 				if (tile.cy == 0) {
 					var border = new HSpriteBE(sbMapBorders, Assets.tiles, "mapBorder");
@@ -149,8 +157,8 @@ class Level extends dn.Process {
 
 		rightArrow = new Arrow(true, this);
 		leftArrow = new Arrow(false, this);
-		wrapperMapTile.add(rightArrow, Const.DP_UI);
-		wrapperMapTile.add(leftArrow, Const.DP_UI);
+		wrapperGameZone.add(rightArrow, Const.DP_UI);
+		wrapperGameZone.add(leftArrow, Const.DP_UI);
 
 		var numTry = 0;
 		generateShipsAndRoad(numTry);
@@ -163,7 +171,7 @@ class Level extends dn.Process {
 		for (tile in arMapTile) {
 			for (ep in tile.getAllExternalEPs()) {
 				var spr = Assets.tiles.h_get("external" + getExternalEPType(tile, ep), 0.5, 0.5);
-				wrapperMapTile.add(spr, Const.DP_EXTERNAL);
+				wrapperGameZone.add(spr, Const.DP_EXTERNAL);
 				spr.setPosition(tile.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1), tile.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
 				switch (ep) {
 					case North_1, North_2:
@@ -485,8 +493,8 @@ class Level extends dn.Process {
 				s.quest_mp = mt1;
 		}
 
-		wrapperMapTile.add(mt1, Const.DP_MAIN);
-		wrapperMapTile.add(mt2, Const.DP_MAIN);
+		wrapperGameZone.add(mt1, Const.DP_MAIN);
+		wrapperGameZone.add(mt2, Const.DP_MAIN);
 	}
 
 	public function showPossibleSwap(to:Null<MapTile>) {
@@ -518,7 +526,7 @@ class Level extends dn.Process {
 		if (lineSwap == null) {
 			lineSwap = new h2d.Graphics();
 			lineSwap.alpha = 0.75;
-			wrapperMapTile.add(lineSwap, Const.DP_UI);
+			wrapperGameZone.add(lineSwap, Const.DP_UI);
 		}
 		lineSwap.visible = true;
 		lineSwap.clear();
@@ -532,7 +540,7 @@ class Level extends dn.Process {
 		
 		if (arrowSwap == null) {
 			arrowSwap = Assets.tiles.h_get("arrowSwap", 0.5, 0.5);
-			wrapperMapTile.add(arrowSwap, Const.DP_UI);
+			wrapperGameZone.add(arrowSwap, Const.DP_UI);
 		}
 		arrowSwap.visible = true;
 		arrowSwap.setPosition((swapFrom.x + x) * 0.5, (swapFrom.y + y) * 0.5);
@@ -563,7 +571,7 @@ class Level extends dn.Process {
 
 	public function addQuestGoal(mp:MapTile, ep:EP, id:Int):HSprite {
 		var spr = Assets.tiles.h_get("questGoal", id, 0.5, 0.5);
-		wrapperMapTile.add(spr, Const.DP_UI);
+		wrapperGameZone.add(spr, Const.DP_UI);
 		var tile = getMapTileAt(mp.cx, mp.cy);
 
 		spr.setPos(tile.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1) , tile.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
