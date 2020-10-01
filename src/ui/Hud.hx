@@ -36,14 +36,16 @@ class Hud extends dn.Process {
 
 		flowRight.x += w()/Const.SCALE;
 		flowLeft.x -= w()/Const.SCALE;
-
+	}
+	
+	public function appear(duration:Float) {
 		tw.createS(flowRight.x, flowRight.x-(w()/Const.SCALE), 0.5);
 		tw.createS(flowLeft.x, flowLeft.x+(w()/Const.SCALE), 0.5);
 	}
 
-	function disappear() {
-		tw.createS(flowRight.x, flowRight.x+(w()/Const.SCALE), 0.5);
-		tw.createS(flowLeft.x, flowLeft.x-(w()/Const.SCALE), 0.5);
+	public function disappear(duration:Float) {
+		tw.createS(flowRight.x, flowRight.x+(w()/Const.SCALE), duration);
+		tw.createS(flowLeft.x, flowLeft.x-(w()/Const.SCALE), duration);
 	}
 
 	function setRightHud(wi:Int, he:Int) {
@@ -81,7 +83,7 @@ class Hud extends dn.Process {
 		flowLeft.layout = Vertical;
 		flowLeft.verticalSpacing = 20;
 
-		menuButton = new ButtonMenu("Menu", Main.ME.startTitleScreen);
+		menuButton = new ButtonMenu("Menu", game.level.closeLevel.bind(Main.ME.startTitleScreen));
 		flowLeft.addChild(menuButton);
 	}
 

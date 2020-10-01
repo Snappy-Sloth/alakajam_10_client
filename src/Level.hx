@@ -92,6 +92,8 @@ class Level extends dn.Process {
 		tw.createS(mainWrapper.scaleX, 0.9 > 1, t);
 		tw.createS(mainWrapper.scaleY, 0.9 > 1, t);
 
+		delayer.addS(()->game.hud.appear(t), 0.1);
+
 		wrapperGameZone = new h2d.Layers(mainWrapper);
 		wrapperGameZone.setPosition(Const.MAP_TILE_SIZE/2 - (wid*Const.MAP_TILE_SIZE)/2,
 									Const.MAP_TILE_SIZE/2 - (hei*Const.MAP_TILE_SIZE)/2);
@@ -385,7 +387,7 @@ class Level extends dn.Process {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
 				s.disappear(function () {
 					shipsOver++;
-					if (shipsOver == lvlData.numShips) game.levelVictory();					
+					if (shipsOver == lvlData.numShips) closeLevel(game.levelVictory);					
 				});
 			}
 			else {
@@ -413,6 +415,17 @@ class Level extends dn.Process {
 				resetShips();
 			}
 		}
+	}
+
+	public function closeLevel(onEnd:Void->Void) {
+		var t = 0.5;
+
+		game.hud.disappear(t);
+
+		tw.createS(mainWrapper.alpha, 0, t);
+		tw.createS(mainWrapper.scaleX, 0.9, t);
+		tw.createS(mainWrapper.scaleY, 0.9, t);
+		delayer.addS(onEnd, t + 0.1);
 	}
 
 	public function resetShips() {
