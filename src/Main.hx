@@ -43,14 +43,14 @@ class Main extends dn.Process {
 
 		// Assets & data init
 		Assets.init();
-		new ui.Console(Assets.fontTiny, s);
+		new ui.Console(Assets.fontPixel, s);
 		Lang.init("en");
 		Data.load( hxd.Res.data.entry.getText() );
 
 		Const.INIT();
 
 		// Start
-		new dn.heaps.GameFocusHelper(Boot.ME.s2d, Assets.fontMedium);
+		new dn.heaps.GameFocusHelper(Boot.ME.s2d, Assets.fontPixel);
 		// delayer.addF( startGame, 1 );
 		delayer.addF( startTitleScreen, 1 );
 

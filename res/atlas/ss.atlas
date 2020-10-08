@@ -1,75 +1,96 @@
 
 ss.png
-size: 248,248
+size: 268,268
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 53, 180
+  xy: 244, 35
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
   index: -1
 arrowSwap
   rotate: false
-  xy: 205, 35
+  xy: 1, 240
   size: 35, 27
   orig: 35, 27
   offset: 0, 0
   index: -1
 button
   rotate: false
-  xy: 103, 35
+  xy: 1, 188
   size: 100, 50
   orig: 100, 50
   offset: 0, 0
   index: -1
+buttonIdle
+  rotate: false
+  xy: 103, 35
+  size: 139, 49
+  orig: 139, 49
+  offset: 0, 0
+  index: -1
+buttonOver
+  rotate: false
+  xy: 103, 86
+  size: 139, 49
+  orig: 139, 49
+  offset: 0, 0
+  index: -1
+buttonPress
+  rotate: false
+  xy: 1, 137
+  size: 139, 49
+  orig: 139, 49
+  offset: 0, 0
+  index: -1
 externalClosed
   rotate: false
-  xy: 165, 119
+  xy: 38, 240
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalEntrance
   rotate: false
-  xy: 1, 148
+  xy: 69, 240
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalExit
   rotate: false
-  xy: 205, 96
+  xy: 155, 221
   size: 29, 30
   orig: 29, 36
   offset: 0, 6
   index: -1
 levelButton
   rotate: false
-  xy: 103, 119
+  xy: 207, 169
   size: 60, 25
   orig: 60, 25
   offset: 0, 0
   index: -1
 life
   rotate: false
-  xy: 78, 137
+  xy: 239, 196
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
   index: -1
 mapBorder
   rotate: false
-  xy: 103, 87
+  xy: 142, 137
   size: 100, 30
   orig: 100, 30
   offset: 0, 0
   index: -1
 mapCorner
   rotate: false
-  xy: 205, 64
+  xy: 207, 196
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
@@ -83,154 +104,154 @@ mapTile
   index: -1
 play
   rotate: false
-  xy: 196, 128
+  xy: 103, 188
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 questGoal0
   rotate: false
-  xy: 1, 232
+  xy: 249, 19
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal1
   rotate: false
-  xy: 16, 232
+  xy: 186, 239
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal2
   rotate: false
-  xy: 31, 232
+  xy: 239, 219
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal3
   rotate: false
-  xy: 46, 232
+  xy: 254, 219
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal4
   rotate: false
-  xy: 78, 229
+  xy: 203, 228
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal5
   rotate: false
-  xy: 93, 229
+  xy: 218, 228
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal6
   rotate: false
-  xy: 89, 180
+  xy: 201, 243
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal7
   rotate: false
-  xy: 100, 160
+  xy: 216, 243
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal8
   rotate: false
-  xy: 89, 195
+  xy: 151, 254
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 61, 229
+  xy: 249, 1
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 32, 160
+  xy: 244, 84
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 49, 160
+  xy: 100, 240
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 66, 160
+  xy: 186, 221
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 32, 137
+  xy: 244, 102
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 49, 137
+  xy: 117, 240
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 72, 180
+  xy: 244, 120
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 83, 160
+  xy: 134, 240
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 72, 198
+  xy: 244, 138
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 1, 180
+  xy: 155, 169
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 242, 35
+  xy: 266, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 72, 216
+  xy: 244, 156
   size: 20, 11
   orig: 20, 11
   offset: 0, 0

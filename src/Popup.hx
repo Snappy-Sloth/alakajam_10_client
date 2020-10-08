@@ -38,6 +38,7 @@ class Popup extends dn.Process {
 	override function onDispose() {
 		super.onDispose();
 
-		ME = null;
+		if (ME == this)
+			ME = null;
 	}
 }
