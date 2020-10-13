@@ -2,19 +2,13 @@ package ui;
 
 class Button extends h2d.Layers {
 
-	var wid : Int;
-	var hei : Int;
+	public var wid(default, null) : Int;
+	public var hei(default, null) : Int;
 
 	public function new(idSpr:String, str:String, onClick:Void->Void) {
 		super();
 
-		// var button = new Graphics(this);
-		// button.beginFill(0xFF888888);
-		// button.drawRect(0, 0, Const.BUTTON_WIDTH, Const.BUTTON_HEIGHT);
-
-		//Assets.tiles.h_get("button", this);
-
-		var spr = Assets.tiles.h_get("buttonIdle");
+		var spr = Assets.tiles.h_get(idSpr + "Idle");
 		this.add(spr, 1);
 		
 		wid = Std.int(spr.tile.width);
@@ -34,19 +28,19 @@ class Button extends h2d.Layers {
 
 		inter.onRelease = inter.onOver = function (e) {
 			text.y = (hei/2)-(text.textHeight/2);
-			spr.set("buttonOver");
+			spr.set(idSpr + "Over");
 			// midSpr.set("buttonOverMid");
 			// rightSpr.set("buttonOverRight");
 		}
 		inter.onReleaseOutside = inter.onOut = function (e) {
 			text.y = (hei/2)-(text.textHeight/2);
-			spr.set("buttonIdle");
+			spr.set(idSpr + "Idle");
 			// midSpr.set("buttonIdleMid");
 			// rightSpr.set("buttonIdleRight");
 		}
 		inter.onPush = function (e) {
 			text.y = (hei/2)-(text.textHeight/2) + 3;
-			spr.set("buttonPress");
+			spr.set(idSpr + "Press");
 			// midSpr.set("buttonClickMid");
 			// rightSpr.set("buttonClickRight");
 		}

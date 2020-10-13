@@ -1,12 +1,12 @@
 
 ss.png
-size: 295,295
+size: 381,381
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 97, 247
+  xy: 357, 327
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
@@ -18,282 +18,366 @@ arrowSwap
   orig: 35, 27
   offset: 0, 0
   index: -1
+bgHUD
+  rotate: false
+  xy: 1, 35
+  size: 134, 109
+  orig: 134, 109
+  offset: 0, 0
+  index: -1
+bgUIsg
+  rotate: false
+  xy: 103, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 button
   rotate: false
-  xy: 1, 188
+  xy: 1, 248
   size: 100, 50
   orig: 100, 50
   offset: 0, 0
   index: -1
 buttonIdle
   rotate: false
-  xy: 103, 35
-  size: 139, 49
-  orig: 139, 49
+  xy: 137, 35
+  size: 137, 47
+  orig: 137, 47
   offset: 0, 0
   index: -1
 buttonOver
   rotate: false
-  xy: 103, 86
-  size: 139, 49
-  orig: 139, 49
+  xy: 137, 84
+  size: 137, 47
+  orig: 137, 47
   offset: 0, 0
   index: -1
 buttonPress
   rotate: false
-  xy: 1, 137
-  size: 139, 49
-  orig: 139, 49
+  xy: 137, 133
+  size: 137, 47
+  orig: 137, 47
   offset: 0, 0
   index: -1
 externalClosed
   rotate: false
-  xy: 213, 220
+  xy: 134, 345
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalEntrance
   rotate: false
-  xy: 244, 222
+  xy: 173, 334
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalExit
   rotate: false
-  xy: 116, 239
+  xy: 103, 349
   size: 29, 30
   orig: 29, 36
   offset: 0, 6
   index: -1
+fxDot0
+  rotate: false
+  xy: 249, 30
+  size: 3, 3
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
 levelButton
   rotate: false
-  xy: 151, 220
+  xy: 276, 148
   size: 60, 25
   orig: 60, 25
   offset: 0, 0
   index: -1
 life
   rotate: false
-  xy: 116, 271
+  xy: 204, 334
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
   index: -1
+littleButtonIdle
+  rotate: false
+  xy: 287, 1
+  size: 93, 47
+  orig: 93, 47
+  offset: 0, 0
+  index: -1
+littleButtonOver
+  rotate: false
+  xy: 287, 50
+  size: 93, 47
+  orig: 93, 47
+  offset: 0, 0
+  index: -1
+littleButtonPress
+  rotate: false
+  xy: 287, 99
+  size: 93, 47
+  orig: 93, 47
+  offset: 0, 0
+  index: -1
 mapBorder
   rotate: false
-  xy: 142, 137
+  xy: 1, 349
   size: 100, 30
   orig: 100, 30
   offset: 0, 0
   index: -1
 mapCorner
   rotate: false
-  xy: 247, 190
+  xy: 338, 148
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 mapTile
   rotate: false
-  xy: 1, 35
+  xy: 1, 146
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+menuButtonIdle
+  rotate: false
+  xy: 333, 180
+  size: 44, 47
+  orig: 44, 47
+  offset: 0, 0
+  index: -1
+menuButtonOver
+  rotate: false
+  xy: 333, 229
+  size: 44, 47
+  orig: 44, 47
+  offset: 0, 0
+  index: -1
+menuButtonPress
+  rotate: false
+  xy: 335, 278
+  size: 44, 47
+  orig: 44, 47
+  offset: 0, 0
+  index: -1
+newHighscore
+  rotate: false
+  xy: 116, 334
+  size: 55, 9
+  orig: 55, 9
+  offset: 0, 0
+  index: -1
+pixel
+  rotate: false
+  xy: 227, 334
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
 play
   rotate: false
-  xy: 244, 35
+  xy: 231, 285
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 playButtonIdle
   rotate: false
-  xy: 1, 240
-  size: 46, 49
-  orig: 46, 49
+  xy: 1, 300
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 playButtonOver
   rotate: false
-  xy: 49, 240
-  size: 46, 49
-  orig: 46, 49
+  xy: 103, 187
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 playButtonPress
   rotate: false
-  xy: 103, 188
-  size: 46, 49
-  orig: 46, 49
+  xy: 103, 236
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 questGoal0
   rotate: false
-  xy: 198, 247
+  xy: 238, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal1
   rotate: false
-  xy: 190, 265
+  xy: 253, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal2
   rotate: false
-  xy: 205, 262
+  xy: 268, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal3
   rotate: false
-  xy: 220, 262
+  xy: 283, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal4
   rotate: false
-  xy: 275, 244
+  xy: 298, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal5
   rotate: false
-  xy: 235, 251
+  xy: 313, 355
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal6
   rotate: false
-  xy: 250, 251
+  xy: 328, 358
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal7
   rotate: false
-  xy: 235, 266
+  xy: 165, 363
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal8
   rotate: false
-  xy: 250, 266
+  xy: 180, 363
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 279, 190
+  xy: 227, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 279, 208
+  xy: 244, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 147, 247
+  xy: 261, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 164, 247
+  xy: 278, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 181, 247
+  xy: 295, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 275, 226
+  xy: 312, 337
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 139, 271
+  xy: 329, 340
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 156, 265
+  xy: 204, 357
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 173, 265
+  xy: 221, 357
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 244, 87
+  xy: 283, 285
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 restartButtonIdle
   rotate: false
-  xy: 151, 169
-  size: 46, 49
-  orig: 46, 49
+  xy: 116, 285
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 restartButtonOver
   rotate: false
-  xy: 199, 169
-  size: 46, 49
-  orig: 46, 49
+  xy: 218, 187
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 restartButtonPress
   rotate: false
-  xy: 247, 139
-  size: 46, 49
-  orig: 46, 49
+  xy: 218, 236
+  size: 113, 47
+  orig: 113, 47
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 244, 139
+  xy: 329, 337
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
+separationBar
+  rotate: false
+  xy: 103, 182
+  size: 182, 3
+  orig: 182, 3
+  offset: 0, 0
+  index: -1
 ship
   rotate: false
-  xy: 213, 249
+  xy: 335, 327
   size: 20, 11
   orig: 20, 11
   offset: 0, 0

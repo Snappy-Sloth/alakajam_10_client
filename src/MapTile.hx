@@ -228,6 +228,9 @@ class MapTile extends h2d.Layers {
 			level.lockControl(0.2);
 			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation + 0.5*Math.PI, 0.2);
 		}
+
+		if (level.game.hud != null)
+			level.game.hud.invalidate();
 	}
 
 	public function rotateLeft(instant:Bool) {
@@ -245,6 +248,9 @@ class MapTile extends h2d.Layers {
 			level.lockControl(0.2);
 			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation - 0.5*Math.PI, 0.2);
 		}
+
+		if (level.game.hud != null)
+			level.game.hud.invalidate();
 	}
 
 	function getNextRoadWhenRotateRight(ep:EP):EP {

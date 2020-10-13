@@ -7,14 +7,13 @@ class Hud extends dn.Process {
 	public var fx(get,never) : Fx; inline function get_fx() return Game.ME.fx;
 	public var level(get,never) : Level; inline function get_level() return Game.ME.level;
 
-	var flowRight : h2d.Flow;
-	var levelText : h2d.Text;
+	var mainFlow : h2d.Flow;
+	var bgFlow : h2d.ScaleGrid;
+	var flowInfos : h2d.Flow;
 	var scoreMinText : Text;
 	var scoreText : Text;
 
-	var flowLeft : h2d.Flow;
-	var menuButton : ButtonMenu;
-
+	var menuButton : MenuButton;
 	
 	var invalidated = true;
 
@@ -30,61 +29,78 @@ class Hud extends dn.Process {
 		root.filter = new h2d.filter.ColorMatrix(); // force pixel perfect rendering
 
 		setRightHud(wi, he);
-		setLeftHud(wi, he);
+
+		menuButton = new MenuButton("", game.level.closeLevel.bind(Main.ME.startTitleScreen));
+		root.addChild(menuButton);
 
 		onResize();
 
-		flowRight.x += w()/Const.SCALE;
-		flowLeft.x -= w()/Const.SCALE;
+		menuButton.y -= 100;
+		mainFlow.x += w()/Const.SCALE;
 	}
 	
 	public function appear(duration:Float) {
-		tw.createS(flowRight.x, flowRight.x-(w()/Const.SCALE), 0.5);
-		tw.createS(flowLeft.x, flowLeft.x+(w()/Const.SCALE), 0.5);
+		// TODO : check duration
+		tw.createS(menuButton.y, menuButton.y + 100, 0.5);
+		tw.createS(mainFlow.x, mainFlow.x-(w()/Const.SCALE), 0.5);
 	}
 
 	public function disappear(duration:Float) {
-		tw.createS(flowRight.x, flowRight.x+(w()/Const.SCALE), duration);
-		tw.createS(flowLeft.x, flowLeft.x-(w()/Const.SCALE), duration);
+		tw.createS(menuButton.y, menuButton.y - 100, duration);
+		tw.createS(mainFlow.x, mainFlow.x+(w()/Const.SCALE), duration);
 	}
 
 	function setRightHud(wi:Int, he:Int) {
 		width = wi;
 		height = he;
 
-		flowRight = new h2d.Flow(root);
-		flowRight.layout = Vertical;
-		flowRight.verticalSpacing = 20;
+		mainFlow = new h2d.Flow(root);
+		mainFlow.layout = Vertical;
+		mainFlow.verticalSpacing = 30;
+		mainFlow.horizontalAlign = Middle;
+		mainFlow.minWidth = mainFlow.maxWidth = Std.int((w() / Const.SCALE) * (2 / 3) - 30 - ((level.wid * Const.MAP_TILE_SIZE) / 2));
 		
-		levelText = new Text(Assets.fontPixel, flowRight);
-		levelText.text = 'Level: ${Game.ME.level.getLevelNumber()}';
+		flowInfos = new h2d.Flow(mainFlow);
+		flowInfos.layout = Vertical;
+		flowInfos.horizontalAlign = Middle;
+		flowInfos.padding = 15;
+		flowInfos.minWidth = 150;
+		
+		bgFlow = new h2d.ScaleGrid(Assets.tiles.getTile("bgUIsg"), 11, 11, flowInfos);
+		flowInfos.getProperties(bgFlow).isAbsolute = true;
 
-		flowRight.addSpacing(30);
+		var levelText = new Text(Assets.fontOeuf26, flowInfos);
+		levelText.text = 'Level ${Game.ME.level.getLevelNumber()}';
+		levelText.dropShadow = {dx: 0, dy: 2, alpha: 1, color: 0x895515};
 
-		scoreMinText = new Text(Assets.fontPixel, flowRight);
-		scoreMinText.text = 'Moves min: ${level.levelScoreMin}';
+		flowInfos.addSpacing(30);
 
-		flowRight.addSpacing(10);
+		scoreMinText = createSubFlowText("Moves min:");
 
-		scoreText = new Text(Assets.fontPixel, flowRight);
-		scoreText.text = 'Moves: ${level.currentScore}';
+		flowInfos.addSpacing(10);
 
-		flowRight.addSpacing(30);
+		scoreText = createSubFlowText("Moves:");
 
 		playBtn = new PlayButton(level);
-		flowRight.addChild(playBtn);
+		mainFlow.addChild(playBtn);
 	}
 
-	function setLeftHud(wi:Int, he:Int) {
-		width = wi;
-		height = he;
+	inline function createSubFlowText(str:String):h2d.Text {
+		flowInfos.reflow();
 
-		flowLeft = new h2d.Flow(root);
-		flowLeft.layout = Vertical;
-		flowLeft.verticalSpacing = 20;
+		var flow = new h2d.Flow(flowInfos);
+		flow.minWidth = flow.maxWidth = flowInfos.innerWidth;
 
-		menuButton = new ButtonMenu("Menu", game.level.closeLevel.bind(Main.ME.startTitleScreen));
-		flowLeft.addChild(menuButton);
+		var labelText = new Text(Assets.fontOeuf13, flow);
+		flow.getProperties(labelText).horizontalAlign = Left;
+		labelText.text = str;
+		labelText.dropShadow = {dx: 0, dy: 1, alpha: 1, color: 0x895515};
+		
+		var valueText = new Text(Assets.fontOeuf13, flow);
+		flow.getProperties(valueText).horizontalAlign = Right;
+		valueText.dropShadow = {dx: 0, dy: 1, alpha: 1, color: 0x895515};
+
+		return valueText;
 	}
 
 	public function onResetShips() {
@@ -95,18 +111,24 @@ class Hud extends dn.Process {
 		super.onResize();
 		root.setScale(Const.UI_SCALE);
 
-		flowRight.reflow();
-		flowRight.setPosition(Std.int((w() / Const.SCALE + width * Const.MAP_TILE_SIZE) / 2) + Const.FLOW_MAPTILE_SPACING,
-							Std.int((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
+		flowInfos.reflow();
 
-		flowLeft.reflow();
-		flowLeft.setPosition(Std.int(((w() / Const.SCALE - width * Const.MAP_TILE_SIZE) / 2) - flowLeft.outerWidth) - Const.FLOW_MAPTILE_SPACING,
-								Std.int((h() / Const.SCALE - height * Const.MAP_TILE_SIZE) / 2));
+		mainFlow.reflow();
+		mainFlow.setPosition(	Std.int((w() / Const.SCALE) - mainFlow.outerWidth),
+								Std.int((h() / Const.SCALE - mainFlow.outerHeight) / 2));
+
+		bgFlow.width = flowInfos.outerWidth;
+		bgFlow.height = flowInfos.outerHeight;
+
+		menuButton.setPosition((w() / Const.SCALE) - menuButton.wid - 10, 10);
 	}
 
 	public inline function invalidate() invalidated = true;
 
-	function render() {}
+	function render() {
+		scoreMinText.text = '${level.levelScoreMin}';
+		scoreText.text = '${Std.int(level.currentScore)}';
+	}
 
 	override function postUpdate() {
 		super.postUpdate();
@@ -115,7 +137,5 @@ class Hud extends dn.Process {
 			invalidated = false;
 			render();
 		}
-
-		scoreText.text = 'Moves: ${Std.int(level.currentScore)}';
 	}
 }

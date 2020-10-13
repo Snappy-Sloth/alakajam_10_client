@@ -9,7 +9,7 @@ class ChooseLevelScreen extends dn.Process {
 	var flowVer : h2d.Flow;
 	var flowHor : h2d.Flow;
 	var returnMenuBtn : ButtonMenu;
-	var arLevelBtn : Array<ButtonLevel>;
+	var arLevelBtn : Array<LittleButton>;
 	
 	var controlLock(default, null) = false;
 
@@ -48,7 +48,7 @@ class ChooseLevelScreen extends dn.Process {
 			
 			if (5*(j+1) < levels.length) {
 				for (i in 5*j...5*(j+1)) {
-					var levelBtn = new ButtonLevel('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
+					var levelBtn = new LittleButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
 					flowHor.addChild(levelBtn);
 					levelBtn.alpha = 0;
 					arLevelBtn.push(levelBtn);
@@ -56,7 +56,7 @@ class ChooseLevelScreen extends dn.Process {
 			}
 			else {
 				for (i in 5*j...levels.length) {
-					var levelBtn = new ButtonLevel('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
+					var levelBtn = new LittleButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
 					flowHor.addChild(levelBtn);
 					levelBtn.alpha = 0;
 					arLevelBtn.push(levelBtn);

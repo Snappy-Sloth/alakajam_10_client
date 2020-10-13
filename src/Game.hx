@@ -40,13 +40,9 @@ class Game extends Process {
 		hud = new ui.Hud(level.wid, level.hei);
 	}
 
-	public function restartLevel(lvlData:Data.Campaign) {
-		level = new Level(lvlData);
-		fx = new Fx();
-		hud = new ui.Hud(level.wid, level.hei);
-	}
-
 	public function levelVictory() {
+		if (Popup.ME != null)
+			Popup.ME.destroy();
 		score += level.currentScore;
 		hud.destroy();
 		if (levelsToDo.length > 0)

@@ -25,7 +25,7 @@ class Const {
 	public static var MAP_TILE_SIZE = 100;
 	public static var ARROW_TILE_WIDTH = 25;
 	public static var ARROW_TILE_HEIGHT = 50;
-	public static var FLOW_MAPTILE_SPACING = 60;
+	public static var FLOW_MAPTILE_SPACING = 45;
 
 	public static var BUTTON_WIDTH = 100;
 	public static var BUTTON_HEIGHT = 50;

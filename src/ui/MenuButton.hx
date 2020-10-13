@@ -1,8 +1,8 @@
 package ui;
 
-class ButtonLevel extends Button {
+class MenuButton extends Button {
 
     public function new(str:String, onClick:Void->Void) {
-		super("levelButton", str, onClick);
+		super("menuButton", str, onClick);
     }
 }

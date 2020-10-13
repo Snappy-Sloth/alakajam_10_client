@@ -64,7 +64,8 @@ class Level extends dn.Process {
 	override function onResize() {
 		super.onResize();
 		
-		mainWrapper.setPosition(w() / (2 * Const.SCALE), h() / (2 * Const.SCALE));
+		mainWrapper.setPosition((w() / Const.SCALE) * (1/3),
+								h() / (2 * Const.SCALE));
 	}
 
 	public function createLevel() {
@@ -78,7 +79,7 @@ class Level extends dn.Process {
 				swapTo = null;
 			}
 			if (swapFrom != null)
-				drawLineSwap(Std.int(e.relX - wrapperGameZone.x), Std.int(e.relY - wrapperGameZone.y));
+				drawLineSwap(Std.int(e.relX - wrapperGameZone.x - mainWrapper.x), Std.int(e.relY - wrapperGameZone.y - mainWrapper.y));
 		}
 
 		inter.onRelease = function (e) {
@@ -89,8 +90,8 @@ class Level extends dn.Process {
 		var t = 0.5;
 		mainWrapper = new h2d.Object(root);
 		tw.createS(mainWrapper.alpha, 0 > 1, t);
-		tw.createS(mainWrapper.scaleX, 0.9 > 1, t);
-		tw.createS(mainWrapper.scaleY, 0.9 > 1, t);
+		tw.createS(mainWrapper.scaleX, 0.8 > 1, TElasticEnd, t);
+		tw.createS(mainWrapper.scaleY, 0.8 > 1, TElasticEnd, t);
 
 		delayer.addS(()->game.hud.appear(t), 0.1);
 
@@ -422,6 +423,9 @@ class Level extends dn.Process {
 
 		game.hud.disappear(t);
 
+		if (Popup.ME != null)
+			Popup.ME.destroy();
+
 		tw.createS(mainWrapper.alpha, 0, t);
 		tw.createS(mainWrapper.scaleX, 0.9, t);
 		tw.createS(mainWrapper.scaleY, 0.9, t);
@@ -508,6 +512,9 @@ class Level extends dn.Process {
 
 		wrapperGameZone.add(mt1, Const.DP_MAIN);
 		wrapperGameZone.add(mt2, Const.DP_MAIN);
+
+		if (game.hud != null)
+			game.hud.invalidate();
 	}
 
 	public function showPossibleSwap(to:Null<MapTile>) {
