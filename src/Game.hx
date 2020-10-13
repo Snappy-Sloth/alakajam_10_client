@@ -45,10 +45,10 @@ class Game extends Process {
 			Popup.ME.destroy();
 		score += level.currentScore;
 		hud.destroy();
-		// if (levelsToDo.length > 0)
-		// 	new ui.EndLevelScreen();
-		// else
-			new ui.EndCampaignScreen();	
+		if (levelsToDo.length > 0)
+			new ui.EndLevelScreen();
+		else
+			new ui.EndCampaignScreen();
 		level.destroy();
 	}
 

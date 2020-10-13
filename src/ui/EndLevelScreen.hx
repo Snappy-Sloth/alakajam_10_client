@@ -72,7 +72,7 @@ class EndLevelScreen extends dn.Process {
 		var bar = Assets.tiles.h_get("separationBar", flow);
 		
 		totalScoreText = new h2d.Text(Assets.fontOeuf13, flow);
-		totalScoreText.text = 'Total Campaign Moves: ${Std.int(Game.ME.score)}';
+		totalScoreText.text = 'Current Campaign Moves: ${Std.int(Game.ME.score)}';
 		totalScoreText.dropShadow = {dx: 0, dy: 1, alpha: 1, color: 0x895515};
 
 		topAddSb = new h2d.SpriteBatch(Assets.tiles.tile, root);
@@ -87,6 +87,7 @@ class EndLevelScreen extends dn.Process {
 
 		onResize();
 
+		mask.y -= h() / Const.SCALE;
 		scoreText.x -= w()/Const.SCALE;
 		bar.x -= w()/Const.SCALE;
 		totalScoreText.x -= w()/Const.SCALE;
@@ -94,6 +95,9 @@ class EndLevelScreen extends dn.Process {
 
 		cinematic.create({
 			250;
+			tw.createS(mask.y, mask.y + h() / Const.SCALE, 0.3).end(()->cinematic.signal());
+			end;
+			100;
 			tw.createS(endLevelText.alpha, 1, 0.5).end(()->cinematic.signal());
 			end;
 			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
@@ -158,8 +162,9 @@ class EndLevelScreen extends dn.Process {
 		root.setScale(Const.SCALE);
 
 		flow.reflow();
-		mask.width = flow.outerWidth;
-		mask.height = flow.outerHeight;
+		
+		bgFlow.width = mask.width = flow.outerWidth;
+		bgFlow.height = mask.height = flow.outerHeight;
 
 		if (newHS != null)
 			newHS.setPosition(scoreText.x + scoreText.textWidth + 3, Std.int(scoreText.y - (newHS.tile.height * 0.5)));
@@ -167,8 +172,6 @@ class EndLevelScreen extends dn.Process {
 		mainFlow.reflow();
 		mainFlow.setPosition(Std.int((w() / Const.SCALE) - mainFlow.outerWidth) >> 1, Std.int((h() / Const.SCALE) - mainFlow.outerHeight) >> 1);
 
-		bgFlow.width = flow.outerWidth;
-		bgFlow.height = flow.outerHeight;
 	}
 
 	override function update() {
