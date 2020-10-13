@@ -9,7 +9,7 @@ class ChooseLevelScreen extends dn.Process {
 	var flowVer : h2d.Flow;
 	var flowHor : h2d.Flow;
 	var returnMenuBtn : ButtonMenu;
-	var arLevelBtn : Array<LittleButton>;
+	var arLevelBtn : Array<LevelButton>;
 	
 	var controlLock(default, null) = false;
 
@@ -37,18 +37,18 @@ class ChooseLevelScreen extends dn.Process {
 		flowVer = new h2d.Flow(root);
 		flowVer.layout = Vertical;
 		flowVer.horizontalAlign = Middle;
-		flowVer.verticalSpacing = 20;
+		flowVer.verticalSpacing = 10;
 		
 		var numHorFlow = Math.ceil(levels.length/5);
 
 		for (j in 0...numHorFlow) {
 			flowHor = new h2d.Flow(flowVer);
 			flowHor.layout = Horizontal;
-        	flowHor.horizontalSpacing = 20;
+        	flowHor.horizontalSpacing = 10;
 			
 			if (5*(j+1) < levels.length) {
 				for (i in 5*j...5*(j+1)) {
-					var levelBtn = new LittleButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
+					var levelBtn = new LevelButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
 					flowHor.addChild(levelBtn);
 					levelBtn.alpha = 0;
 					arLevelBtn.push(levelBtn);
@@ -56,7 +56,7 @@ class ChooseLevelScreen extends dn.Process {
 			}
 			else {
 				for (i in 5*j...levels.length) {
-					var levelBtn = new LittleButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
+					var levelBtn = new LevelButton('Level ${i+1}', onClickBtn.bind(Main.ME.startOneLevel.bind(levels[i])));
 					flowHor.addChild(levelBtn);
 					levelBtn.alpha = 0;
 					arLevelBtn.push(levelBtn);
