@@ -28,20 +28,20 @@ class EndCampaignScreen extends dn.Process {
 		flow.verticalSpacing = 20;
 		flow.horizontalAlign = Middle;
         
-        congratsText = new h2d.Text(Assets.fontPixel, flow);
+        congratsText = new h2d.Text(Assets.fontOeuf26, flow);
 		congratsText.text = 'Congratulations!';
-		congratsText.setScale(Const.SCALE);
 		congratsText.alpha = 0;
 
-		endCampaignText = new h2d.Text(Assets.fontPixel, flow);
+		endCampaignText = new h2d.Text(Assets.fontOeuf13, flow);
 		endCampaignText.text = 'You finished the Campaign!';
-		endCampaignText.setScale(Const.SCALE);
 		endCampaignText.alpha = 0;
+
+		var bar = Assets.tiles.h_get("separationBar", flow);
 
 		flow.addSpacing(20);
 		
-		scoreText = new h2d.Text(Assets.fontPixel, flow);
-		scoreText.text = 'Total Moves: ${Std.int(Game.ME.score)}';			
+		scoreText = new h2d.Text(Assets.fontOeuf13, flow);
+		scoreText.text = 'Total Campaign Moves: ${Std.int(Game.ME.score)}';			
 
 		flow.addSpacing(20);
 
