@@ -495,13 +495,34 @@ class Level extends dn.Process {
 			mt2.setPosition(mt2.cx*Const.MAP_TILE_SIZE, mt2.cy*Const.MAP_TILE_SIZE);
 		}
 		else {
-			controlLock = true;
 			var t = 0.2;
-			tw.createS(mt1.x, mt1.cx*Const.MAP_TILE_SIZE, t);
-			tw.createS(mt1.y, mt1.cy*Const.MAP_TILE_SIZE, t);
-			tw.createS(mt2.x, mt2.cx*Const.MAP_TILE_SIZE, t);
-			tw.createS(mt2.y, mt2.cy*Const.MAP_TILE_SIZE, t);
-			delayer.addS(()->controlLock = false, t);
+			cm.create({
+				wrapperGameZone.add(mt1, Const.DP_WATERFX);
+				wrapperGameZone.add(mt2, Const.DP_WATERFX);
+				lockControl();
+				mt1.showShadow();
+				mt2.showShadow();
+				tw.createS(mt1.scaleX, 1.1, 0.1);
+				tw.createS(mt1.scaleY, 1.1, 0.1);
+				tw.createS(mt2.scaleX, 1.1, 0.1);
+				tw.createS(mt2.scaleY, 1.1, 0.1).end(()->cm.signal());
+				end;
+				tw.createS(mt1.x, mt1.cx*Const.MAP_TILE_SIZE, t);
+				tw.createS(mt1.y, mt1.cy*Const.MAP_TILE_SIZE, t);
+				tw.createS(mt2.x, mt2.cx*Const.MAP_TILE_SIZE, t);
+				tw.createS(mt2.y, mt2.cy*Const.MAP_TILE_SIZE, t).end(()->cm.signal());
+				end;
+				mt1.hideShadow();
+				mt2.hideShadow();
+				tw.createS(mt1.scaleX, 1, 0.1);
+				tw.createS(mt1.scaleY, 1, 0.1);
+				tw.createS(mt2.scaleX, 1, 0.1);
+				tw.createS(mt2.scaleY, 1, 0.1).end(()->cm.signal());
+				end;
+				wrapperGameZone.add(mt1, Const.DP_MAIN);
+				wrapperGameZone.add(mt2, Const.DP_MAIN);
+				unlockControl();
+			});
 		}
 
 		mt1.unSelect();
@@ -519,8 +540,8 @@ class Level extends dn.Process {
 				s.quest_mp = mt1;
 		}
 
-		wrapperGameZone.add(mt1, Const.DP_MAIN);
-		wrapperGameZone.add(mt2, Const.DP_MAIN);
+		// wrapperGameZone.add(mt1, Const.DP_MAIN);
+		// wrapperGameZone.add(mt2, Const.DP_MAIN);
 
 		if (game.hud != null)
 			game.hud.invalidate();

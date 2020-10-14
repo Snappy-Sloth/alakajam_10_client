@@ -10,9 +10,11 @@ class MapTile extends h2d.Layers {
 
 	var whiteSelection : Graphics;
 	var inter : Interactive;
-
+	
 	public var selected : Bool;
-
+	
+	var wrapperShadow : h2d.Object;
+	var shadow : h2d.Bitmap;
 	var wrapper : Layers;
 	var wrapperRotation : Layers;
 
@@ -27,6 +29,13 @@ class MapTile extends h2d.Layers {
 		this.level = level;
 
 		selected = false;
+
+		wrapperShadow = new h2d.Object(this);
+		wrapperShadow.scaleX = wrapperShadow.scaleY = 0;
+
+		shadow = new h2d.Bitmap(h2d.Tile.fromColor(0, Std.int(Const.MAP_TILE_SIZE), Std.int(Const.MAP_TILE_SIZE), 0.1));
+		shadow.setPosition(-shadow.tile.width * 0.5, -shadow.tile.height * 0.5);
+		wrapperShadow.addChild(shadow);
 		
 		wrapperRotation = new Layers(this);
 		wrapper = new Layers(wrapperRotation);
@@ -86,6 +95,20 @@ class MapTile extends h2d.Layers {
 				level.doSwap();
 			}
 		}
+	}
+
+	public function showShadow() {
+		// shadow.alpha = 1;
+		// level.tw.createS(shadow.alpha, 1, 0.1);
+		level.tw.createS(wrapperShadow.scaleX, 1.1, 0.1);
+		level.tw.createS(wrapperShadow.scaleY, 1.1, 0.1);
+	}
+	
+	public function hideShadow() {
+		// level.tw.createS(shadow.alpha, 0, 0.1);
+		level.tw.createS(wrapperShadow.scaleX, 1, 0.1);
+		level.tw.createS(wrapperShadow.scaleY, 1, 0.1);
+		// shadow.alpha = 0;
 	}
 
 	public function createRoad(from:EP, to:EP) {

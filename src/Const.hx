@@ -18,7 +18,7 @@ class Const {
 	public static var DP_MAIN = _inc++;
 	public static var DP_EXTERNAL = _inc++;
 	public static var DP_WATERFX = _inc++;
-	public static var DP_FRONT = _inc++;
+	public static var DP_SHIP = _inc++;
 	public static var DP_FX_FRONT = _inc++;
 	public static var DP_TOP = _inc++;
 	public static var DP_UI = _inc++;
