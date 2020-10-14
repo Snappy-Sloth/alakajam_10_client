@@ -17,20 +17,20 @@ class Fx extends dn.Process {
 		pool = new ParticlePool(Assets.tiles.tile, 2048, Const.FPS);
 
 		bgAddSb = new h2d.SpriteBatch(Assets.tiles.tile);
-		game.scroller.add(bgAddSb, Const.DP_FX_BG);
+		game.level.wrapperGameZone.add(bgAddSb, Const.DP_WATERFX);
 		bgAddSb.blendMode = Add;
 		bgAddSb.hasRotationScale = true;
 
 		bgNormalSb = new h2d.SpriteBatch(Assets.tiles.tile);
-		game.scroller.add(bgNormalSb, Const.DP_FX_BG);
+		game.level.wrapperGameZone.add(bgNormalSb, Const.DP_WATERFX);
 		bgNormalSb.hasRotationScale = true;
 
 		topNormalSb = new h2d.SpriteBatch(Assets.tiles.tile);
-		game.scroller.add(topNormalSb, Const.DP_FX_FRONT);
+		game.level.wrapperGameZone.add(topNormalSb, Const.DP_FX_FRONT);
 		topNormalSb.hasRotationScale = true;
 
 		topAddSb = new h2d.SpriteBatch(Assets.tiles.tile);
-		game.scroller.add(topAddSb, Const.DP_FX_FRONT);
+		game.level.wrapperGameZone.add(topAddSb, Const.DP_FX_FRONT);
 		topAddSb.blendMode = Add;
 		topAddSb.hasRotationScale = true;
 	}
@@ -71,6 +71,46 @@ class Fx extends dn.Process {
 
 	public function killAll() {
 		pool.killAll();
+	}
+
+	public function reachExit(mt:MapTile, ep:EP) {
+		for (i in 0...5) {
+			var color = Color.randomColor();
+	
+			var p = allocTopAdd(getTile("fxDot"), mt.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1), mt.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
+			p.dy = -2;
+			p.dx = rnd(0.1, 0.3, true);
+			p.colorize(color);
+			p.scale = 3;
+			p.lifeS = rnd(0.15, 0.4);
+			p.delayS = i * 0.1;
+			p.onUpdate = function (p) {
+				var np = allocTopAdd(getTile("fxDot"), p.x, p.y);
+				np.colorize(color);
+				np.lifeS = 0.2;
+			}
+			p.onKill = function() {
+				for (i in 0...20) {
+					var np = allocTopAdd(getTile("fxDot"), p.x, p.y);
+					np.moveAng(rnd(0, Math.PI, true), rnd(0.5, 1));
+					np.colorize(color);
+					np.lifeS = rnd(0.5, 1);
+					np.frict = 0.99;
+					np.ds = 0.1;
+					np.dsFrict = 0.97;
+					np.rotation = rnd(0, Math.PI, true);
+					np.dr = rnd(0.1, 0.2);
+					np.scale = rnd(1, 2);
+				}
+			}
+		}
+	}
+	
+	public function showShipWaterMove(s:Ship, rotation:Float) {
+		var p = allocBgAdd(getTile("shipWaterMove"), s.root.x, s.root.y);
+		p.playAnimAndKill(Assets.tiles, "shipWaterMove", 0.1);
+		p.alpha = 0.75;
+		p.rotation = rotation;
 	}
 
 	public function markerCase(cx:Int, cy:Int, ?sec=3.0, ?c=0xFF00FF) {

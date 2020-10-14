@@ -195,7 +195,7 @@ newHighscore
   index: -1
 pixel
   rotate: false
-  xy: 388, 1
+  xy: 333, 197
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -384,7 +384,7 @@ restartButtonPress
   index: -1
 roadStep
   rotate: false
-  xy: 218, 182
+  xy: 333, 200
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -401,6 +401,34 @@ ship
   xy: 118, 285
   size: 20, 11
   orig: 20, 11
+  offset: 0, 0
+  index: -1
+shipWaterMove0
+  rotate: false
+  xy: 388, 1
+  size: 3, 7
+  orig: 5, 13
+  offset: 2, 3
+  index: -1
+shipWaterMove1
+  rotate: false
+  xy: 393, 154
+  size: 4, 9
+  orig: 5, 13
+  offset: 1, 2
+  index: -1
+shipWaterMove2
+  rotate: false
+  xy: 225, 182
+  size: 5, 11
+  orig: 5, 13
+  offset: 0, 1
+  index: -1
+shipWaterMove3
+  rotate: false
+  xy: 218, 182
+  size: 5, 13
+  orig: 5, 13
   offset: 0, 0
   index: -1
 title

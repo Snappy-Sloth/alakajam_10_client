@@ -225,8 +225,18 @@ class MapTile extends h2d.Layers {
 		if (instant)
 			wrapperRotation.rotate(0.5*Math.PI);
 		else {
-			level.lockControl(0.2);
-			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation + 0.5*Math.PI, 0.2);
+			level.cm.create({
+				level.lockControl();
+				level.tw.createS(wrapperRotation.scaleY, 0.9, 0.1);
+				level.tw.createS(wrapperRotation.scaleX, 0.9, 0.1).end(()->level.cm.signal());
+				end;
+				level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation + 0.5*Math.PI, 0.1).end(()->level.cm.signal());
+				end;
+				level.tw.createS(wrapperRotation.scaleY, 1, 0.1);
+				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());
+				end;
+				level.unlockControl();
+			});
 		}
 
 		if (level.game.hud != null)
@@ -245,8 +255,18 @@ class MapTile extends h2d.Layers {
 		if (instant)
 			wrapperRotation.rotate(-0.5*Math.PI);
 		else {
-			level.lockControl(0.2);
-			level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation - 0.5*Math.PI, 0.2);
+			level.cm.create({
+				level.lockControl();
+				level.tw.createS(wrapperRotation.scaleY, 0.9, 0.1);
+				level.tw.createS(wrapperRotation.scaleX, 0.9, 0.1).end(()->level.cm.signal());
+				end;
+				level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation - 0.5*Math.PI, 0.1).end(()->level.cm.signal());
+				end;
+				level.tw.createS(wrapperRotation.scaleY, 1, 0.1);
+				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());
+				end;
+				level.unlockControl();
+			});
 		}
 
 		if (level.game.hud != null)

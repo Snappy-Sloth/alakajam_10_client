@@ -157,6 +157,9 @@ class Ship extends dn.Process {
 
 				rotationWanted = Math.atan2(Road.getEpY(to) - Road.getEpY(from), Road.getEpX(to) - Road.getEpX(from));
 			}
+
+			if (!cd.hasSetS("spout", 0.1))
+				level.fx.showShipWaterMove(this, rotationWanted);
 		}
 		
 		spr.rotation += (M.radSubstract(rotationWanted, spr.rotation)) * 0.1 * tmod;

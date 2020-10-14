@@ -9,8 +9,10 @@ class Level extends dn.Process {
 	public var hei(get,never) : Int; inline function get_hei() return lvlData.height;
 
 	var arMapTile : Array<MapTile>;
-	var mainWrapper : h2d.Object;
-	var wrapperGameZone : h2d.Layers;
+	public var mainWrapper : h2d.Object;
+	public var wrapperGameZone : h2d.Layers;
+
+	public var cm : dn.Cinematic;
 
 	var rightArrow : Arrow;
 	var leftArrow : Arrow;
@@ -40,6 +42,8 @@ class Level extends dn.Process {
 		super(Game.ME);
 
 		this.lvlData = lvlData;
+
+		cm = new dn.Cinematic(Const.FPS);
 
 		rand = new dn.Rand(Std.random(999999));
 		// rand = new dn.Rand(13278);
@@ -386,6 +390,7 @@ class Level extends dn.Process {
 
 		if (nextTile == null) {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
+				fx.reachExit(s.quest_mp, s.quest_ep);
 				s.disappear(function () {
 					shipsOver++;
 					if (shipsOver == lvlData.numShips) closeLevel(game.levelVictory);					
@@ -419,17 +424,21 @@ class Level extends dn.Process {
 	}
 
 	public function closeLevel(onEnd:Void->Void) {
-		var t = 0.5;
+		lockControl();
 
-		game.hud.disappear(t);
-
-		if (Popup.ME != null)
-			Popup.ME.destroy();
-
-		tw.createS(mainWrapper.alpha, 0, t);
-		tw.createS(mainWrapper.scaleX, 0.9, t);
-		tw.createS(mainWrapper.scaleY, 0.9, t);
-		delayer.addS(onEnd, t + 0.1);
+		delayer.addS(function () {
+			var t = 0.5;
+	
+			game.hud.disappear(t);
+	
+			if (Popup.ME != null)
+				Popup.ME.destroy();
+	
+			tw.createS(mainWrapper.alpha, 0, t);
+			tw.createS(mainWrapper.scaleX, 0.9, t);
+			tw.createS(mainWrapper.scaleY, 0.9, t);
+			delayer.addS(onEnd, t + 0.1);
+		}, 1);
 	}
 
 	public function resetShips() {
@@ -676,9 +685,15 @@ class Level extends dn.Process {
 	override function update() {		
 		super.update();
 
+		cm.update(tmod);
+
 		#if debug
 		if (hxd.Key.isPressed(Key.F3)) {
 			game.levelVictory();
+		}
+		if (hxd.Key.isPressed(Key.F1)) {
+			var mt = getMapTileAt(0, 0);
+			fx.reachExit(mt, West_2);
 		}
 		#end
 	}
