@@ -105,6 +105,23 @@ class Fx extends dn.Process {
 			}
 		}
 	}
+
+	public function explosion(x:Float, y:Float) {
+		for (i in 0...10) {
+			var p = allocBgNormal(getTile("backExplosion"), x, y);
+			p.rotation = rnd(0, Math.PI * 2);
+			p.moveAng(p.rotation, rnd(0.1, 0.15));
+			p.alpha = rnd(0.5, 0.75);
+			p.scale = 0;
+			p.ds = rnd(0.1, 0.15);
+			p.dsFrict = 0.9;
+			p.playAnimAndKill(Assets.tiles, "backExplosion", rnd(0.05, 0.1));
+			p.lifeS = 2;
+			p.delayS = 0.05;
+		}
+		var p = allocBgNormal(getTile("fxCircle"), x, y);
+		p.lifeS = 0.1;
+	}
 	
 	public function showShipWaterMove(s:Ship, rotation:Float) {
 		var p = allocBgAdd(getTile("shipWaterMove"), s.root.x, s.root.y);

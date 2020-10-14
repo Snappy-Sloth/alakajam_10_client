@@ -4,6 +4,12 @@ import h2d.Graphics;
 
 class MapTile extends h2d.Layers {
 
+	static var num = 0;
+	static var DP_W_BG = num++;
+	static var DP_W_ROADS = num++;
+	static var DP_W_DOORS = num++;
+	static var DP_W_INTER = num++;
+
 	public var cx : Int;
 	public var cy : Int;
 	public var level : Level;
@@ -20,7 +26,7 @@ class MapTile extends h2d.Layers {
 
 	public var roads(default, null) : Array<Road> = [];
 
-	//public var ships : Array<Ship> = [];
+	public var doors : Array<{spr:HSprite, ep:EP}> = [];
 	
 	public function new(tx:Int, ty:Int, level:Level) {
 		super();
@@ -42,7 +48,7 @@ class MapTile extends h2d.Layers {
 		wrapper.setPosition(-Const.MAP_TILE_SIZE/2, -Const.MAP_TILE_SIZE/2);
 
 		var bg = Assets.tiles.h_get("mapTile");
-		wrapper.addChild(bg);
+		wrapper.add(bg, DP_W_BG);
 
 		this.setPosition(cx*Const.MAP_TILE_SIZE, cy*Const.MAP_TILE_SIZE);
 
@@ -53,7 +59,8 @@ class MapTile extends h2d.Layers {
 
         whiteSelection.visible = false;
 
-		inter = new Interactive(Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE, wrapper);
+		inter = new Interactive(Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
+		wrapper.add(inter, DP_W_INTER);
 		//inter.backgroundColor = 0x55ff00ff;
 		
 		inter.onPush = function (e) {
@@ -97,18 +104,65 @@ class MapTile extends h2d.Layers {
 		}
 	}
 
+	public function drawDoors() {
+		for (ep in EP.createAll()) {
+			var door = Assets.tiles.h_get("door");
+			wrapper.add(door, DP_W_DOORS);
+			door.setPosition(Road.getEpX(ep), Road.getEpY(ep));
+
+			doors.push({spr: door, ep: ep});
+
+			switch ep {
+				case North_1, North_2:
+					door.x -= door.tile.width * 0.5;
+				case South_1, South_2:
+					door.rotation = Math.PI;
+					door.x += door.tile.width * 0.5;
+				case West_1, West_2:
+					door.rotation = -Math.PI / 2;
+					door.y += door.tile.width * 0.5;
+				case East_1, East_2:
+					door.rotation = Math.PI / 2;
+					door.y -= door.tile.width * 0.5;
+			}
+
+			door.x = Std.int(door.x);
+			door.y = Std.int(door.y);
+		}
+
+		updateDoors();
+	}
+
+	public function openAllDoors() {
+		for (d in doors) {
+			level.tw.createS(d.spr.scaleX, 0, 0.1);
+		}
+	}
+
+	public function updateDoors() {
+		for (d in doors) {
+			var nextMT = switch (d.ep) {
+				case North_1, North_2: level.getMapTileAt(cx, cy - 1);
+				case South_1, South_2: level.getMapTileAt(cx, cy + 1);
+				case West_1, West_2: level.getMapTileAt(cx - 1, cy);
+				case East_1, East_2: level.getMapTileAt(cx + 1, cy);
+			}
+
+			if (!isEPExternal(d.ep) && (nextMT.getRoadWith(Const.GET_NEIGHBOOR_MATCHING_EP(d.ep)) == null || getRoadWith(d.ep) == null))
+				level.tw.createS(d.spr.scaleX, 1, 0.1);
+			else
+				level.tw.createS(d.spr.scaleX, 0, 0.1);
+		}
+	}
+
 	public function showShadow() {
-		// shadow.alpha = 1;
-		// level.tw.createS(shadow.alpha, 1, 0.1);
 		level.tw.createS(wrapperShadow.scaleX, 1.1, 0.1);
 		level.tw.createS(wrapperShadow.scaleY, 1.1, 0.1);
 	}
 	
 	public function hideShadow() {
-		// level.tw.createS(shadow.alpha, 0, 0.1);
 		level.tw.createS(wrapperShadow.scaleX, 1, 0.1);
 		level.tw.createS(wrapperShadow.scaleY, 1, 0.1);
-		// shadow.alpha = 0;
 	}
 
 	public function createRoad(from:EP, to:EP) {
@@ -117,7 +171,8 @@ class MapTile extends h2d.Layers {
 	}
 
 	public function drawRoads() {
-		var spriteBatch = new HSpriteBatch(Assets.tiles.tile, wrapper);
+		var spriteBatch = new HSpriteBatch(Assets.tiles.tile);
+		wrapper.add(spriteBatch, DP_W_ROADS);
 		var step = 1;
 		// var step = 5;
 
@@ -150,7 +205,8 @@ class MapTile extends h2d.Layers {
 		} */
 
 		for (r in roads) {
-			var gr = new h2d.Graphics(wrapper);
+			var gr = new h2d.Graphics();
+			wrapper.add(gr, DP_W_ROADS);
 			gr.lineStyle(1, 0xFF2a6e83);
 			gr.moveTo(r.pointAX, r.pointAY);
 			gr.lineTo(r.pointBX, r.pointBY);
@@ -244,6 +300,11 @@ class MapTile extends h2d.Layers {
 			r.modifyPoints(getNextRoadWhenRotateRight(r.pointA), getNextRoadWhenRotateRight(r.pointB));
 		}
 
+		// Rotate doors
+		for (d in doors) {
+			d.ep = getNextRoadWhenRotateRight(d.ep);
+		}
+
 		// Rotate art
 		if (instant)
 			wrapperRotation.rotate(0.5*Math.PI);
@@ -259,6 +320,9 @@ class MapTile extends h2d.Layers {
 				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());
 				end;
 				level.unlockControl();
+				for (tile in level.arMapTile) {
+					tile.updateDoors();
+				}
 			});
 		}
 
@@ -272,6 +336,11 @@ class MapTile extends h2d.Layers {
 		// Rotate roads
 		for (r in roads) {
 			r.modifyPoints(getNextRoadWhenRotateLeft(r.pointA), getNextRoadWhenRotateLeft(r.pointB));
+		}
+
+		// Rotate doors
+		for (d in doors) {
+			d.ep = getNextRoadWhenRotateLeft(d.ep);
 		}
 
 		// Rotate art
@@ -289,6 +358,9 @@ class MapTile extends h2d.Layers {
 				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());
 				end;
 				level.unlockControl();
+				for (tile in level.arMapTile) {
+					tile.updateDoors();
+				}
 			});
 		}
 

@@ -60,4 +60,17 @@ class Const {
 
 		return mt1.roads.length == nIdentical;
 	}
+
+	public static function GET_NEIGHBOOR_MATCHING_EP(ep:EP) {
+		return switch (ep) {
+			case North_1: South_1;
+			case North_2: South_2;
+			case South_1: North_1;
+			case South_2: North_2;
+			case West_1: East_1;
+			case West_2: East_2;
+			case East_1: West_1;
+			case East_2: West_2;
+		}
+	}
 }

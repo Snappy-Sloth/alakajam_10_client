@@ -8,7 +8,7 @@ class Level extends dn.Process {
 	public var wid(get,never) : Int; inline function get_wid() return lvlData.width;
 	public var hei(get,never) : Int; inline function get_hei() return lvlData.height;
 
-	var arMapTile : Array<MapTile>;
+	public var arMapTile : Array<MapTile>;
 	public var mainWrapper : h2d.Object;
 	public var wrapperGameZone : h2d.Layers;
 
@@ -32,6 +32,8 @@ class Level extends dn.Process {
 	public var controlLock(default, null) = false;
 
 	public var rand : dn.Rand;
+	
+	var shakePower = 1.0;
 
 	public var swapFrom : MapTile = null;
 	public var swapTo : MapTile = null;
@@ -100,8 +102,6 @@ class Level extends dn.Process {
 		delayer.addS(()->game.hud.appear(t), 0.1);
 
 		wrapperGameZone = new h2d.Layers(mainWrapper);
-		wrapperGameZone.setPosition(Const.MAP_TILE_SIZE/2 - (wid*Const.MAP_TILE_SIZE)/2,
-									Const.MAP_TILE_SIZE/2 - (hei*Const.MAP_TILE_SIZE)/2);
 
 		// Create MapTiles
 		for (i in 0...wid) {
@@ -172,6 +172,7 @@ class Level extends dn.Process {
 
 		for (tile in arMapTile) {
 			tile.drawRoads();
+			tile.drawDoors();
 		}
 
 		// Add externals entrance
@@ -254,6 +255,10 @@ class Level extends dn.Process {
 				else
 					goLeft ? mt.rotateLeft(true) : mt.rotateRight(true);
 			}
+		}
+
+		for (tile in arMapTile) {
+			tile.updateDoors();
 		}
 
 		// Tuto Popup
@@ -352,16 +357,7 @@ class Level extends dn.Process {
 				to = rand.arrayPick(possibleExit);
 				currentMP.createRoad(from, to);
 
-				from = switch (to) {
-					case North_1: South_1;
-					case North_2: South_2;
-					case South_1: North_1;
-					case South_2: North_2;
-					case West_1: East_1;
-					case West_2: East_2;
-					case East_1: West_1;
-					case East_2: West_2;
-				}
+				from = Const.GET_NEIGHBOOR_MATCHING_EP(to);
 			}
 			ship.quest_mp.createRoad(from, ship.quest_ep);
 		}
@@ -393,10 +389,14 @@ class Level extends dn.Process {
 				fx.reachExit(s.quest_mp, s.quest_ep);
 				s.disappear(function () {
 					shipsOver++;
-					if (shipsOver == lvlData.numShips) closeLevel(game.levelVictory);					
+					if (shipsOver == lvlData.numShips) {
+						lockControl();
+						delayer.addS(()->closeLevel(game.levelVictory), 1);
+					}	
 				});
 			}
 			else {
+				crashShip(s);
 				resetShips();
 			}
 		}
@@ -418,27 +418,34 @@ class Level extends dn.Process {
 				nextTile.addShipToRoad(s, nextRoad, nextEP);
 			}
 			else {
+				crashShip(s);
 				resetShips();
 			}
 		}
 	}
 
-	public function closeLevel(onEnd:Void->Void) {
-		lockControl();
+	public function crashShip(s:Ship) {
+		shakeS(0.3);
+		fx.explosion(s.root.x, s.root.y);
+	}
 
-		delayer.addS(function () {
-			var t = 0.5;
-	
-			game.hud.disappear(t);
-	
-			if (Popup.ME != null)
-				Popup.ME.destroy();
-	
-			tw.createS(mainWrapper.alpha, 0, t);
-			tw.createS(mainWrapper.scaleX, 0.9, t);
-			tw.createS(mainWrapper.scaleY, 0.9, t);
-			delayer.addS(onEnd, t + 0.1);
-		}, 1);
+	public function shakeS(t:Float, ?pow=1.0) {
+		cd.setS("shaking", t, false);
+		shakePower = pow;
+	}
+
+	public function closeLevel(onEnd:Void->Void) {
+		var t = 0.5;
+
+		game.hud.disappear(t);
+
+		if (Popup.ME != null)
+			Popup.ME.destroy();
+
+		tw.createS(mainWrapper.alpha, 0, t);
+		tw.createS(mainWrapper.scaleX, 0.9, t);
+		tw.createS(mainWrapper.scaleY, 0.9, t);
+		delayer.addS(onEnd, t + 0.1);
 	}
 
 	public function resetShips() {
@@ -499,6 +506,9 @@ class Level extends dn.Process {
 			cm.create({
 				wrapperGameZone.add(mt1, Const.DP_WATERFX);
 				wrapperGameZone.add(mt2, Const.DP_WATERFX);
+				for (mt in arMapTile) {
+					mt.openAllDoors();
+				}
 				lockControl();
 				mt1.showShadow();
 				mt2.showShadow();
@@ -519,6 +529,9 @@ class Level extends dn.Process {
 				tw.createS(mt2.scaleX, 1, 0.1);
 				tw.createS(mt2.scaleY, 1, 0.1).end(()->cm.signal());
 				end;
+				for (mt in arMapTile) {
+					mt.updateDoors();
+				}
 				wrapperGameZone.add(mt1, Const.DP_MAIN);
 				wrapperGameZone.add(mt2, Const.DP_MAIN);
 				unlockControl();
@@ -539,9 +552,6 @@ class Level extends dn.Process {
 			else if (s.quest_mp == mt2)
 				s.quest_mp = mt1;
 		}
-
-		// wrapperGameZone.add(mt1, Const.DP_MAIN);
-		// wrapperGameZone.add(mt2, Const.DP_MAIN);
 
 		if (game.hud != null)
 			game.hud.invalidate();
@@ -709,13 +719,25 @@ class Level extends dn.Process {
 		cm.update(tmod);
 
 		#if debug
-		if (hxd.Key.isPressed(Key.F3)) {
-			game.levelVictory();
-		}
-		if (hxd.Key.isPressed(Key.F1)) {
-			var mt = getMapTileAt(0, 0);
-			fx.reachExit(mt, West_2);
-		}
+		// if (hxd.Key.isPressed(Key.F3)) {
+		// 	game.levelVictory();
+		// }
+		// if (hxd.Key.isPressed(Key.F1)) {
+		// 	shakeS(0.2);
+		// 	fx.explosion(Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
+		// }
 		#end
+	}
+
+	override function postUpdate() {
+		super.postUpdate();
+
+		wrapperGameZone.setPosition(Const.MAP_TILE_SIZE/2 - (wid*Const.MAP_TILE_SIZE)/2,
+									Const.MAP_TILE_SIZE/2 - (hei*Const.MAP_TILE_SIZE)/2);
+		// Shakes
+		if( cd.has("shaking") ) {
+			wrapperGameZone.x += Math.cos(ftime*1.1)*2.5*shakePower * cd.getRatio("shaking");
+			wrapperGameZone.y += Math.sin(0.3+ftime*1.7)*2.5*shakePower * cd.getRatio("shaking");
+		}
 	}
 }
