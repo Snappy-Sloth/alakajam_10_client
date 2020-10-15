@@ -35,8 +35,6 @@ class Ship extends dn.Process {
 
 		createRootInLayers(level.wrapperGameZone, Const.DP_SHIP);
 
-		// var bmp = new h2d.Bitmap(h2d.Tile.fromColor(0x00FF00, 11, 7));
-		// root.addChild(bmp);
 		spr = Assets.tiles.h_get("ship", 0.5, 0.5, root);
 	}
 

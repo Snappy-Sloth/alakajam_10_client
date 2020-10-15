@@ -40,6 +40,9 @@ class Level extends dn.Process {
 	var lineSwap : h2d.Graphics;
 	var arrowSwap : HSprite;
 
+	var ambient : dn.heaps.Sfx;
+	var shipMoving : dn.heaps.Sfx;
+
 	public function new(lvlData:Data.Campaign) {
 		super(Game.ME);
 
@@ -57,6 +60,10 @@ class Level extends dn.Process {
 
 		levelScoreMin = lvlData.numSwap + lvlData.numRotation;
 		currentScore = 0;
+
+		ambient = Assets.CREATE_SOUND(hxd.Res.sfx.wavesAmbient, WavesAmbient, true);
+
+		shipMoving = Assets.CREATE_SOUND(hxd.Res.sfx.shipMoves, ShipsMoving, true, false);
 
 		onResize();
 	}
@@ -391,7 +398,8 @@ class Level extends dn.Process {
 					shipsOver++;
 					if (shipsOver == lvlData.numShips) {
 						lockControl();
-						delayer.addS(()->closeLevel(game.levelVictory), 1);
+						shipMoving.channel.fadeTo(0, 1);
+						delayer.addS(()->closeLevel(game.levelVictory), 2);
 					}	
 				});
 			}
@@ -437,6 +445,8 @@ class Level extends dn.Process {
 	public function closeLevel(onEnd:Void->Void) {
 		var t = 0.5;
 
+		ambient.channel.fadeTo(0, t);
+
 		game.hud.disappear(t);
 
 		if (Popup.ME != null)
@@ -455,6 +465,8 @@ class Level extends dn.Process {
 		shipAreGone = false;
 		shipsOver = 0;
 		game.hud.onResetShips();
+
+		shipMoving.channel.fadeTo(0, 1);
 	}
 
 	public function checkOtherTiles(mapTile:MapTile) {
@@ -521,6 +533,7 @@ class Level extends dn.Process {
 				tw.createS(mt1.y, mt1.cy*Const.MAP_TILE_SIZE, t);
 				tw.createS(mt2.x, mt2.cx*Const.MAP_TILE_SIZE, t);
 				tw.createS(mt2.y, mt2.cy*Const.MAP_TILE_SIZE, t).end(()->cm.signal());
+				Assets.CREATE_SOUND(hxd.Res.sfx.woosh, WooshExchange);
 				end;
 				mt1.hideShadow();
 				mt2.hideShadow();
@@ -673,6 +686,9 @@ class Level extends dn.Process {
 			for (tile in arMapTile) {
 				tile.unSelect();
 			}
+
+			shipMoving.play(true);
+			tw.createS(shipMoving.volume, 0 > 1, 1);
 			
 			shipAreGone = true;
 
@@ -718,15 +734,13 @@ class Level extends dn.Process {
 
 		cm.update(tmod);
 
-		#if debug
+		// #if debug
 		// if (hxd.Key.isPressed(Key.F3)) {
 		// 	game.levelVictory();
 		// }
-		// if (hxd.Key.isPressed(Key.F1)) {
-		// 	shakeS(0.2);
-		// 	fx.explosion(Const.MAP_TILE_SIZE, Const.MAP_TILE_SIZE);
-		// }
-		#end
+		if (hxd.Key.isPressed(Key.F1)) {
+		}
+		// #end
 	}
 
 	override function postUpdate() {

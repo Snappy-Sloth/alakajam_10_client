@@ -19,3 +19,13 @@ enum ExternalEPType {
 	Exit;
 	Closed;
 }
+
+enum VolumeGroup {
+	@volume(1) OverButton;
+	@volume(1) ClickButton;
+	@volume(1) WavesAmbient;
+	@volume(1) FireworkLaunch;
+	@volume(0.75) Firework;
+	@volume(0.6) WooshExchange;
+	@volume(0.75) ShipsMoving;
+}

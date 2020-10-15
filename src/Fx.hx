@@ -74,22 +74,40 @@ class Fx extends dn.Process {
 	}
 
 	public function reachExit(mt:MapTile, ep:EP) {
+		var ar = [
+			Assets.CREATE_SOUND(hxd.Res.sfx.firework0, Firework, false, false),
+			Assets.CREATE_SOUND(hxd.Res.sfx.firework1, Firework, false, false),
+			Assets.CREATE_SOUND(hxd.Res.sfx.firework2, Firework, false, false),
+		];
+
 		for (i in 0...5) {
+		// for (i in 0...2) {
 			var color = Color.randomColor();
-	
+
 			var p = allocTopAdd(getTile("fxDot"), mt.x + Road.getEpX(ep) - (Const.MAP_TILE_SIZE >> 1), mt.y + Road.getEpY(ep) - (Const.MAP_TILE_SIZE >> 1));
 			p.dy = -2;
 			p.dx = rnd(0.1, 0.3, true);
 			p.colorize(color);
 			p.scale = 3;
-			p.lifeS = rnd(0.15, 0.4);
-			p.delayS = i * 0.1;
+			// p.lifeS = rnd(0.15, 0.4);
+			p.lifeS = 0.2;
+			// p.delayS = i * 0.1;
+			p.delayS = i * 0.25;
+			p.data0 = i;
+			p.onStart = function () {
+				var sndLaunch = Assets.CREATE_SOUND(hxd.Res.sfx.fireworkLaunch, FireworkLaunch);
+				p.userData = sndLaunch;
+			}
 			p.onUpdate = function (p) {
 				var np = allocTopAdd(getTile("fxDot"), p.x, p.y);
 				np.colorize(color);
 				np.lifeS = 0.2;
 			}
 			p.onKill = function() {
+				var sndLaunch : dn.heaps.Sfx = cast p.userData;
+				sndLaunch.channel.volume = 0;
+				var snd = ar[Std.random(ar.length)].play();
+				// snd.channel.channelGroup.addEffect(new hxd.snd.effect.Pitch(1 - rnd(0.25, 0.5)));
 				for (i in 0...20) {
 					var np = allocTopAdd(getTile("fxDot"), p.x, p.y);
 					np.moveAng(rnd(0, Math.PI, true), rnd(0.5, 1));

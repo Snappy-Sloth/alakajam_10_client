@@ -43,6 +43,7 @@ class PlayButton extends h2d.Layers {
 		inter.onRelease = inter.onOver = function (e) {
 			text.y = Std.int((hei/2)-(text.textHeight/2));
 			spr.set(currentStatus == Play ? "playButtonOver" : "restartButtonOver");
+			Assets.CREATE_SOUND(hxd.Res.sfx.overButton, OverButton);
 		}
 		inter.onReleaseOutside = inter.onOut = function (e) {
 			text.y = Std.int((hei/2)-(text.textHeight/2));
@@ -51,6 +52,7 @@ class PlayButton extends h2d.Layers {
 		inter.onPush = function (e) {
 			text.y = Std.int((hei/2)-(text.textHeight/2) + 3);
 			spr.set(currentStatus == Play ? "playButtonPress" : "restartButtonPress");
+			Assets.CREATE_SOUND(hxd.Res.sfx.clickButton, ClickButton);
 		}
 	}
 

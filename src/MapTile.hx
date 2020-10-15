@@ -315,6 +315,7 @@ class MapTile extends h2d.Layers {
 				level.tw.createS(wrapperRotation.scaleX, 0.9, 0.1).end(()->level.cm.signal());
 				end;
 				level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation + 0.5*Math.PI, 0.1).end(()->level.cm.signal());
+				Assets.CREATE_SOUND(hxd.Res.sfx.woosh, WooshExchange);
 				end;
 				level.tw.createS(wrapperRotation.scaleY, 1, 0.1);
 				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());
@@ -353,6 +354,7 @@ class MapTile extends h2d.Layers {
 				level.tw.createS(wrapperRotation.scaleX, 0.9, 0.1).end(()->level.cm.signal());
 				end;
 				level.tw.createS(wrapperRotation.rotation, wrapperRotation.rotation - 0.5*Math.PI, 0.1).end(()->level.cm.signal());
+				Assets.CREATE_SOUND(hxd.Res.sfx.woosh, WooshExchange);
 				end;
 				level.tw.createS(wrapperRotation.scaleY, 1, 0.1);
 				level.tw.createS(wrapperRotation.scaleX, 1, 0.1).end(()->level.cm.signal());

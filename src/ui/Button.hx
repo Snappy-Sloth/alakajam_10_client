@@ -29,23 +29,16 @@ class Button extends h2d.Layers {
 		inter.onRelease = inter.onOver = function (e) {
 			text.y = (hei/2)-(text.textHeight/2);
 			spr.set(idSpr + "Over");
-			// midSpr.set("buttonOverMid");
-			// rightSpr.set("buttonOverRight");
+			Assets.CREATE_SOUND(hxd.Res.sfx.overButton, OverButton);
 		}
 		inter.onReleaseOutside = inter.onOut = function (e) {
 			text.y = (hei/2)-(text.textHeight/2);
 			spr.set(idSpr + "Idle");
-			// midSpr.set("buttonIdleMid");
-			// rightSpr.set("buttonIdleRight");
 		}
 		inter.onPush = function (e) {
 			text.y = (hei/2)-(text.textHeight/2) + 3;
 			spr.set(idSpr + "Press");
-			// midSpr.set("buttonClickMid");
-			// rightSpr.set("buttonClickRight");
+			Assets.CREATE_SOUND(hxd.Res.sfx.clickButton, ClickButton);
 		}
-
-        // var button = Assets.tiles.h_get(idSpr);
-        // this.add(button, 1);
     }
 }
