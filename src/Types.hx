@@ -22,10 +22,13 @@ enum ExternalEPType {
 
 enum VolumeGroup {
 	@volume(1) OverButton;
-	@volume(1) ClickButton;
+	@volume(0.75) ClickButton;
 	@volume(1) WavesAmbient;
 	@volume(1) FireworkLaunch;
 	@volume(0.75) Firework;
 	@volume(0.6) WooshExchange;
-	@volume(0.75) ShipsMoving;
+	@volume(0.5) ShipsMoving;
+	@volume(0.5) ShipCrash;
+	@volume(1) WhooshUI;
+	@volume(1) ShipReachEnd;
 }

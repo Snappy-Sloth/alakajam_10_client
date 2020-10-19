@@ -62,6 +62,8 @@ class Level extends dn.Process {
 		currentScore = 0;
 
 		ambient = Assets.CREATE_SOUND(hxd.Res.sfx.wavesAmbient, WavesAmbient, true);
+		ambient.channel.volume = 0;
+		ambient.channel.fadeTo(Assets.GET_VOLUME(WavesAmbient), 1);
 
 		shipMoving = Assets.CREATE_SOUND(hxd.Res.sfx.shipMoves, ShipsMoving, true, false);
 
@@ -394,6 +396,7 @@ class Level extends dn.Process {
 		if (nextTile == null) {
 			if (s.currentMapTile == s.quest_mp && s.to == s.quest_ep) {
 				fx.reachExit(s.quest_mp, s.quest_ep);
+				Assets.CREATE_SOUND(hxd.Res.sfx.shipReachEnd, ShipReachEnd);
 				s.disappear(function () {
 					shipsOver++;
 					if (shipsOver == lvlData.numShips) {
@@ -435,6 +438,7 @@ class Level extends dn.Process {
 	public function crashShip(s:Ship) {
 		shakeS(0.3);
 		fx.explosion(s.root.x, s.root.y);
+		Assets.CREATE_SOUND(hxd.Res.sfx.shipCrash2, ShipCrash);
 	}
 
 	public function shakeS(t:Float, ?pow=1.0) {
