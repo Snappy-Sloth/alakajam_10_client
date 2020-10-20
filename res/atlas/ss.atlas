@@ -1,68 +1,68 @@
 
 ss.png
-size: 398,398
+size: 408,408
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arrow
   rotate: false
-  xy: 327, 334
+  xy: 371, 37
   size: 17, 47
   orig: 17, 47
   offset: 0, 0
   index: -1
 arrowSwap
   rotate: false
-  xy: 333, 230
+  xy: 192, 380
   size: 35, 27
   orig: 35, 27
   offset: 0, 0
   index: -1
 backExplosion0
   rotate: false
-  xy: 320, 246
+  xy: 162, 384
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: -1
 backExplosion1
   rotate: false
-  xy: 302, 383
+  xy: 390, 73
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: -1
 backExplosion2
   rotate: false
-  xy: 388, 1
+  xy: 174, 384
   size: 9, 10
   orig: 10, 10
   offset: 1, 0
   index: -1
 backExplosion3
   rotate: false
-  xy: 388, 13
+  xy: 377, 399
   size: 7, 8
   orig: 10, 10
   offset: 3, 2
   index: -1
 backExplosion4
   rotate: false
-  xy: 320, 258
+  xy: 185, 384
   size: 5, 6
   orig: 10, 10
   offset: 5, 4
   index: -1
 backExplosion5
   rotate: false
-  xy: 330, 323
+  xy: 185, 392
   size: 5, 6
   orig: 10, 10
   offset: 5, 4
   index: -1
 backExplosion6
   rotate: false
-  xy: 287, 278
+  xy: 386, 220
   size: 3, 5
   orig: 10, 10
   offset: 7, 5
@@ -90,70 +90,70 @@ button
   index: -1
 buttonIdle
   rotate: false
-  xy: 249, 1
+  xy: 1, 300
   size: 137, 47
   orig: 137, 47
   offset: 0, 0
   index: -1
 buttonOver
   rotate: false
-  xy: 1, 300
+  xy: 1, 349
   size: 137, 47
   orig: 137, 47
   offset: 0, 0
   index: -1
 buttonPress
   rotate: false
-  xy: 1, 349
+  xy: 232, 37
   size: 137, 47
   orig: 137, 47
   offset: 0, 0
   index: -1
 door
   rotate: false
-  xy: 140, 394
+  xy: 1, 403
   size: 21, 1
   orig: 21, 1
   offset: 0, 0
   index: -1
 externalClosed
   rotate: false
-  xy: 362, 259
+  xy: 229, 380
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalEntrance
   rotate: false
-  xy: 362, 288
+  xy: 349, 363
   size: 29, 27
   orig: 29, 36
   offset: 0, 9
   index: -1
 externalExit
   rotate: false
-  xy: 330, 291
+  xy: 365, 233
   size: 29, 30
   orig: 29, 36
   offset: 0, 6
   index: -1
 fxCircle0
   rotate: false
-  xy: 361, 317
+  xy: 103, 280
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 fxDot0
   rotate: false
-  xy: 163, 394
+  xy: 403, 32
   size: 3, 3
   orig: 3, 3
   offset: 0, 0
   index: -1
 levelButton
   rotate: false
-  xy: 333, 203
+  xy: 287, 363
   size: 60, 25
   orig: 60, 25
   offset: 0, 0
@@ -181,42 +181,42 @@ levelButtonPress
   index: -1
 life
   rotate: false
-  xy: 370, 230
+  xy: 260, 380
   size: 21, 21
   orig: 21, 21
   offset: 0, 0
   index: -1
 littleButtonIdle
   rotate: false
-  xy: 140, 285
+  xy: 192, 282
   size: 93, 47
   orig: 93, 47
   offset: 0, 0
   index: -1
 littleButtonOver
   rotate: false
-  xy: 140, 334
+  xy: 192, 331
   size: 93, 47
   orig: 93, 47
   offset: 0, 0
   index: -1
 littleButtonPress
   rotate: false
-  xy: 235, 285
+  xy: 287, 282
   size: 93, 47
   orig: 93, 47
   offset: 0, 0
   index: -1
 mapBorder
   rotate: false
-  xy: 218, 246
+  xy: 287, 331
   size: 100, 30
   orig: 100, 30
   offset: 0, 0
   index: -1
 mapCorner
   rotate: false
-  xy: 330, 259
+  xy: 333, 233
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
@@ -230,268 +230,282 @@ mapTile
   index: -1
 menuButtonIdle
   rotate: false
-  xy: 235, 334
+  xy: 347, 86
   size: 44, 47
   orig: 44, 47
   offset: 0, 0
   index: -1
 menuButtonOver
   rotate: false
-  xy: 281, 334
+  xy: 347, 135
   size: 44, 47
   orig: 44, 47
   offset: 0, 0
   index: -1
 menuButtonPress
   rotate: false
-  xy: 347, 154
+  xy: 333, 184
   size: 44, 47
   orig: 44, 47
   offset: 0, 0
   index: -1
 newHighscore
   rotate: false
-  xy: 140, 383
+  xy: 333, 265
   size: 55, 9
   orig: 55, 9
   offset: 0, 0
   index: -1
 pixel
   rotate: false
-  xy: 330, 331
+  xy: 1, 406
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 347, 50
+  xy: 140, 280
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 playButtonIdle
   rotate: false
-  xy: 232, 50
+  xy: 232, 86
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 playButtonOver
   rotate: false
-  xy: 232, 99
+  xy: 232, 135
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 playButtonPress
   rotate: false
-  xy: 232, 148
+  xy: 103, 182
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 questGoal0
   rotate: false
-  xy: 232, 35
+  xy: 317, 390
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal1
   rotate: false
-  xy: 103, 285
+  xy: 332, 390
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal2
   rotate: false
-  xy: 197, 383
+  xy: 347, 392
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal3
   rotate: false
-  xy: 212, 383
+  xy: 362, 392
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal4
   rotate: false
-  xy: 227, 383
+  xy: 393, 88
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal5
   rotate: false
-  xy: 242, 383
+  xy: 393, 103
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal6
   rotate: false
-  xy: 257, 383
+  xy: 393, 118
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal7
   rotate: false
-  xy: 272, 383
+  xy: 393, 133
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questGoal8
   rotate: false
-  xy: 287, 383
+  xy: 393, 148
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 questMark0
   rotate: false
-  xy: 379, 317
+  xy: 121, 280
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark1
   rotate: false
-  xy: 346, 335
+  xy: 379, 184
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark2
   rotate: false
-  xy: 346, 353
+  xy: 379, 202
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark3
   rotate: false
-  xy: 363, 335
+  xy: 390, 37
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark4
   rotate: false
-  xy: 363, 353
+  xy: 390, 55
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark5
   rotate: false
-  xy: 380, 335
+  xy: 380, 363
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark6
   rotate: false
-  xy: 380, 353
+  xy: 380, 381
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark7
   rotate: false
-  xy: 346, 371
+  xy: 283, 390
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 questMark8
   rotate: false
-  xy: 363, 371
+  xy: 300, 390
   size: 15, 16
   orig: 15, 16
   offset: 0, 0
   index: -1
 restartBtn
   rotate: false
-  xy: 347, 102
+  xy: 140, 332
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 restartButtonIdle
   rotate: false
-  xy: 103, 182
+  xy: 103, 231
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 restartButtonOver
   rotate: false
-  xy: 103, 231
+  xy: 218, 184
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 restartButtonPress
   rotate: false
-  xy: 218, 197
+  xy: 218, 233
   size: 113, 47
   orig: 113, 47
   offset: 0, 0
   index: -1
 roadStep
   rotate: false
-  xy: 333, 331
+  xy: 377, 392
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 separationBar
   rotate: false
-  xy: 103, 280
+  xy: 1, 398
   size: 182, 3
   orig: 182, 3
   offset: 0, 0
   index: -1
 ship
   rotate: false
-  xy: 118, 285
+  xy: 140, 384
   size: 20, 11
   orig: 20, 11
   offset: 0, 0
   index: -1
 shipWaterMove0
   rotate: false
-  xy: 393, 165
+  xy: 390, 265
   size: 3, 7
   orig: 5, 13
   offset: 2, 3
   index: -1
 shipWaterMove1
   rotate: false
-  xy: 393, 154
+  xy: 403, 21
   size: 4, 9
   orig: 5, 13
   offset: 1, 2
   index: -1
 shipWaterMove2
   rotate: false
-  xy: 225, 182
+  xy: 379, 220
   size: 5, 11
   orig: 5, 13
   offset: 0, 1
   index: -1
 shipWaterMove3
   rotate: false
-  xy: 218, 182
+  xy: 402, 73
   size: 5, 13
   orig: 5, 13
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 249, 21
+  size: 152, 14
+  orig: 152, 14
+  offset: 0, 0
+  index: -1
+sliderBG
+  rotate: false
+  xy: 249, 1
+  size: 156, 18
+  orig: 156, 18
   offset: 0, 0
   index: -1
 title

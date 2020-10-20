@@ -19,7 +19,7 @@ class EndLevelScreen extends dn.Process {
 	var pool : ParticlePool;
 	var topAddSb       : h2d.SpriteBatch;
 
-	var controlLock(default, null) = false;
+	var controlLock = false;
 	
 	var cinematic : dn.Cinematic;
 
@@ -171,7 +171,6 @@ class EndLevelScreen extends dn.Process {
 
 		mainFlow.reflow();
 		mainFlow.setPosition(Std.int((w() / Const.SCALE) - mainFlow.outerWidth) >> 1, Std.int((h() / Const.SCALE) - mainFlow.outerHeight) >> 1);
-
 	}
 
 	override function update() {
@@ -180,8 +179,5 @@ class EndLevelScreen extends dn.Process {
 		pool.update(tmod);
 
 		cinematic.update(tmod);
-
-		if (hxd.Key.isPressed(hxd.Key.SPACE))
-			fxHighscore();
 	}
 }

@@ -62,8 +62,8 @@ class Level extends dn.Process {
 		currentScore = 0;
 
 		ambient = Assets.CREATE_SOUND(hxd.Res.sfx.wavesAmbient, WavesAmbient, true);
-		ambient.channel.volume = 0;
-		ambient.channel.fadeTo(Assets.GET_VOLUME(WavesAmbient), 1);
+		ambient.volume = 0;
+		tw.createS(ambient.volume, 1, 1);
 
 		shipMoving = Assets.CREATE_SOUND(hxd.Res.sfx.shipMoves, ShipsMoving, true, false);
 

@@ -14,6 +14,11 @@ typedef PlayerData = {
 	var maxLevelReached : Int;
 }
 
+typedef OptionsData = {
+	var SFX_VOLUME : Float;
+	var MUSIC_VOLUME : Float;
+}
+
 enum ExternalEPType {
 	Entrance;
 	Exit;

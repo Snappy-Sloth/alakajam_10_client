@@ -32,9 +32,36 @@ class Const {
 	public static var BUTTON_HEIGHT = 50;
 
 	public static var PLAYER_DATA : PlayerData;
+	public static var OPTIONS_DATA : OptionsData;
 	
 	public static function INIT() {
 		PLAYER_DATA = dn.LocalStorage.readObject("playerData", {scores:[], maxLevelReached:1});
+
+		OPTIONS_DATA = dn.LocalStorage.readObject("optionsData", {SFX_VOLUME: 1., MUSIC_VOLUME: 1.});
+			// #if debug 
+			// {SFX_VOLUME: 0., MUSIC_VOLUME: 0.}
+			// #else
+			// {SFX_VOLUME: 1., MUSIC_VOLUME: 1.}
+			// #end);
+
+		updateSFXVolume();
+		updateMusicVolume();
+	}
+
+	public static function updateUserSettings() {
+		dn.LocalStorage.writeObject("optionsData", OPTIONS_DATA);
+	}
+
+	public static function updateMusicVolume() {
+		/* if (MUSIC != null) {
+			MUSIC.group.volume = OPTIONS_DATA.MUSIC_VOLUME;
+		}
+			
+		updateUserSettings(); */
+	}
+
+	public static function updateSFXVolume() {
+		updateUserSettings();
 	}
 
 	public static function SAVE_PROGRESS() {

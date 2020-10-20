@@ -25,10 +25,10 @@ class Assets {
 		return dn.Lib.getEnumMetaFloat(vg, "volume");
 	}
 
-	public static function CREATE_SOUND(sndFile:hxd.res.Sound, vg:VolumeGroup, loop:Bool = false, playNow:Bool = true) {
+	public static function CREATE_SOUND(sndFile:hxd.res.Sound, vg:VolumeGroup, loop:Bool = false, playNow:Bool = true, isMusic:Bool = false) {
 		var snd = new dn.heaps.Sfx(sndFile);
 		snd.groupId = vg.getIndex();
-		dn.heaps.Sfx.setGroupVolume(snd.groupId, GET_VOLUME(vg));
+		dn.heaps.Sfx.setGroupVolume(snd.groupId, GET_VOLUME(vg) * (isMusic ? Const.OPTIONS_DATA.MUSIC_VOLUME : Const.OPTIONS_DATA.SFX_VOLUME));
 		playNow ? snd.play(loop) : snd.stop();
 
 		return snd;

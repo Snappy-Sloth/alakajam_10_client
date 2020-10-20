@@ -73,6 +73,12 @@ class Main extends dn.Process {
 		new ui.ChooseLevelScreen();
 	}
 
+	public function showOptions() {
+		clean();
+
+		new ui.Options();
+	}
+
 	function clean() {
 		if( EndCampaignScreen.ME!=null ) {
 			EndCampaignScreen.ME.destroy();
