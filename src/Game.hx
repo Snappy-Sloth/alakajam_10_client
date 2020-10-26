@@ -13,13 +13,16 @@ class Game extends Process {
 
 	public var score(default, null): Float;
 
+	var isCampaign : Bool = true;
+
 	var levelsToDo : Array<Data.Campaign> = [];
 
-	public function new(levelsToDo:Array<Data.Campaign>) {
+	public function new(levelsToDo:Array<Data.Campaign>, isCampaign:Bool) {
 		super(Main.ME);
 		ME = this;
 
 		this.levelsToDo = levelsToDo;
+		this.isCampaign = isCampaign;
 
 		score = 0;
 
@@ -35,20 +38,27 @@ class Game extends Process {
 	}
 
 	public function goToNextLevel() {
+		Assets.FADE_MUSIC_VOLUME(1);
 		level = new Level(levelsToDo.shift());
 		fx = new Fx();
 		hud = new ui.Hud(level.wid, level.hei);
 	}
 
 	public function levelVictory() {
+		Assets.FADE_MUSIC_VOLUME(0.25);
 		if (Popup.ME != null)
 			Popup.ME.destroy();
 		score += level.currentScore;
 		hud.destroy();
-		if (levelsToDo.length > 0)
-			new ui.EndLevelScreen();
-		else
-			new ui.EndCampaignScreen();
+		if (!isCampaign) {
+			new ui.EndSoloLevelScreen();
+		}
+		else {
+			if (levelsToDo.length > 0)
+				new ui.EndLevelScreen();
+			else
+				new ui.EndCampaignScreen();
+		}
 		level.destroy();
 	}
 

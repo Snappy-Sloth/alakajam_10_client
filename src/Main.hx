@@ -61,6 +61,8 @@ class Main extends dn.Process {
 		if (Game.ME != null) {
 			Game.ME.destroy();
 		}
+
+		Assets.FADE_MUSIC_VOLUME(0.5);
 		
 		clean();
 
@@ -103,25 +105,25 @@ class Main extends dn.Process {
 			levelsToDo.push(lvl);
 		}
 
-		startGame(levelsToDo);
+		startGame(levelsToDo, true);
 		//startGame([levelsToDo[0]]); // For debug only
 	}
 
 	public function startOneLevel(level:Data.Campaign) {
 		clean();
 
-		startGame([level]);
+		startGame([level], false);
 	}
 
-	public function startGame(levelsToDo:Array<Data.Campaign>) {
+	public function startGame(levelsToDo:Array<Data.Campaign>, isCampaign:Bool) {
 		if( Game.ME!=null ) {
 			Game.ME.destroy();
 			delayer.addF(function() {
-				new Game(levelsToDo);
+				new Game(levelsToDo, isCampaign);
 			}, 1);
 		}
 		else
-			new Game(levelsToDo);
+			new Game(levelsToDo, isCampaign);
 	}
 
 	override public function onResize() {

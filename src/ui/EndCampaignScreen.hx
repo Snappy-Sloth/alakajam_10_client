@@ -88,6 +88,7 @@ class EndCampaignScreen extends dn.Process {
 			200;
 			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.3).end(()->cinematic.signal());
 			end;
+			Assets.CREATE_SOUND(hxd.Res.sfx.popUI, PopUI);
 			tw.createS(menuBtn.y, menuBtn.y-(h()/Const.SCALE), 0.5);
 		});
 	}

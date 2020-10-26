@@ -44,12 +44,12 @@ class Options extends dn.Process {
 
 		createSliderFlow("SFX", Const.OPTIONS_DATA.SFX_VOLUME, function (v) {
 			Const.OPTIONS_DATA.SFX_VOLUME = v;
-			Const.updateSFXVolume();
+			Assets.UPDATE_SFX_VOLUME();
 		});
-		// createSliderFlow("Music", Const.OPTIONS_DATA.MUSIC_VOLUME, function (v) {
-		// 	Const.OPTIONS_DATA.MUSIC_VOLUME = v;
-		// 	Const.updateMusicVolume();
-		// });
+		createSliderFlow("Music", Const.OPTIONS_DATA.MUSIC_VOLUME, function (v) {
+			Const.OPTIONS_DATA.MUSIC_VOLUME = v;
+			Assets.UPDATE_MUSIC_VOLUME();
+		});
 
 		Assets.tiles.h_get("separationBar", flow);
 
@@ -59,7 +59,7 @@ class Options extends dn.Process {
 		creditsText.text = "- A game developed by Titaninette and Tipyx\n- SFXs by FreeSounds\n- Initially done for the Alakajam #10";
 		creditsText.dropShadow = {dx: 0, dy: 1, alpha: 1, color: 0x895515};
 
-		nextLevelBtn = new ButtonMenu("Next Level", onClickBtn);
+		nextLevelBtn = new ButtonMenu("Back", onClickBtn);
 		mainFlow.addChild(nextLevelBtn);
 
 		onResize();
@@ -95,6 +95,7 @@ class Options extends dn.Process {
 		text.textColor = 0xFFFFFF;
 		text.dropShadow = {dx: 0, dy: 1, alpha: 1, color: 0x895515};
 		subFlow.getProperties(text).horizontalAlign = Left;
+		subFlow.getProperties(text).minWidth = 50;
 		subFlow.getProperties(text).paddingLeft = 10;
 		
 		var slider = new Slider(initialValue, onChange);

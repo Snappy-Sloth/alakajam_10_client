@@ -34,6 +34,8 @@ enum VolumeGroup {
 	@volume(0.6) WooshExchange;
 	@volume(0.5) ShipsMoving;
 	@volume(0.5) ShipCrash;
+	@volume(1) PopUI;
 	@volume(1) WhooshUI;
 	@volume(1) ShipReachEnd;
+	@volume(1) Music;
 }

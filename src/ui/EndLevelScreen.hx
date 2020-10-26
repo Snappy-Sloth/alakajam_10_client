@@ -102,6 +102,7 @@ class EndLevelScreen extends dn.Process {
 			end;
 			tw.createS(scoreText.x, scoreText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
 			end;
+			Assets.CREATE_SOUND(hxd.Res.sfx.popUI, PopUI);
 			300;
 			if (newHS != null) {
 				tw.createS(newHS.alpha, 1, 0.2).end(()->cinematic.signal());
@@ -114,6 +115,7 @@ class EndLevelScreen extends dn.Process {
 			200;
 			tw.createS(totalScoreText.x, totalScoreText.x+(w()/Const.SCALE), 0.2).end(()->cinematic.signal());
 			end;
+			Assets.CREATE_SOUND(hxd.Res.sfx.popUI, PopUI);
 			tw.createS(nextLevelBtn.y, nextLevelBtn.y-(h()/Const.SCALE), 0.5);
 		});
 	}
