@@ -32,7 +32,7 @@ class Popup extends dn.Process {
 		
 		delayer.addS(function () {
 			tw.createS(root.y, -h() * 0.2, 0.5).onEnd = ()->this.destroy();
-		}, 2 + str.length * 0.04);
+		}, 3 + str.length * 0.04);
 
 		onResize();
 	}

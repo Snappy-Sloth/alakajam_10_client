@@ -272,9 +272,9 @@ class Level extends dn.Process {
 
 		// Tuto Popup
 		if (lvlData.id == level_1)
-			game.showPopup("You need to connect each ship to it destination. Do it by swapping the tiles, and press the Play button when you think you're done!");
+			game.showPopup("You need to connect each ship to it destination. Do it by swapping the tiles (with drag'n'drop), and press the LAUNCH button when you think you're done!");
 		else if (lvlData.id == level_3)
-			game.showPopup("From now, you can rotate each tile. \nGood luck!");
+			game.showPopup("From now, you can rotate each tile, by clicking on them and select the appropriate arrow. \nGood luck!");
 	}
 
 	function generateShipsAndRoad(numTry:Int) {
